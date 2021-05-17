@@ -1,2 +1,4 @@
-from node:16-alpine3.11
+FROM node:16-alpine3.11
+
+WORKDIR /home/app/web
 
