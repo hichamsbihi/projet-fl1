@@ -1,0 +1,35 @@
+{
+    "name": "Projet_fl1",
+    "version": "0.1.1",
+    "description": "mvp FL1",
+    "main": "src/index.js",
+    "scripts": {
+      "start": "DEBUG=1 nodemon src/index.js",
+      "start-prod": "node ./build/index.js",
+      "build": "yarn clean && babel src -d build",
+      "clean": "rm -rf build && mkdir build",
+      "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+      "apidoc": "^0.17.7",
+      "bcrypt-nodejs": "0.0.3",
+      "body-parser": "^1.19.0",
+      "check-types": "^8.0.3",
+      "express": "^4.16.4",
+      "jsonwebtoken": "^8.5.1",
+      "mongodb": "^3.2.7",
+      "mongoose": "^5.5.3"
+    },
+    "devDependencies": {
+      
+    },
+    "lint-staged": {
+      "**/*.js": [
+        "prettier-eslint 'src/**/*.{js,json}' --write",
+        "git add"
+      ]
+    }
+  }
+  
