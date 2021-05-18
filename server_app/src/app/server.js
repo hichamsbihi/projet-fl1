@@ -2,31 +2,23 @@
 const express = require('express');
 const path = require('path');
 
-const CONSTANTS = require('../core/constants');
-const configApp = require('../config/app');
-const db_service = require('../config/db_connect');
-const middlewares = require('../routes/middlewares');
-// const auth = require('../routes/authentication');
-const userRouter = require('./routes/user');
+import { SERVER_HOST, SERVER_PORT } from '../config/app';
+// import {dbService} from '../config/db_connect';
+import {_router} from "../routes/middlewares";
+import {auth_Router} from '../routes/authentification';
+import {user_Router}  from '../routes/user';
+
 const app = express();
 
-const server = app.listen(configApp.port, (err) => {
+const server = app.listen(SERVER_PORT, (err) => {
   if (err) throw err;
-  console.log(`Server is running on http://${configApp.host}:${configApp.port}`);
+  console.log(`Server is running on http://${SERVER_HOST}:${SERVER_PORT}`);
 });
 
 app.use('/Apidocs', express.static(path.join(__dirname, 'docs')));
 
-app.use(middlewares.router);
-app.use(auth.router);
-app.use(userRouter.router);
+app.use(_router);
 
 
-app.use((error, req, res, next) => {
-  if (error instanceof SyntaxError) {
-    res.writeHead(450, { 'content-type': 'text/json' });
-    res.end('{"demande_state":"Please verify the syntax of your request !!"}');
-  } else {
-    next();
-  }
-});
+
+

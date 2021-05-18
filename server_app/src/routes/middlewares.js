@@ -1,51 +1,75 @@
 const router = require('express').Router();
 const jwt = require('jsonwebtoken');
 
-router.use(require('body-parser').json());
+import { USER_SECRET_KEY } from "../config/app";
+import { USERMOBILE_SECRET_KEY } from "../config/app";
+import { UserSerializer } from "../serializers/user_serializer";
+import { UserMobileSerializer } from "../serializers/usermobile_serializer";
 
 
-import {USER_SECRET_KEY} from "../config/app";
-import User_SERIALIZER from "../serializers/user";
 
-
-const setHeaders = ({res,status,render})=>{
-    return new Promise(res=> {
-        res.header('Access-Control-Allow-Origin', '*');
-        res.header(
-          'Access-Control-Allow-Headers',
-          'Origin, X-Requested-With, Content-Type, Accept',
-        );
-        res.writeHead(status, { 'content-type': 'text/json' });
-        res.end(render);
-        res();
-    })
-
+export const setHeaders = ({ res, status }) => {
+  return new Promise(resolve => {
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header(
+      'Access-Control-Allow-Headers',
+      'Origin, X-Requested-With, Content-Type, Accept',
+    );
+    res.writeHead(status, { 'content-type': 'text/json' });
+    resolve();
+  });
 };
 
 const jwt_sync_mdlw = (req, res, next) => {
-      try {
-        const token = req.headers.x_access_token;
-        !token && setHeaders({
-            res,status:450,render: '{"demande_state":"error!! please provide the token on your request"}'
-        }).then(()=> res.end());
+  try {
+    if (req.url === '/api/v1.0/signin')  next();
+    else {
 
-        jwt.verify(token, USER_SECRET_KEY, (err, decoded) => {
-          if (!err) {
-                req.url.includes('admin') && (req.admin_data = new User_SERIALIZER(decoded));
-                req.connection_time = Date.now();
-                next();
+      const token = req.headers.x_access_token;
+      !token && setHeaders({
+        res, status: 450
+      }).then(() => res.end('{"demande_state":"error!! please provide the token on your request"}'));
+
+      jwt.verify(token, USER_SECRET_KEY, (err, decoded) => {
+        if (!err) {
+          req.admin_data = new UserSerializer(decoded);
+          req.connection_time = Date.now();
+          next();
+        }
+        else {
+          jwt.verify(token, USERMOBILE_SECRET_KEY, (err, decoded) => {
+            if (!err) {
+              req.usermobile_data = new UserMobileSerializer(decoded);
+              req.connection_time = Date.now();
+              next();
             }
-            setHeaders({
-                res,status:450,render: '{"demande_state":"error!! please provide the token on your request"}'
-            }).then(()=> res.end());
-        });
-      } catch (err) {
-        setHeaders({
-            res,status:450,render: { auth: false, message: 'Failed to authenticate token.' }
-        }).then(()=> res.end());
-      }
-    };
+            else {
+              setHeaders({
+                res, status: 450
+              }).then(() => res.end('{"demande_state":"error!! please provide the token on your request"}'));
+            }
+          });
+        }
+      });
+    }
+  } catch (Err) {
+    console.log(Err);
+    setHeaders({
+      res, status: 450
+    }).then(() => res.end({ auth: false, message: 'Failed to authenticate token.' }));
+  }
+};
 
+
+router.use(require('body-parser').json());
+router.use((error, req, res, next) => {
+  if (error instanceof SyntaxError)
+    setHeaders({
+      res, status: 450
+    }).then(() => res.end('{"demande_state":"Please verify the syntax of your request !!"}'));
+  else next();
+
+});
 router.use(jwt_sync_mdlw);
 
-export const router = router;
+export const _router = router;
