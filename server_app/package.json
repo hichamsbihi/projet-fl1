@@ -2,17 +2,18 @@
     "name": "FL1-projet",
     "version": "1.0.0",
     "description": "",
-    "main": "src/app/server.js",
     "type": "module",
     "keywords": [],
-    "author": "HICHAM-SBIHI/ZAKARIA-HADI",
+    "author": "HICHAM-SBIHI/ZAKARIA-HADI  @Contact: sbihi.hicham96@gmail.com",
     "license": "",
+
+    "main": "src/app/esm.js",
     "scripts": {
+        "start": "node src/app/esm.js",
         "test": "echo \"Error: no test specified\" && exit 1"
     },
     "dependencies": {
         "apidoc": "^0.28.0",
-        "bcrypt-nodejs": "0.0.3",
         "body-parser": "^1.19.0",
         "esm": "^3.2.25",
         "express": "^4.17.1",
