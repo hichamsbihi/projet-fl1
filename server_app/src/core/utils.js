@@ -4,7 +4,7 @@
  * In this file we define all the utilities functions to be exposed as a generic proxies to all the modules.
  */
 
- const bcrypt = require('bcrypt-nodejs');
+import bcrypt from 'bcrypt-nodejs';
 
 export const getStringHash = () => {
     let hash = 0;
@@ -19,10 +19,7 @@ export const getStringHash = () => {
     return hash;
   };
 
-  export const cryptPassword = (pass) => bcrypt.genSalt(10, (err, salt) => {
-    if (err) return null;
-    bcrypt.hash(pass, salt, null, (err, hash) => {
-      if (err) pass = null;
-      pass = hash;
-    });
-  });
+  ///  used by the serializers before exporting api data when a signup request is invoked;
+  export const cryptPassword = (pass) => bcrypt.hashSync(pass, bcrypt.genSaltSync(10));
+
+  export const comparePass = (pass,hash) => bcrypt.compareSync(pass, hash);

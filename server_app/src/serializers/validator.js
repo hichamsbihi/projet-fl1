@@ -346,9 +346,4 @@ var Validator = function (schema, middleware) {
   });
   
   // Export our module
-  if (typeof module !== "undefined" && typeof module.exports !== "undefined") {
-    module.exports = Validator;
-  } 
-    else window.Validator = Validator;
-  
-  
+  export default Validator;

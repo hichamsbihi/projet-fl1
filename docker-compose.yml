@@ -1,0 +1,53 @@
+version: '3.7'
+
+services:
+  web:
+    build:
+      context: ./server_app
+      dockerfile: Dockerfile
+    container_name: Central_Server_dev
+    command: nodemon /home/app/web/src/app/server.js
+    volumes:
+      - ./server_app:/home/app/web
+    ports:
+      - 8089:8089
+    env_file:
+      - ./.env.dev
+    depends_on:
+      - mongodb
+    networks: 
+      - mydb
+  
+  mongodb:
+    image: mongo
+    container_name: mongo_dev
+    volumes:
+      - mongo_data:/data/db
+    logging:
+      driver: "none"
+    env_file:
+      - ./.env.dev
+    networks:
+      - mydb
+    ports:
+      - 27017:27017
+
+#   nginx:
+#     build: ./front_nginx
+#     ports:
+#       - 80:80
+#     volumes:
+#       - static_volume:/usr/src/SERVER_DJANGO/staticfiles
+#       - ./front_nginx/BC_Projet:/SE-UI_App
+#       - '/SE-UI_App/node_modules'
+#     depends_on:
+#       - web
+#     networks: 
+#       - mydb
+
+volumes:
+  mongo_data:
+        
+networks:
+  mydb:
+    driver: bridge

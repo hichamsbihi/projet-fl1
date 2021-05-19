@@ -1,15 +1,20 @@
 
-const router = require('express').Router();
-const jwt = require('jsonwebtoken');
-import {USER_SECRET_KEY,USERMOBILE_SECRET_KEY} from "../config/app";
-import {UserSerializer} from "../serializers/user_serializer";
-import {LoginSerializer} from "../serializers/login_serializer";
-import {setHeaders} from "./middlewares";
-import {getStringHash} from "../core/utils";
-import {ERROR_MESSAGES_EN} from "../core/constants";
-import USER from '../models/User';
+import jwt from "jsonwebtoken";
+import {Router} from "express";
+import bodyParser from 'body-parser';
 
-router.use(require('body-parser').json());
+import {USER_SECRET_KEY,USERMOBILE_SECRET_KEY} from "../config/app.js";
+import {UserSerializer} from "../serializers/user_serializer.js";
+import {LoginSerializer} from "../serializers/login_serializer.js";
+import {setHeaders} from "./middlewares.js";
+import {getStringHash} from "../core/utils.js";
+import {ERROR_MESSAGES_EN,SUCCESS_MESSAGES_EN} from "../core/constants.js";
+import {USER} from '../models/User.js';
+
+const router = Router();
+const _JSON2STR = JSON.stringify;
+
+router.use(bodyParser.json());
 
 
 // overwrite hashCode function of the string prototype
@@ -56,15 +61,15 @@ router.post('/api/v1.0/signup', (req, res) => {
         const User_serializer = new UserSerializer(req);
         const UserModel = new USER();
 
-        !User_serializer.is_valide() && setHeaders({res,status:450}).then(()=>res.end({err_number: 11, demande_state: ERROR_MESSAGES_EN[11]}));
+        !User_serializer.is_valide({raise_exception: false}) && setHeaders({res,status:450}).then(()=>res.end(_JSON2STR({err_number: 11, demande_state: ERROR_MESSAGES_EN[11]})));
 
         USER.findOne(
           {email: User_serializer.validated_data['email']},
           (err, existingUser) => {
             if (existingUser) {
               if (!existingUser.isActive)
-                setHeaders({res,status:450}).then(()=>res.end({err_number: 12 ,demande_state: ERROR_MESSAGES_EN[12]}));
-              else setHeaders({res,status:450}).then(()=>res.end({err_number: 13,demande_state: ERROR_MESSAGES_EN[13]}));
+                setHeaders({res,status:450}).then(()=>res.end(_JSON2STR({err_number: 12 ,demande_state: ERROR_MESSAGES_EN[12]})));
+              else setHeaders({res,status:450}).then(()=>res.end(_JSON2STR({err_number: 13,demande_state: ERROR_MESSAGES_EN[13]})));
             }
              else {
               UserModel.email = User_serializer.validated_data['email'];
@@ -75,8 +80,8 @@ router.post('/api/v1.0/signup', (req, res) => {
               UserModel.inscription_Date = Date.now();
               
               UserModel.AddUser((err, reply) => {
-                err && setHeaders({res,status:450}).then(()=>res.end({err_number: 14 ,demande_state: ERROR_MESSAGES_EN[14]}));
-                !err && setHeaders({res,status:200}).then(()=>res.end({isActive: false ,idUser: reply}));
+                err && setHeaders({res,status:450}).then(()=>res.end(_JSON2STR({err_number: 14 ,demande_state: ERROR_MESSAGES_EN[14]})));
+                !err && setHeaders({res,status:200}).then(()=>res.end(_JSON2STR({isActive: false ,idUser: reply})));
               });
             }
           },
@@ -84,7 +89,7 @@ router.post('/api/v1.0/signup', (req, res) => {
       
   } catch (e) {
     console.log(e);
-    setHeaders({res,status:500}).then(()=>res.end({err_number: 1 ,demande_state: ERROR_MESSAGES_EN[1]}));
+    setHeaders({res,status:500}).then(()=>res.end(_JSON2STR({err_number: 1 ,demande_state: ERROR_MESSAGES_EN[1]})));
   }
 });
 
@@ -122,27 +127,26 @@ router.post('/api/v1.0/signup', (req, res) => {
 router.post('/api/v1.0/signin', (req, res) => {
 
   try {
-        const Login_serializer = new LoginSerializer(req);
-        !Login_serializer.is_valide() && setHeaders({res,status:450}).then(()=>res.end({err_number: 11, demande_state: ERROR_MESSAGES_EN[11]}));
+        const Login_serializer = new LoginSerializer(req,"POST # LOGIN");
+        !Login_serializer.is_valide({raise_exception: false}) && setHeaders({res,status:450}).then(()=>res.end(_JSON2STR({err_number: 11, demande_state: ERROR_MESSAGES_EN[11]})));
 
         USER.findOne(
           {
             email: Login_serializer.validated_data["email"],
-            password: Login_serializer.validated_data["crypted_password"],
           },
           (err, existingUser) => {
-            if (existingUser) {
-              !existingUser.isActive && setHeaders({res,status:450}).then(()=>res.end({err_number: 16, demande_state: ERROR_MESSAGES_EN[16]}));
+            if (existingUser && Login_serializer.validatePassword(existingUser.password)) {
+              !existingUser.isActive && setHeaders({res,status:450}).then(()=>res.end(_JSON2STR({err_number: 16, demande_state: ERROR_MESSAGES_EN[16]})));
               let token_body = {...existingUser,password:"hidden"};
               let token = jwt.sign(JSON.stringify(token_body), USER_SECRET_KEY);
-              setHeaders({res,status:450}).then(()=>res.end({x_access_token: token,idUser:existingUser._id, demande_state: SUCCESS_MESSAGES_EN[20]}));
+              setHeaders({res,status:450}).then(()=>res.end(_JSON2STR({x_access_token: token,idUser:existingUser._id, demande_state: SUCCESS_MESSAGES_EN[20]})));
             } else 
-                setHeaders({res,status:450}).then(()=>res.end({err_number: 15, demande_state: ERROR_MESSAGES_EN[15]}));
+                setHeaders({res,status:450}).then(()=>res.end(_JSON2STR({err_number: 15, demande_state: ERROR_MESSAGES_EN[15]})));
             
           });
   } catch (e) {
     console.log(e);
-    setHeaders({res,status:500}).then(()=>res.end({err_number: 1, demande_state: ERROR_MESSAGES_EN[1]}));
+    setHeaders({res,status:500}).then(()=>res.end(_JSON2STR({err_number: 1, demande_state: ERROR_MESSAGES_EN[1]})));
 
   }
 });

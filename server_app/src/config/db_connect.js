@@ -1,6 +1,8 @@
-const mongoose = require('mongoose');
-import {DB_DSL} from './app'
 
+import mongoose from 'mongoose';
+
+import {DB_DSL} from './app';
+import {ERROR_MESSAGES_EN,SUCCESS_MESSAGES_EN} from "../core/constants";
 mongoose.connect(
     DB_DSL,
   {
@@ -9,8 +11,8 @@ mongoose.connect(
     useCreateIndex: true,
   },
   (err) => {
-    if (err) console.log("Database connection error =>" + err);
-    else console.log('Server connected to Database with DSL => ' + DB_DSL);
+    if (err) console.log(ERROR_MESSAGES_EN[2] + err);
+    else console.log(SUCCESS_MESSAGES_EN[2] + DB_DSL);
   },
 );
 mongoose.set('useNewUrlParser', true);

@@ -1,5 +1,4 @@
-const mongoose = require("mongoose");
-
+import mongoose from "mongoose";
 const CorrectifSchema = new mongoose.Schema({
   id: {
     type: Number,

@@ -4,4 +4,5 @@
  * to launch the server =+> node src/app/server.js
  */
 require = require("esm")(module);
+
 module.exports = require("./server.js");

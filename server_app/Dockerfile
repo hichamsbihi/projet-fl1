@@ -23,7 +23,3 @@ RUN npm install -g nodemon
 
 #Copy all the source files of the project into the container
 COPY . . 
-
-
-
-RUN node src/app/esm.js

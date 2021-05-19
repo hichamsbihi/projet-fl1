@@ -1,19 +1,58 @@
-const mongoose = require("mongoose");
+import mongoose from "mongoose";
+
+import {COUNTER} from "./Counter.js";
+
+
 
 const UserSchema = new mongoose.Schema({
-  nom: {
-    type: String,
+    _id: {type: String},
+    name: String,
+    email: { type: String, lowercase: true,unique : true, required : true },
+    password: String,
+    isActive: { type: Boolean,default: false },
+    tele: { type: String, unique: true, required: false },
+    inscription_Date: { type: Date },
   },
+  { collection: 'User' },
+);
 
-  email: {
-    type: String,
-  },
+UserSchema.statics.GetProfile = function (idUser, callback) {
+  try {
+    const query = { _id: idUser };
+    User.findOne(query, (err, result) => {
+      if (err) {
+        callback('Profile with the specified ID is not found', null);
+      } else {
+        if (result) result.password = 'no access to the password';
+        callback(null, result);
+      }
+    });
+  } catch (e) {
+    callback(e, null);
+  }
+};
 
-  password: {
-    type: String,
-  },
-});
+UserSchema.methods.AddUser = async function (callback) {
+  const counter = new COUNTER();
+  await counter.getNextSequenceValue('user', (err, res) => {
+    if (err) callback(err, null);
+    else {
+      this._id = `U${res}`;
+
+      this.save((err, result) => {
+        if (err) callback(err, null);
+        else {
+          console.log('User inserted');
+          callback(null, `U${res}`);
+        }
+      });
+    }
+  });
+};
+
 
 const User = new mongoose.model("User", UserSchema);
 
-exports.User = User;
+export const USER = User;
+
+
