@@ -35,10 +35,13 @@ UserSchema.statics.GetProfile = function (idUser, callback) {
 UserSchema.methods.AddUser = async function (callback) {
   const counter = new COUNTER();
   await counter.getNextSequenceValue('user', (err, res) => {
+    console.log(err,res);
+
     if (err) callback(err, null);
     else {
       this._id = `U${res}`;
-
+      console.log("here");
+      console.log(res);
       this.save((err, result) => {
         if (err) callback(err, null);
         else {

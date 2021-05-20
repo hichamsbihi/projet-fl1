@@ -2,9 +2,9 @@
  * In this module we define a generic serializer with valdator process of api comming data.
  * 
  */
- import Validator from "./validator.js";
+ import {Validator} from "jsonschema";
  import {ValidatorException} from "../exceptions/ValidatorException.js";
-
+import {cryptPassword} from "../core/utils.js";
  const USER_API_SCHEMA = {
      "id": "/user_apiSchema",
      "type": "object",
@@ -23,7 +23,7 @@
            request,
            apiName
          ) {
-           super();
+           super(USER_API_SCHEMA);
            this.jsonSchema = USER_API_SCHEMA;
            this.dataToValidate = request.body;
            this.validated_data = {};

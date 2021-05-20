@@ -5,7 +5,7 @@ import { fileURLToPath } from 'url';
 
 import { SERVER_HOST, SERVER_PORT } from '../config/app.js';
 
-// import {dbService} from '../config/db_connect';
+import {dbService} from '../config/db_connect.js';
 import {_router} from "../routes/middlewares.js";
 import {auth_Router} from '../routes/authentification.js';
 import {user_Router}  from '../routes/user.js';

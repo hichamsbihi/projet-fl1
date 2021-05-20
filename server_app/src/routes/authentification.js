@@ -58,9 +58,9 @@ String.prototype.hashCode = getStringHash;
 router.post('/api/v1.0/signup', (req, res) => {
   
   try {
-        const User_serializer = new UserSerializer(req);
+        const User_serializer = new UserSerializer(req,"POST # SIGN-UP");
         const UserModel = new USER();
-
+        console.log(User_serializer.dataToValidate);
         !User_serializer.is_valide({raise_exception: false}) && setHeaders({res,status:450}).then(()=>res.end(_JSON2STR({err_number: 11, demande_state: ERROR_MESSAGES_EN[11]})));
 
         USER.findOne(

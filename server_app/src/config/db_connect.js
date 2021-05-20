@@ -1,8 +1,9 @@
 
 import mongoose from 'mongoose';
 
-import {DB_DSL} from './app';
-import {ERROR_MESSAGES_EN,SUCCESS_MESSAGES_EN} from "../core/constants";
+import {DB_DSL} from './app.js';
+import {ERROR_MESSAGES_EN,SUCCESS_MESSAGES_EN} from "../core/constants.js";
+
 mongoose.connect(
     DB_DSL,
   {
@@ -18,3 +19,5 @@ mongoose.connect(
 mongoose.set('useNewUrlParser', true);
 mongoose.set('useFindAndModify', false);
 mongoose.set('useCreateIndex', true);
+
+export const dbService="";

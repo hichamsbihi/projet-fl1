@@ -23,6 +23,7 @@ export const ERROR_MESSAGES_EN = {
 }
 
 export const SUCCESS_MESSAGES_EN = {
+    2: "database is connected",
     20: "login successed",
     21: "Server connected to Database with DSL",
 }

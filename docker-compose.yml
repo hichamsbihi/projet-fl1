@@ -6,7 +6,8 @@ services:
       context: ./server_app
       dockerfile: Dockerfile
     container_name: Central_Server_dev
-    command: nodemon /home/app/web/src/app/server.js
+    # command: nodemon /home/app/web/src/app/server.js
+    command: tail -f /dev/null 
     volumes:
       - ./server_app:/home/app/web
     ports:
