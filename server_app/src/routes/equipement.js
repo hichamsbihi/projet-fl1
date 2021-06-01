@@ -6,6 +6,7 @@ import EQUIPEMENT from "../models/Equipement.js";
 import CORRECTIF from "../models/Equipement.js";
 import PREVENTIF from "../models/Equipement.js";
 import STOCK from "../models/Equipement.js";
+import equipementSerializer from "../serializers/equipement_serializer";
 
 router.use(bodyParser.json());
 router.use(require("body-parser").json());
@@ -143,8 +144,10 @@ router.get("/api/v1.0/getEquipement", async (req, res) => {
 
     EQUIPEMENT.getequipement(
       {
-        id: Equipement_serializer.validatedata["id"],
-        code: Equipement_serializer.validatedata["code"],
+        anyOf: [
+          { id: Equipement_serializer.validatedata["id"] },
+          { code: Equipement_serializer.validatedata["code"] },
+        ],
       },
       (err, results) => {
         if (err)
@@ -173,8 +176,10 @@ router.get("/api/v1.0/getEquipement", async (req, res) => {
 
     CORRECTIF.getequipement(
       {
-        id: Equipement_serializer.validatedata["id"],
-        code: Equipement_serializer.validatedata["code"],
+        anyOf: [
+          { id: Equipement_serializer.validatedata["id"] },
+          { code: Equipement_serializer.validatedata["code"] },
+        ],
       },
       (err, results) => {
         if (err)
@@ -203,8 +208,10 @@ router.get("/api/v1.0/getEquipement", async (req, res) => {
 
     PREVENTIF.getequipement(
       {
-        id: Equipement_serializer.validatedata["id"],
-        code: Equipement_serializer.validatedata["code"],
+        anyOf: [
+          { id: Equipement_serializer.validatedata["id"] },
+          { code: Equipement_serializer.validatedata["code"] },
+        ],
       },
       (err, results) => {
         if (err)

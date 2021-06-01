@@ -2,34 +2,30 @@
  * In this module we define a generic serializer with valdator process of api comming data.
  *
  */
- import {Validator} from "jsonschema";
- import {ValidatorException} from "../exceptions/ValidatorException.js";
-import {cryptPassword} from "../core/utils.js";
- const USER_API_SCHEMA = {
-     "id": "/user_apiSchema",
-     "type": "object",
-     "properties": {
-        "name": {"type":"string"},
-        "email": {"type":"string"},
-        "password": {"type":"string"},
-        "tele": {"type":"string"}
-    },
-    "required": ["email","password","tele","name"]
+import { Validator } from "jsonschema";
+import { ValidatorException } from "../exceptions/ValidatorException.js";
+import { cryptPassword } from "../core/utils.js";
+const USER_API_SCHEMA = {
+  id: "/user_apiSchema",
+  type: "object",
+  properties: {
+    name: { type: "string" },
+    email: { type: "string" },
+    password: { type: "string" },
+    tele: { type: "string" },
+  },
+  required: ["email", "password", "tele", "name"],
 };
- 
- 
-  export class UserSerializer extends Validator {
-         constructor(
-           request,
-           apiName
-         ) {
-           super(USER_API_SCHEMA);
-           this.jsonSchema = USER_API_SCHEMA;
-           this.dataToValidate = request.body;
-           this.validated_data = {};
-           this.apiName = apiName;
-           this.details = {};
-         }
+
+export class UserSerializer extends Validator {
+  constructor(request, apiName) {
+    super(USER_API_SCHEMA);
+    this.jsonSchema = USER_API_SCHEMA;
+    this.dataToValidate = request.body;
+    this.validated_data = {};
+    this.apiName = apiName;
+    this.details = {};
+  }
 
   is_valide({ raise_exception = false }) {
     this.details = this.validate(this.dataToValidate, this.jsonSchema);
