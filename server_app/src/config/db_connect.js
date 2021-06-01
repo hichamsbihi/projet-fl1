@@ -10,6 +10,7 @@ mongoose.connect(
     useNewUrlParser: true,
     useFindAndModify: false,
     useCreateIndex: true,
+    useUnifiedTopology: true
   },
   (err) => {
     if (err) console.log(ERROR_MESSAGES_EN[2] + err);

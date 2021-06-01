@@ -31,16 +31,6 @@ import {cryptPassword} from "../core/utils.js";
            this.details = {};
          }
 
-export class UserSerializer extends Validator {
-  constructor(request, apiName) {
-    super();
-    this.jsonSchema = USER_API_SCHEMA;
-    this.dataToValidate = request.body;
-    this.validated_data = {};
-    this.apiName = apiName;
-    this.details = {};
-  }
-
   is_valide({ raise_exception = false }) {
     this.details = this.validate(this.dataToValidate, this.jsonSchema);
     if (this.details.valid) {

@@ -5,7 +5,7 @@ services:
     build:
       context: ./server_app
       dockerfile: Dockerfile
-    container_name: Central_Server_dev
+    container_name: Central_Server
     # command: nodemon /home/app/web/src/app/server.js
     command: tail -f /dev/null 
     volumes:
@@ -24,8 +24,6 @@ services:
     container_name: mongo_dev
     volumes:
       - mongo_data:/data/db
-    logging:
-      driver: "none"
     env_file:
       - ./.env.dev
     networks:

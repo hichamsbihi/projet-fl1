@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 
 const EquipementSchema = new mongoose.Schema({
-  id: {
+  _id: {
     type: Number,
     unique: true,
   },
@@ -39,7 +39,9 @@ const EquipementSchema = new mongoose.Schema({
   },
 
   QRcode: {
-    type: Number,
+    type: String,
+    unique: true,
+    required: true
   },
 
   Qsse_pdf: {
@@ -48,8 +50,9 @@ const EquipementSchema = new mongoose.Schema({
 });
 
 const CorrectifSchema = new mongoose.Schema({
-  id: {
+  _id: {
     type: Number,
+    unique:true
   },
 
   id_equipement: [],
@@ -64,6 +67,11 @@ const CorrectifSchema = new mongoose.Schema({
 });
 
 const PreventifSchema = new mongoose.Schema({
+  _id: {
+    type: Number,
+    unique:true
+  },
+
   ots: {
     type: Number,
   },
@@ -76,12 +84,13 @@ const PreventifSchema = new mongoose.Schema({
 
   date: {
     type: Date,
-  },
+  }
 });
 
 const StockSchema = new mongoose.Schema({
-  id: {
+  _id: {
     type: Number,
+    unique: true
   },
 
   designation: {
