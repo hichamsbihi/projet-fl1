@@ -81,7 +81,6 @@ state = {
                            <Form.Item
                                name='name'
                                rules={[{ required: true }]}
-                               style={{ display: 'inline-block', width: 'calc(50% - 8px)' }}
                            >
                                <Input placeholder="Nom et prénom" />
                            </Form.Item>
@@ -93,23 +92,33 @@ state = {
                            </Form.Item>
                            <Form.Item
                                name='email'
-                               rules={[{required: true, message: ' email obligatoire!'}]}
+                               rules={[{required: true, message: 'Email obligatoire!'},{type: 'email',message: 'Email non valide'}]}
                            >
                                <Input placeholder="Email" />
                            </Form.Item>
                        </Form.Item>
                        <Form.Item
                            name="password"
+                           hasFeedback
                            rules={[{required: true, message: ' mot de passe obligatoire!'}]}
                        >
-                           <Input  type="password" placeholder="Mot de passe"/>
+                           <Input.Password placeholder="Mot de passe"/>
                        </Form.Item>
                        <Form.Item
-                           name="is_password"
-                           rules={[{required: true, message: 'Veuillez confirmer votre mot de passe !'}]}
+                           name="confirm"
+                           dependencies={['password']}
+                           hasFeedback
+                           rules={[{required: true, message: 'Veuillez confirmer votre mot de passe !'},
+                           ({ getFieldValue }) => ({
+                            validator(_, value) {
+                              if (!value || getFieldValue('password') === value) {
+                                return Promise.resolve();
+                              }
+                              return Promise.reject(new Error('veuillez verifier la correspondance du password'));
+                            },
+                          })]}
                        >
-                           <Input
-                               type="password"
+                           <Input.Password
                                placeholder="Confirmer mot de passe"
                            />
                        </Form.Item>
