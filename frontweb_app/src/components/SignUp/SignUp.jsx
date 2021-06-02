@@ -1,15 +1,14 @@
 import React from 'react'
 import './style.css'
-import { Form, Input, Button, Result, Checkbox,Modal } from 'antd';
+import { Form, Input, Button, Result, Modal,Select } from 'antd';
 import {Link } from 'react-router-dom';
-import {withRouter} from "react-router-dom";
 import { reqAddUser } from '../../apis/index';
+import {ERROR_MESSAGES, GRAPHICS_PAGE_FR,SUCCESS_MESSAGES} from '../../utils/CONSTANTS'
 
 
 
 
-
-class SignUp extends React.Component{
+export default class SignUp extends React.Component{
 
 state = {
     Active:true
@@ -25,7 +24,7 @@ state = {
 
             if (user)
             {
-                if (userData.data.is_active) {
+                if (userData.data.isActive) {
                     sessionStorage.clear();
                     this.setState({Active: true});
                  }
@@ -38,27 +37,27 @@ state = {
     onFinish = async (values) => {
 
         const user = {
-            first_name: values.first_name,
+            name: values.name,
             tele: values.tele,
             email: values.email,
-            password: values.password,
-            confirmPassword: values.is_password,
-
+            password: values.password
         }
-        const result = await reqAddUser(user)
-        if (result.status===201){
-            this.setState({Active: false});
-            
-        }else{
+
+        reqAddUser(user).then((result)=>{
+        result.status===200 && this.setState({Active: false});
+
+        })
+        .catch((err)=>{
+            console.log(err.data);
             Modal.error({
-                title:"Opps !! Erreur lors de votre inscription",
-                content: "Veuillez contacter votre administrateur !"
+                title:"Opps !",
+                content: ERROR_MESSAGES.INSCRIPTION_FAILED
             });
-        }
+    });
+}
 
-    }
     
-
+    
            render()
            {
             
@@ -67,9 +66,9 @@ state = {
 
                        <div className="LoginContainer">
 
-                       <p className="title">PROJET FL</p>
-                       <p className="slogan">Version Béta Date: 07/06/2021</p>
-                       {(this.state.Active==true) && (
+                       <p className="title">{GRAPHICS_PAGE_FR.PLATEFORME_NAME}</p>
+                       <p className="slogan">{GRAPHICS_PAGE_FR.INFOS}</p>
+                       {this.state.Active && (
                        
                        <Form
                        name="normal_login"
@@ -80,7 +79,7 @@ state = {
 
                        <Form.Item  style={{ marginBottom: 0 }}>
                            <Form.Item
-                               name='first_name'
+                               name='name'
                                rules={[{ required: true }]}
                                style={{ display: 'inline-block', width: 'calc(50% - 8px)' }}
                            >
@@ -125,10 +124,10 @@ state = {
                    </Form>)}
 
                    {
-                       (this.state.Active==false) && (<Result
+                       !this.state.Active && (<Result
                        status="success"
-                       title="Votre compte a été crée!"
-                       subTitle="Merci de contacter votre admin pour l'activation de votre compte."
+                       title={SUCCESS_MESSAGES.INSCRIPTION_1}
+                       subTitle={SUCCESS_MESSAGES.ACTIVATION_MSG}
                        
                    />)
                    }
@@ -149,8 +148,8 @@ state = {
                 width: 70,
             }}
             >
-            <Option value="33">+33</Option>
-            <Option value="212">+212</Option>
+            <Select.Option value="33">+33</Select.Option>
+            <Select.Option value="212">+212</Select.Option>
             </Select>
         </Form.Item>
         );
@@ -158,5 +157,4 @@ state = {
 
 
 
-export default withRouter(SignUp)
 

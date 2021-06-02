@@ -37,3 +37,8 @@
     transform: rotate(360deg);
   }
 }
+
+@fontface{
+  font-family: 'Bungee Inline', cursive;
+  src: url('https://fonts.googleapis.com/css2?family=Montserrat&family=Roboto&display=swap')
+}

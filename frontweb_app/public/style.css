@@ -1,0 +1,78 @@
+/*@import url('../fonts.googleapis.com/css.3fda6f.delayed?family=Open+Sans:400,600,700');*/
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&family=Roboto&display=swap');
+
+/* ==========================================================================
+ Default CSS
+ ========================================================================== */
+
+body {
+    font-size: 14px;
+    font-family: 'Montserrat', sans-serif;
+    background: transparent;
+    line-height: 24px;
+    font-weight: 400;
+    color: #64648d;
+}
+
+img {
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+}
+
+span {
+    display: inline-block;
+}
+
+a {
+    text-decoration: none;
+    border: none;
+    outline: 0;
+    color: #333;
+    font-family: 'Montserrat', sans-serif;
+}
+
+a:hover,
+a:focus,
+a:active,
+button:focus {
+    text-decoration: none;
+    border: none;
+    outline: 0;
+    font-family: 'Montserrat', sans-serif;
+    color: #443fe4;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: 'Montserrat', sans-serif;
+    color: #23AE96;
+    padding: 0;
+    margin: 0;
+}
+
+h2 {
+    font-size: 40px;
+    line-height: 50px;
+    font-weight: 500;
+    color: #1f395f;
+}
+
+h3 {
+    font-size: 24px;
+    line-height: 34px;
+    font-weight: 600;
+    color: #0d0d71;
+}
+
+h4,
+h5,
+h6 {
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 28px;
+}

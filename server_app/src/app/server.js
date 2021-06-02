@@ -1,6 +1,7 @@
 import express from "express";
 import path from "path";
 import { fileURLToPath } from "url";
+import cors from 'cors';
 
 import { SERVER_HOST, SERVER_PORT } from "../config/app.js";
 
@@ -18,8 +19,9 @@ const server = app.listen(SERVER_PORT, (err) => {
 
 //we need to change up how __dirname is used for ES6 purposes
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
+
+app.use(cors());
 app.use("/apidocs", express.static(path.join(__dirname, "../../doc")));
-console.log(path.join(__dirname, "doc"));
 app.use(_router);
 app.use(auth_Router);
 app.use(user_Router);

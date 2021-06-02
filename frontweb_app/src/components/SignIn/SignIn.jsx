@@ -5,10 +5,9 @@ import { Link } from 'react-router-dom'
 import { reqLogin } from '../../apis/index'
 import './style.css'
 import UserMem from "../../utils/memoryUtils";
-import {withRouter} from "react-router-dom";
-import { ERROR_MESSAGES } from "../../constants/CONSTANTS"
+import { ERROR_MESSAGES,GRAPHICS_PAGE_FR, SUCCESS_MESSAGES } from "../../utils/CONSTANTS"
 
-class SignIn extends React.Component {
+export default class SignIn extends React.Component {
 
     
     routeChangeSignUp= () => {
@@ -19,16 +18,14 @@ class SignIn extends React.Component {
   
     onFinish = async (values) => {
 
-        try {
+            const email = values.email;
+            const password = values.password;
+            const response = reqLogin(email, password);
 
-            const email = values.email
-            const password = values.password
+            response.then((res)=>{
+                if (res.status === 200) {
 
-            const response = await reqLogin(email, password)
-
-            if (response.status === 200) {
-
-                const user = { email: email, token: response.data.token, id: response.data.id };
+                const user = { email: email, token: res.data.x_access_token, id: res.data.idUser };
                 sessionStorage.setItem("user", JSON.stringify(user));
 
                 // here to sync all user informations and store them in the memory before openning the plateform.
@@ -36,29 +33,22 @@ class SignIn extends React.Component {
                     this.props.history.replace('/home')
                 });
 
-            } else if (response.status === 202) {
-                
-                Modal.warning({
-                    title: 'Vérification demandée !',
-                    content: "Veuillez consulter votre boite mail pour vérifier votre compte !",
-                });
-
-            }
-            else {
+            } else {
                 Modal.error({
                     title: 'Opps !!',
-                    content: ERROR_MESSAGES.AUTHENTIFICATION_FAILED,
+                    content: ERROR_MESSAGES.UNKOWN_ERROR,
                 });
             }
-        }
-        catch (loginException) {
-
-            Modal.error({
-                title: 'Opps !!',
-                content: ERROR_MESSAGES.AUTHENTIFICATION_FAILED,
-            });
-            
-        }
+            })
+            .catch((LoginErr)=>{
+                const {err_number} = LoginErr.response.data;
+                
+                Modal.warning({
+                    title: 'Opps',
+                    content: ERROR_MESSAGES[err_number]
+                });
+            })
+        
     }
 
 
@@ -67,8 +57,8 @@ class SignIn extends React.Component {
         return (
 
             <div className="LoginContainer">
-                <p className="title">PROJET FL</p>
-                <p className="slogan">Version Béta Date: 07/06/2021</p>
+                <p className="title">{GRAPHICS_PAGE_FR.PLATEFORME_NAME}</p>
+                <p className="slogan">{GRAPHICS_PAGE_FR.INFOS}</p>
                 <Form
                     name="normal_login"
                     className="login-form"
@@ -78,13 +68,13 @@ class SignIn extends React.Component {
 
                     <Form.Item
                         name="email"
-                        rules={[{ required: true, message: 'Please input your email!' }]}
+                        rules={[{ required: true, message: 'Veuillez entrer votre email !' }]}
                     >
                         <Input prefix={<UserOutlined className="site-form-item-icon" />} placeholder="Email" />
                     </Form.Item>
                     <Form.Item
                         name="password"
-                        rules={[{ required: true, message: 'Please input your Password!' }]}
+                        rules={[{ required: true, message: 'Veuillez entrer votre mot de passe !' }]}
                     >
                         <Input
                             prefix={<LockOutlined className="site-form-item-icon" />}
@@ -114,7 +104,6 @@ class SignIn extends React.Component {
 
 }
 
-export default withRouter(SignIn)
 
 
 

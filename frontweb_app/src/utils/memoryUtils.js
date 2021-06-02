@@ -5,7 +5,7 @@ the localstorage used just to save unexpired data as (some util files/ group of 
 
  */
 import CryptoJS from "crypto-js";
-import { reqGetUserData } from "../apis";
+import { reqGetUserData } from "../apis/index";
 
 
 export class LocalData {
@@ -41,8 +41,8 @@ export class LocalData {
         this.userData={};
       }
 
-    async fetchUserData(id){
-        this._userData = await reqGetUserData(id);
+    async fetchUserData(){
+        this._userData = await reqGetUserData();
         return true;
     }
     get userId(){
@@ -77,7 +77,7 @@ export class LocalData {
 
         let usr = JSON.parse(sessionStorage.getItem('user'));
         var nvUser = new UserData(usr.id,usr.token);
-        await nvUser.fetchUserData(usr.id);
+        await nvUser.fetchUserData();
         sessionStorage.setItem('userData',JSON.stringify(nvUser.userData));
         connectedUserData = nvUser.userData;
         callback();

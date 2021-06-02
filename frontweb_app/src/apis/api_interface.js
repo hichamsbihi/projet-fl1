@@ -5,7 +5,7 @@ import {ERROR_MESSAGES} from "../utils/CONSTANTS"
 export default function api_interface(url, data = {}, type = "GET") {
 
     const user = sessionStorage.getItem("user");
-    if (!JSON.parse(user) && !url.includes('users')) {
+    if (!JSON.parse(user) && !url.includes('signup') && !url.includes('signin')) {
         return new Promise((res, rej) => {
             rej(ERROR_MESSAGES.SESSION_EXPIRED);
         });
@@ -14,7 +14,7 @@ export default function api_interface(url, data = {}, type = "GET") {
         'x_access_token': ((JSON.parse(user)) ? JSON.parse(user).token : ""),
         'Cache-Control': 'no-cache',
         'Content-type': 'application/json; charset=UTF-8',
-
+        'Access-Control-Allow-Origin': "*"
     };
 
     return new Promise((resolve, reject) => {   // new promise  object
@@ -52,7 +52,6 @@ export default function api_interface(url, data = {}, type = "GET") {
                 resolve(response)
             }).catch(error => {
 
-                setLoadProgress(null, 'Error');
                 reject()
 
             });

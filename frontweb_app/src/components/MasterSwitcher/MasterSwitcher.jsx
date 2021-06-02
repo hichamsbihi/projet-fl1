@@ -1,10 +1,10 @@
 import React from 'react'
 
 import AdminNavBar from "../NavBar/AdminNavBar";
-import MainHome from "../MainHome/mainHome"
+import MainHome from "../MainHome/MainHome"
 import './style.css'
 import {Redirect} from "react-router-dom"
-import { _FOOTER } from "../../constants/CONSTANTS";
+import { _FOOTER } from "../../utils/CONSTANTS";
 import {Layout} from 'antd';
 
 
@@ -28,7 +28,7 @@ const middleware = () => {
 }
 
 
-export class MasterSwitcher extends React.Component {
+export default class MasterSwitcher extends React.Component {
 
     render() {
 

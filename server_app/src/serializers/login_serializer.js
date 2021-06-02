@@ -2,7 +2,7 @@
  * In this module we define a generic serializer with valdator process of api comming data.
  * 
  */
- import Validator from "./validator.js";
+ import { Validator } from "jsonschema";
  import {ValidatorException} from "../exceptions/ValidatorException.js";
  import {cryptPassword,comparePass} from "../core/utils.js";
 
@@ -47,8 +47,6 @@
            }
            else return false;
          }
-         validatePassword (hashFromDb){return comparePass(this.dataToValidate.password,hashFromDb);}
-         
-       }
+         validatePassword (hashFromDb){return comparePass(this.dataToValidate.password,hashFromDb);}}
        
   

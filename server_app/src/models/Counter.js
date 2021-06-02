@@ -15,9 +15,8 @@ const Counter = new schema(
   { collection: 'Counter' },
 );
 
-const _COUNTER = mongoose.model('Counter', Counter);
 
-Counter.methods.getNextSequenceValue = function (SequenceName, callback) {
+Counter.methods.getNextSequenceValue = (SequenceName, callback) => {
   try {
     _COUNTER.findOneAndUpdate(
       {
@@ -30,10 +29,9 @@ Counter.methods.getNextSequenceValue = function (SequenceName, callback) {
         new: true,
       },
       (err, res) => {
-        console.log(err,res);
         if (res) {
           callback(null, res.sequanceCounter);
-        } else if (err) {
+        } else {
           const count = new _COUNTER({
             sequanceName: SequenceName,
             sequanceCounter: 1,
@@ -53,6 +51,7 @@ Counter.methods.getNextSequenceValue = function (SequenceName, callback) {
     callback(err, null);
   }
 };
+const _COUNTER = mongoose.model('Counter', Counter);
 
 
 export const COUNTER = _COUNTER ;

@@ -32,9 +32,9 @@ UserSchema.statics.GetProfile = function (idUser, callback) {
   }
 };
 
-UserSchema.methods.AddUser = async function (callback) {
+UserSchema.methods.AddUser = function (callback) {
   const counter = new COUNTER();
-  await counter.getNextSequenceValue('user', (err, res) => {
+  counter.getNextSequenceValue('user', (err, res) => {
     console.log(err,res);
 
     if (err) callback(err, null);
