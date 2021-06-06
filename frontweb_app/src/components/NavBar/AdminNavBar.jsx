@@ -27,10 +27,10 @@ export default class AdminNavBar extends React.Component {
     ];
     return (
       // <Menu  theme="dark" mode="horizontal" selectedKeys={selected_menu_item}>
-      //     <Menu.Item key="0">
+      //     <Menu key="0">
       //         <img className="ant-menu-item" src="office-building.png"/>
 
-      //     </Menu.Item>
+      //     </Menu .Item>
       // <Menu.Item key="1"><Link to={path_maping[1]}><FileSyncOutlined/></Link>Acceuil</Menu.Item>
       // <Menu.SubMenu icon={<UploadOutlined/>} title="Import des données">
       //         <Menu.ItemGroup>
