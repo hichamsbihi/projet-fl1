@@ -61,6 +61,7 @@ const jwt_sync_mdlw = (req, res, next) => {
             req.user_data = decoded;
             next();
           } else {
+       
             jwt.verify(token, USERMOBILE_SECRET_KEY, (err, decoded) => {
               if (!err) {
                 req.usermobile_data = decoded;

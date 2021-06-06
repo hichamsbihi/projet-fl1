@@ -1,0 +1,54 @@
+
+.admin-page {
+    width: 100%;
+}
+
+.content-content {
+
+    padding-bottom: 900px;
+    background-color: floralwhite;
+}
+
+.logo {
+    width: 100px;
+    background-color: white;
+}
+
+.sustain-center-div {
+    margin: 0 auto;
+    width: 100px;
+}
+
+.site-layout-content {
+    background: rgb(255, 255, 255);
+    padding: 24px;
+    min-height: 280px;
+    height: auto;
+}
+#components-layout-demo-top .logo {
+    width: 120px;
+    height: 31px;
+    background: rgba(255, 255, 255, 0.2);
+    margin: 16px 24px 16px 0;
+    float: left;
+}
+
+.footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 20px;
+    text-align: center;
+    font-weight: bold;
+
+    padding-top: initial;
+}
+
+.features-box-border {
+    border: 1px;
+    margin-bottom: 20px;
+}
+
+
+

@@ -1,0 +1,302 @@
+.excel_preview_up_side {
+    margin-top: 2%;
+}
+
+button.generatorcell {
+    color: #FFF !important;
+    cursor: pointer;
+    padding: 3px 9px;
+    float: right;
+    display: inline-block;
+    margin: 3px;
+    border-radius: 7px;
+    line-height: 20px;
+    font-size: 18px;
+    border: 2px solid #FFF;
+    background-color: #1C6EA4;
+}
+
+button.preview {
+    color: #FFF !important;
+    cursor: pointer;
+    padding: 3px 9px;
+    float: right;
+    display: inline-block;
+    margin: 3px;
+    border-radius: 7px;
+    line-height: 20px;
+    font-size: 18px;
+    border: 2px solid #FFF;
+    background-color: #21a41c;
+}
+
+button {
+    cursor: pointer;
+    padding: 3px 9px;
+    display: inline-block;
+    margin: 3px;
+    border-radius: 7px;
+    border: 2px solid #FFF;
+}
+
+._header_col {
+    cursor: pointer;
+    max-height: 60px;
+    overflow: hidden;
+}
+
+._select_lot {
+    text-align: center;
+
+}
+
+/*""""""""""""""""""""""""""""""""""""""""""""""""""""""""*/
+/*                   STEP BORDER                          */
+/*""""""""""""""""""""""""""""""""""""""""""""""""""""""""*/
+.ant-steps-item-process[class~="ant-steps-item-sustain_1"] .ant-steps-item-icon {
+    border-color: #ad2b2f !important;
+}
+
+.ant-steps-item-process[class~="ant-steps-item-sustain_2"] .ant-steps-item-icon {
+    border-color: #fa9a19 !important;
+}
+
+.ant-steps-item-process[class~="ant-steps-item-sustain_3"] .ant-steps-item-icon {
+    border-color: #23ae96 !important;
+}
+
+.ant-steps-item-process[class~="ant-steps-item-sustain_4"] .ant-steps-item-icon {
+    border-color: #2b7dad !important;
+}
+
+.ant-steps-item-process[class~="ant-steps-item-sustain_5"] .ant-steps-item-icon {
+    border-color: #ad4a23 !important;
+}
+
+.ant-steps-item-process[class~="ant-steps-item-sustain_6"] .ant-steps-item-icon {
+    border-color: #a423ad !important;
+}
+
+/*""""""""""""""""""""""""""""""""""""""""""""""""""""""""*/
+/*          DISABLE ANT TABLE :BEFORE PROPERTy           */
+/*""""""""""""""""""""""""""""""""""""""""""""""""""""""""*/
+.ant-table .ant-table-container::before {
+    left: unset !important;
+}
+
+/*""""""""""""""""""""""""""""""""""""""""""""""""""""""""*/
+/*                   STEP ICON                            */
+/*""""""""""""""""""""""""""""""""""""""""""""""""""""""""*/
+.ant-steps-item-finish > .ant-steps-item-container > .ant-steps-item-content > .ant-steps-item-description {
+    margin-left: -40px;
+}
+
+.ant-steps-item-process[class~="ant-steps-item-sustain_1"] > .ant-steps-item-container > .ant-steps-item-icon {
+    background: #ad2b2f !important;
+}
+
+.ant-steps-item-process[class~="ant-steps-item-sustain_2"] > .ant-steps-item-container > .ant-steps-item-icon {
+    background: #fa9a19 !important;
+}
+
+.ant-steps-item-process[class~="ant-steps-item-sustain_3"] > .ant-steps-item-container > .ant-steps-item-icon {
+    background: #23ae96 !important;
+}
+
+.ant-steps-item-process[class~="ant-steps-item-sustain_4"] > .ant-steps-item-container > .ant-steps-item-icon {
+    background: #2b7dad !important;
+}
+
+.ant-steps-item-process[class~="ant-steps-item-sustain_5"] > .ant-steps-item-container > .ant-steps-item-icon {
+    background: #ad4a23 !important;
+}
+
+.ant-steps-item-process[class~="ant-steps-item-sustain_6"] > .ant-steps-item-container > .ant-steps-item-icon {
+    background: #a423ad !important;
+}
+
+/*""""""""""""""""""""""""""""""""""""""""""""""""""""""""*/
+/*                   ROW COL SELECT                       */
+/*""""""""""""""""""""""""""""""""""""""""""""""""""""""""*/
+.ant-steps-item-process > .ant-steps-item-container > .ant-steps-item-content > .ant-steps-item-title {
+    color: #FFFFFF !important;
+}
+
+.ant-steps-item-finish > .ant-steps-item-container > .ant-steps-item-content > .ant-steps-item-title {
+    color: #FFFFFF !important;
+}
+
+.ant-steps-item-wait > .ant-steps-item-container > .ant-steps-item-content > .ant-steps-item-title {
+    color: #FFFFFF !important;
+}
+
+.ant-steps-item-finish > .ant-steps-item-container > .ant-steps-item-content > .ant-steps-item-title::after {
+    background-color: unset !important;
+}
+
+.ant-steps-item-title::after {
+    position: absolute;
+    top: 16px;
+    /* left: 100%; */
+    display: block;
+    width: 9999px;
+    height: 1px;
+    background: unset !important;
+    content: '' !important;
+    border-top: dotted !important;
+    border-color: #155e50 !important;
+    border-width: 2.5px !important;
+}
+
+.entete_row {
+    background-color: #ad2b2f !important;
+    opacity: 0.54;
+    pointer-events: none;
+}
+
+._code_col {
+    background-color: #fa9a19 !important;
+    opacity: 0.54;
+}
+
+._libelle_col {
+    background-color: #23ae96 !important;
+    opacity: 0.54;
+}
+
+._quantity_col {
+    background-color: #2b7dad !important;
+    opacity: 0.54;
+}
+
+._unity_col {
+    background-color: #ad4a23 !important;
+    opacity: 0.54;
+}
+
+._step_wrapper {
+    margin-left: -0px;
+}
+
+._step_desc_text_1 {
+    color: #ad2b2f !important;
+    font-size: 80%;
+    font-weight: 400;
+    text-align: left;
+    margin-top: 10px;
+}
+
+._step_desc_text_2 {
+    color: #fa9a19 !important;
+    font-size: 80%;
+    font-weight: 400;
+    text-align: left;
+    margin-top: 10px;
+}
+
+._step_desc_text_3 {
+    color: #23ae96 !important;
+    font-size: 80%;
+    font-weight: 400;
+    text-align: left;
+    margin-top: 10px;
+}
+
+._step_desc_text_4 {
+    color: #2b7dad !important;
+    font-size: 80%;
+    font-weight: 400;
+    text-align: left;
+    margin-top: 10px;
+}
+
+._step_desc_text_5 {
+    color: #ad4a23 !important;
+    font-size: 80%;
+    font-weight: 400;
+    text-align: left;
+    margin-top: 10px;
+}
+
+._step_desc_text_6 {
+    color: #a423ad !important;
+    font-size: 80%;
+    font-weight: 400;
+    text-align: left;
+    margin-top: 10px;
+}
+
+.up_side {
+    margin-top: 5%;
+    min-width: 600px;
+}
+
+.title_text {
+    margin-left: 5%;
+    max-width: 30%;
+    height: 30px;
+    font-family: Montserrat;
+    font-size: 20px;
+    font-weight: bold;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.2;
+    letter-spacing: normal;
+    text-align: left;
+    color: #155e50;
+    display: inline-block;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+._excel_title {
+    text-align: center;
+    margin-bottom: 10px;
+    font-family: Montserrat;
+    font-size: 25px;
+    font-weight: 500;
+    font-stretch: normal;
+    font-style: italic;
+    line-height: 1;
+    letter-spacing: normal;
+    color: #23ae96;
+    display: inline-block;
+    margin-left: 31%;
+}
+
+.excel-text-center {
+    text-align: center;
+}
+
+.sustain-select-lot {
+    display: block;
+    width: 100%;
+    padding: .375rem 2.25rem .375rem .75rem;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #212529;
+    background-color: #fff;
+    background-repeat: no-repeat;
+    background-position: right .75rem center;
+    background-size: 16px 12px;
+    border: 1px solid #ced4da;
+    border-radius: .25rem;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+}
+.sustain-select-lot:focus {
+    border-color: #86b7fe;
+    border: 1px;
+    outline: 0;
+    box-shadow: 0 0 0 0.1rem #86b7fe;
+}
+.sustain-select-lot option {
+    font-weight: normal;
+    display: block;
+    white-space: nowrap;
+    min-height: 1.2em;
+    padding: 0px 2px 1px;
+}

@@ -48,11 +48,12 @@ state = {
 
         })
         .catch((err)=>{
-            console.log(err.data);
-            Modal.error({
-                title:"Opps !",
-                content: ERROR_MESSAGES.INSCRIPTION_FAILED
-            });
+            
+            const {err_number} = err.response && err.response.data ? err.response.data :{err_number :8};
+                Modal.warning({
+                    title: 'Opps',
+                    content: ERROR_MESSAGES[err_number]
+                });
     });
 }
 
@@ -60,7 +61,6 @@ state = {
     
            render()
            {
-            
             
                return (
 
@@ -86,7 +86,7 @@ state = {
                            </Form.Item>
                            <Form.Item
                                name='tele'
-                               rules={[{required: true, message: ' Num de télé obligatoire!'}]}
+                               rules={[{required: true, message: ' Num de télé obligatoire!'},{max: 9, message: 'Num non valide!'}]}
                            >
                                <Input addonBefore={prefixSelector} placeholder="Télé" />
                            </Form.Item>
@@ -133,14 +133,17 @@ state = {
                    </Form>)}
 
                    {
-                       !this.state.Active && (<Result
+                       !this.state.Active && (<><Result
                        status="success"
                        title={SUCCESS_MESSAGES.INSCRIPTION_1}
                        subTitle={SUCCESS_MESSAGES.ACTIVATION_MSG}
                        
-                   />)
-                   }
-
+                   />
+                    <br>
+                    </br>
+                    <Button style={{marginLeft: "42%"}} onClick={this.routeChange}>Se connecter</Button>
+                   </>
+                   )}
                    </div>
                    
                    

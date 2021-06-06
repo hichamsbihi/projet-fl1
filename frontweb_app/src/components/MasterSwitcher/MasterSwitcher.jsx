@@ -1,9 +1,11 @@
 import React from 'react'
+import {Route,Switch} from "react-router-dom";
 
 import AdminNavBar from "../NavBar/AdminNavBar";
-import MainHome from "../MainHome/MainHome"
-import './style.css'
-import {Redirect} from "react-router-dom"
+import MainHome from "../MainHome/MainHome";
+import DataImport from "../DataImport/DataImport";
+import './style.css';
+import {Redirect} from "react-router-dom";
 import { _FOOTER } from "../../utils/CONSTANTS";
 import {Layout} from 'antd';
 
@@ -39,15 +41,18 @@ export default class MasterSwitcher extends React.Component {
 
         
         let mainNavBar = <AdminNavBar location={pathname}/>;
-        let  mainHome = <MainHome/>
         
         return (
             <>
                 <Layout className="layout">
                     <Content className="site-layout-content">
                         {mainNavBar}
-
-                        {mainHome}
+                        <Switch>
+                            <Route path='/home' render={props => <MainHome userData={userBody.userData.data} />} />
+                            <Route path='/data-import/equipements/static' render={props => <DataImport {...props}dataType="_equip_data" />} />
+                            <Route path='/data-import/stock' render={props => <DataImport {...props} dataType="_stock_data" />} />
+                            {/* <Route path='/data-import/stock' render={props => <DataImport {...props} dataType="_stock_data" />} /> */}
+                        </Switch>
                     </Content>
                     <Footer className="footer">
                         {_FOOTER.COMPANY_NAME + _FOOTER.YEAR}

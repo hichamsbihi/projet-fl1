@@ -9,6 +9,8 @@ import {USER} from '../models/User.js';
 const router = Router();
 router.use(bodyParser.json());
 
+const _JSON2STR = JSON.stringify
+
 /**
  * @api {get} /api/v1.0/me Get user's infos
  * @apiGroup User
@@ -42,19 +44,23 @@ router.use(bodyParser.json());
  router.get('/api/v1.0/me', (req, res) => {
     
     try {
-      if (!req.user_data || !req.user_data._id) 
+      console.log(_JSON2STR(req.user_data._id))
+      if (!req.user_data || !req.user_data._id)
+      {
         setHeaders({res,status:450}).then(()=>res.end(_JSON2STR({err_number: 17, demande_state: ERROR_MESSAGES_EN[17]})));
-      
-      USER.GetProfile(req.user_data._id, (err, results) => {
+
+      }
+      else{
+        USER.GetProfile(req.user_data._id, (err, results) => {
         if (err)
             setHeaders({res,status:450}).then(()=>res.end(_JSON2STR({err_number: 17, demande_state: ERROR_MESSAGES_EN[17]})));
          else {
-        //   results.password && delete results['password'];
           setHeaders({res,status:200}).then(()=>res.end(_JSON2STR(results)));
         }
       });
+      }
+      
     } catch (e) {
-      console.log(e);
       setHeaders({res,status:450}).then(()=>res.end(_JSON2STR({err_number: 1, demande_state: ERROR_MESSAGES_EN[1]})));
     }
   });

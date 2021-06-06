@@ -11,8 +11,7 @@ export default class MainHome extends Component {
     render(){
 
         return (
-            <Card title="Card Title">
-            <Card.Grid >Content</Card.Grid>
+            <Card title="TITRE">
             <Card.Grid hoverable={false} >
               Content
             </Card.Grid>

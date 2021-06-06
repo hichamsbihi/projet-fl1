@@ -26,6 +26,7 @@ export default class SignIn extends React.Component {
                 if (res.status === 200) {
 
                 const user = { email: email, token: res.data.x_access_token, id: res.data.idUser };
+                console.log(user.token);
                 sessionStorage.setItem("user", JSON.stringify(user));
 
                 // here to sync all user informations and store them in the memory before openning the plateform.
@@ -41,7 +42,7 @@ export default class SignIn extends React.Component {
             }
             })
             .catch((LoginErr)=>{
-                const {err_number} = LoginErr.response.data;
+                const {err_number} = LoginErr.response && LoginErr.response.data ? LoginErr.response.data : {err_number :8};
                 
                 Modal.warning({
                     title: 'Opps',
@@ -68,18 +69,19 @@ export default class SignIn extends React.Component {
 
                     <Form.Item
                         name="email"
-                        rules={[{ required: true, message: 'Veuillez entrer votre email !' }]}
+                        rules={[{ required: true, message: 'Veuillez entrer votre email !' },{type: 'email',message: 'Email non valide'}]}
                     >
                         <Input prefix={<UserOutlined className="site-form-item-icon" />} placeholder="Email" />
-                    </Form.Item>
+                    </Form.Item>                       
                     <Form.Item
                         name="password"
                         rules={[{ required: true, message: 'Veuillez entrer votre mot de passe !' }]}
+                        hasFeedback
                     >
-                        <Input
+                        <Input.Password
                             prefix={<LockOutlined className="site-form-item-icon" />}
-                            type="password"
                             placeholder="Password"
+                            
                         />
                     </Form.Item>
                     
@@ -90,6 +92,7 @@ export default class SignIn extends React.Component {
                     </Form.Item>
 
                     <Form.Item>
+                        
                         <Button type="primary" htmlType="submit" className="login-form-button">
                             Se connecter
                     </Button>

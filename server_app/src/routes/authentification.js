@@ -139,9 +139,9 @@ router.post('/api/v1.0/signin', (req, res) => {
               if(!existingUser.isActive) setHeaders({res,status:450}).then(()=>res.end(_JSON2STR({err_number: 16, demande_state: ERROR_MESSAGES_EN[16]})));
               else 
               {
-                let token_body = {...existingUser,password:"hidden"};
+                let token_body = {...existingUser._doc,password:"hidden"};
                 let token = jwt.sign(JSON.stringify(token_body), USER_SECRET_KEY);
-                setHeaders({res,status:450}).then(()=>res.end(_JSON2STR({x_access_token: token,idUser:existingUser._id, demande_state: SUCCESS_MESSAGES_EN[20]})));
+                setHeaders({res,status:200}).then(()=>res.end(_JSON2STR({x_access_token: token,idUser:existingUser._id, demande_state: SUCCESS_MESSAGES_EN[20]})));
               }
             } else 
                 setHeaders({res,status:450}).then(()=>res.end(_JSON2STR({err_number: 15, demande_state: ERROR_MESSAGES_EN[15]})));

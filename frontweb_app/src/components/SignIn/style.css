@@ -22,6 +22,7 @@
     letter-spacing: 2px;
     color:#43425D;
     font-size: xx-large;
+    margin-bottom: 20px !important;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
 }
 .slogan{
@@ -29,6 +30,7 @@
     letter-spacing: 1px;
     font-size: medium;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    margin-bottom: 60px !important;
 
 }
 
@@ -48,6 +50,13 @@
 }
 .login-form-button {
     width: 100%;
+    background-color: #23AE96 !important;
+    border-color: #ffffff !important;
+    border-radius: 3%;
+}
+.login-form-button:hover {
+    
+    background-color: #3ec7b0 !important;
 }
 
 .input-style{

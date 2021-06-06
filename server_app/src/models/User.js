@@ -10,7 +10,7 @@ const UserSchema = new mongoose.Schema({
     email: { type: String, lowercase: true,unique : true, required : true },
     password: String,
     isActive: { type: Boolean,default: false },
-    tele: { type: String, unique: true, required: false },
+    tele: { type: String, required: false },
     inscription_Date: { type: Date },
   },
   { collection: 'User' },

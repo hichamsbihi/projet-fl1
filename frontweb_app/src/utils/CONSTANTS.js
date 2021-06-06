@@ -11,6 +11,12 @@ export const IMPORT_FILE_MESSAGES = {
 export const GRAPHICS_PAGE_FR = {
     PLATEFORME_NAME: "PROJET FL",
     INFOS: "Version Béta Date: 07/06/2021",
+    DROP_FILE_TITLE: "Glisser votre fichier ici ou Cliquer pour le charger",
+    IMPORT_DATA_TITLE: "Importer votre métré: ",
+    IMPORT_DATA_HINT: "Il doit contenir un valide entete. Il peut être au format excel ou csv",
+    FILE_UPLOADED: "Fichier importé",
+    FILE_REMOVED: "Fichier supprimé",
+    EXCEL_PREVIEW_TITLE: "Page de traitement du fichier Excel"
 }
 export const ERROR_MESSAGES = {
     1:  "internal error! please contact your admin (find the err message in the server logs",
@@ -26,12 +32,17 @@ export const ERROR_MESSAGES = {
     17: "wrong token !",
     18: "error!! please provide the token on your request",
     19: "Please verify the syntax of your request !!",
+    8: "Please verify the connection with the server",
 
     SESSION_EXPIRED: "Votre session a été expirée! veuillez vous connecter à nouveau",
     UNKOWN_ERROR: "Erreur inconnue ! veuillez contacter votre admin",
     INSCRIPTION_FAILED: "Erreur lors de votre inscription! Veuillez contacter votre administrateur.",
     WRONG_EMAIL_PASS: "Email/mot de passe erroné !",
-    
+    DATATYPE_MISSING: "Veuillez choisir le type des données qui seront importées. Le passage par le url directement est interdit !",
+    FILE_VERIFICATION: 'Vérifier les données du fichier entré',
+    FILE_NOT_UPLOADED: 'Veuillez importer votre fichier !',
+    FILE_NOT_VALIDE: 'Fichier invalide !'
+
 }
 
 export const SUCCESS_MESSAGES = {
