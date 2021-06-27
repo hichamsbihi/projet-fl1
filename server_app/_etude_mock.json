@@ -1,0 +1,1 @@
+{"adresse":"default adress","siret":"123456789","buildings":[{"nom":"Batiment 1","type":"logement individuel","zones":[{"nom":"Zone 1","type":"logement individuel"}]}],"nom":"test perf 2","company":3,"type":"logement individuel","surface_habitable":"10","is_new":true,"phase":"APS","client":"zak"}
