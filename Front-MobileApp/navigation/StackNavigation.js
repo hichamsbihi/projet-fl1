@@ -10,22 +10,40 @@ import MesureScreen from "../Screens/MesureScreen";
 import SchemaScreen from "../Screens/SchemaScreen";
 import QsseScreen from "../Screens/QsseScreen";
 import CommentaireScreen from "../Screens/CommentaireScreen";
+import { NavigationContainer } from "@react-navigation/native";
 
-const Stack = createStackNavigator();
+const StackNavigator = () => {
+  const Stack = createStackNavigator();
+  const MyTheme = {
+    colors: {
+      background: "#e3a3ce",
+    },
+  };
+  return (
+    <NavigationContainer theme={MyTheme}>
+      <Stack.Navigator
+        initialRouteName="WelcomeScreen"
+        screenOptions={{
+          headerShown: false,
+        }}
+      >
+        <Stack.Screen name="WelcomeScreen" component={WelcomeScreen} />
+        <Stack.Screen name="EquipementScreen" component={EquipementScreen} />
+        <Stack.Screen name="EtatStockScreen" component={EtatStockScreen} />
+        <Stack.Screen name="CorrectifScreen" component={CorrectifScreen} />
+        <Stack.Screen name="PreventifScreen" component={PreventifScreen} />
 
-const StackNavigator = () => (
-  <Stack.Navigator initialRouteName="WelcomeScreen">
-    <Stack.Screen name="WelcomeScreen" component={WelcomeScreen} />
-    <Stack.Screen name="EquipementScreen" component={EquipementScreen} />
-    <Stack.Screen name="CorrectifScreen" component={CorrectifScreen} />
-    <Stack.Screen name="PreventifScreen" component={PreventifScreen} />
-    <Stack.Screen name="EtatStockScreen" component={EtatStockScreen} />
-    <Stack.Screen name="DocumentationScreen" component={DocumentationScreen} />
-    <Stack.Screen name="MesureScreen" component={MesureScreen} />
-    <Stack.Screen name="SchemaScreen" component={SchemaScreen} />
-    <Stack.Screen name="QsseScreen" component={QsseScreen} />
-    <Stack.Screen name="CommentaireScreen" component={CommentaireScreen} />
-  </Stack.Navigator>
-);
+        <Stack.Screen
+          name="DocumentationScreen"
+          component={DocumentationScreen}
+        />
+        <Stack.Screen name="MesureScreen" component={MesureScreen} />
+        <Stack.Screen name="SchemaScreen" component={SchemaScreen} />
+        <Stack.Screen name="QsseScreen" component={QsseScreen} />
+        <Stack.Screen name="CommentaireScreen" component={CommentaireScreen} />
+      </Stack.Navigator>
+    </NavigationContainer>
+  );
+};
 
 export default StackNavigator;

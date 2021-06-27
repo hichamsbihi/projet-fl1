@@ -4,22 +4,38 @@ import { StyleSheet, Button, View } from "react-native";
 import { Form, FormField, SubmitButton } from "../components/forms";
 import { Screen } from "../components/Screen";
 import EquipementApi from "../Apis/EquipementApi";
+import Logo from "../components/Logo";
 
 const WelcomeScreen = ({ navigation }) => {
-  const handleSubmit = async ({ id }) => {
+  const handleSubmit = async ({ id, title }) => {
     const result = await EquipementApi(id);
-
-    navigation.navigate("EquipementScreen", { data: result.data });
+    console.log(navigation);
+    if ((title = "Equipement")) {
+      navigation.navigate("EquipementScreen", { data: result.data });
+    }
   };
 
   return (
-    <View style={styles.container}>
-      <Form initialValues={{ id: "" }} onSubmit={handleSubmit}>
-        <FormField name="id" placeholder="entrer le code Equipement" />
-        <SubmitButton title="rechercher" />
-        <Button title="QR code" />
-      </Form>
-    </View>
+    <>
+      <Logo />
+      <View style={styles.container}>
+        <Form initialValues={{ id: "", title: "" }} onSubmit={handleSubmit}>
+          <FormField name="id" placeholder="Code Equipement" width={200} />
+          <SubmitButton
+            title="Equipement"
+            style={[{ backgroundColor: "#fb66c9" }]}
+          />
+          <SubmitButton
+            title="Stock"
+            style={[{ backgroundColor: "#f731b5", marginTop: 100 }]}
+          />
+          <SubmitButton
+            title="QR code"
+            style={[{ backgroundColor: "#de0094" }]}
+          />
+        </Form>
+      </View>
+    </>
   );
 };
 
@@ -33,7 +49,7 @@ const styles = StyleSheet.create({
   },
   container: {
     flex: 1,
-    backgroundColor: "#fff",
+
     alignItems: "center",
     justifyContent: "center",
   },
