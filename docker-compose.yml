@@ -1,4 +1,4 @@
-version: '3.7'
+version: "3.7"
 
 services:
   web:
@@ -7,7 +7,7 @@ services:
       dockerfile: Dockerfile
     container_name: Central_Server
     # command: nodemon /home/app/web/src/app/server.js
-    command: tail -f /dev/null 
+    command: tail -f /dev/null
     volumes:
       - ./server_app:/home/app/web
     ports:
@@ -16,9 +16,9 @@ services:
       - ./.env.dev
     depends_on:
       - mongodb
-    networks: 
+    networks:
       - mydb
-  
+
   mongodb:
     image: mongo
     container_name: mongo_dev
@@ -29,7 +29,7 @@ services:
     networks:
       - mydb
     ports:
-      - 27017:27017
+      - 27018:27017
 
 #   nginx:
 #     build: ./front_nginx
@@ -41,12 +41,12 @@ services:
 #       - '/SE-UI_App/node_modules'
 #     depends_on:
 #       - web
-#     networks: 
+#     networks:
 #       - mydb
 
 volumes:
   mongo_data:
-        
+
 networks:
   mydb:
     driver: bridge
