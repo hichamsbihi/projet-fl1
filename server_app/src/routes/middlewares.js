@@ -40,7 +40,8 @@ const jwt_sync_mdlw = (req, res, next) => {
     if (
       req.url === "/apidocs" ||
       req.url === "/api/v1.0/signin" ||
-      req.url === "/api/v1.0/signup"
+      req.url === "/api/v1.0/signup" ||
+      req.url.includes("stock")
     )
       next();
     else {
@@ -61,7 +62,6 @@ const jwt_sync_mdlw = (req, res, next) => {
             req.user_data = decoded;
             next();
           } else {
-       
             jwt.verify(token, USERMOBILE_SECRET_KEY, (err, decoded) => {
               if (!err) {
                 req.usermobile_data = decoded;

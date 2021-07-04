@@ -3,16 +3,26 @@ import axios from "axios";
 import { StyleSheet, Button, View } from "react-native";
 import { Form, FormField, SubmitButton } from "../components/forms";
 import { Screen } from "../components/Screen";
-import EquipementApi from "../Apis/EquipementApi";
+import Api from "../Apis/EquipementApi";
 import Logo from "../components/Logo";
+import AppForm from "../components/forms/Form";
 
 const WelcomeScreen = ({ navigation }) => {
   const handleSubmit = async ({ id, title }) => {
-    const result = await EquipementApi(id);
-    console.log(navigation);
-    if ((title = "Equipement")) {
-      navigation.navigate("EquipementScreen", { data: result.data });
-    }
+    console.log("salut");
+    navigation.navigate("EquipementScreen");
+  };
+
+  const handleStock = async ({ id, title }) => {
+    console.log("test");
+    Api.StockApi()
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => console.log(err));
+
+    console.log("salut");
+    navigation.navigate("EtatStockScreen");
   };
 
   return (
@@ -25,15 +35,9 @@ const WelcomeScreen = ({ navigation }) => {
             title="Equipement"
             style={[{ backgroundColor: "#fb66c9" }]}
           />
-          <SubmitButton
-            title="Stock"
-            style={[{ backgroundColor: "#f731b5", marginTop: 100 }]}
-          />
-          <SubmitButton
-            title="QR code"
-            style={[{ backgroundColor: "#de0094" }]}
-          />
         </Form>
+
+        <Button title={"stock"} onPress={handleStock} />
       </View>
     </>
   );
