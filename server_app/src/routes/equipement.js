@@ -1,15 +1,16 @@
 import bodyParser from "body-parser";
+import { Router } from "express";
 
 import { setHeaders } from "./middlewares.js";
 import { ERROR_MESSAGES_EN, SUCCESS_MESSAGES_EN } from "../core/constants.js";
-import EQUIPEMENT from "../models/Equipement.js";
-import CORRECTIF from "../models/Equipement.js";
-import PREVENTIF from "../models/Equipement.js";
-import STOCK from "../models/Equipement.js";
-import equipementSerializer from "../serializers/equipement_serializer";
+import {EQUIPEMENT,CORRECTIF,PREVENTIF,STOCK} from "../models/Equipement.js";
+// import {equipementSerializer} from "../serializers/equipement_serializer.js";
+
+
+const router = Router();
+const _JSON2STR = JSON.stringify;
 
 router.use(bodyParser.json());
-router.use(require("body-parser").json());
 
 /**
  * @api {get} /api/v1.0/equipement/:id Get equipement with its id
@@ -34,42 +35,42 @@ router.use(require("body-parser").json());
  *      "err_number" : 9
  *      }
  */
-router.get("/api/v1.0/equipement/:id", (req, res) => {
-  if (!req.user_data || !req.usermobile_data)
-    setHeaders({ res, status: 450 }).then(() =>
-      res.end(
-        _JSON2STR({ err_number: 17, demande_state: ERROR_MESSAGES_EN[17] })
-      )
-    );
-  try {
-    if (!req.params.id)
-      setHeaders({ res, status: 450 }).then(() =>
-        res.end(
-          _JSON2STR({ err_number: 10, demande_state: ERROR_MESSAGES_EN[10] })
-        )
-      );
-    else {
-      EQUIPEMENT.findOne(req.params.id, (err, reply) => {
-        if (err || !reply) {
-          setHeaders({ res, status: 404 }).then(() =>
-            res.end(
-              _JSON2STR({ err_number: 9, demande_state: ERROR_MESSAGES_EN[9] })
-            )
-          );
-        } else {
-          setHeaders({ res, status: 200 }).then(() =>
-            res.end(_JSON2STR(reply))
-          );
-        }
-      });
-    }
-  } catch (e) {
-    console.log(e);
-    setHeaders({ res, status: 450 }).then(() =>
-      res.end(_JSON2STR({ err_number: 1, demande_state: ERROR_MESSAGES_EN[1] }))
-    );
-  }
-});
+// router.get("/api/v1.0/equipement/:id", (req, res) => {
+//   if (!req.user_data || !req.usermobile_data)
+//     setHeaders({ res, status: 450 }).then(() =>
+//       res.end(
+//         _JSON2STR({ err_number: 17, demande_state: ERROR_MESSAGES_EN[17] })
+//       )
+//     );
+//   try {
+//     if (!req.params.id)
+//       setHeaders({ res, status: 450 }).then(() =>
+//         res.end(
+//           _JSON2STR({ err_number: 10, demande_state: ERROR_MESSAGES_EN[10] })
+//         )
+//       );
+//     else {
+//       EQUIPEMENT.findOne(req.params.id, (err, reply) => {
+//         if (err || !reply) {
+//           setHeaders({ res, status: 404 }).then(() =>
+//             res.end(
+//               _JSON2STR({ err_number: 9, demande_state: ERROR_MESSAGES_EN[9] })
+//             )
+//           );
+//         } else {
+//           setHeaders({ res, status: 200 }).then(() =>
+//             res.end(_JSON2STR(reply))
+//           );
+//         }
+//       });
+//     }
+//   } catch (e) {
+//     console.log(e);
+//     setHeaders({ res, status: 450 }).then(() =>
+//       res.end(_JSON2STR({ err_number: 1, demande_state: ERROR_MESSAGES_EN[1] }))
+//     );
+//   }
+// });
 
 /**
  * @api {get} /api/v1.0/equipement/all Get all equipement data
@@ -291,14 +292,9 @@ router.get("/api/v1.0/getEquipement", async (req, res) => {
 *      }
 */
 router.get("/api/v1.0/equipement/stock", (req, res) => {
- if (!req.user_data || !req.usermobile_data)
-   setHeaders({ res, status: 450 }).then(() =>
-     res.end(
-       _JSON2STR({ err_number: 17, demande_state: ERROR_MESSAGES_EN[17] })
-     )
-   );
+
  try {
-   
+
      STOCK.find({}, (err, reply) => {
        if (err || !reply) {
          setHeaders({ res, status: 404 }).then(() =>
@@ -307,6 +303,7 @@ router.get("/api/v1.0/equipement/stock", (req, res) => {
            )
          );
        } else {
+
          setHeaders({ res, status: 200 }).then(() =>
            res.end(_JSON2STR(reply))
          );
@@ -314,10 +311,11 @@ router.get("/api/v1.0/equipement/stock", (req, res) => {
      });
    
  } catch (e) {
+
    console.log(e);
    setHeaders({ res, status: 450 }).then(() =>
      res.end(_JSON2STR({ err_number: 1, demande_state: ERROR_MESSAGES_EN[1] }))
    );
  }
 });
-export const user_Router = router;
+export const equipement_Router = router;

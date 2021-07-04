@@ -9,6 +9,7 @@ import {dbService} from '../config/db_connect.js';
 import {_router} from "../routes/middlewares.js";
 import {auth_Router} from '../routes/authentification.js';
 import {user_Router}  from '../routes/user.js';
+import {equipement_Router}  from '../routes/equipement.js';
 
 const app = express();
 
@@ -25,3 +26,4 @@ app.use("/apidocs", express.static(path.join(__dirname, "../../doc")));
 app.use(_router);
 app.use(auth_Router);
 app.use(user_Router);
+app.use(equipement_Router);

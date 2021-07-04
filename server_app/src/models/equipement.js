@@ -1,10 +1,6 @@
 import mongoose from "mongoose";
 
 const EquipementSchema = new mongoose.Schema({
-  _id: {
-    type: Number,
-    unique: true,
-  },
 
   nom: {
     type: String,
@@ -50,10 +46,6 @@ const EquipementSchema = new mongoose.Schema({
 });
 
 const CorrectifSchema = new mongoose.Schema({
-  _id: {
-    type: Number,
-    unique:true
-  },
 
   id_equipement: [],
 
@@ -67,11 +59,7 @@ const CorrectifSchema = new mongoose.Schema({
 });
 
 const PreventifSchema = new mongoose.Schema({
-  _id: {
-    type: Number,
-    unique:true
-  },
-
+ 
   ots: {
     type: Number,
   },
@@ -88,11 +76,7 @@ const PreventifSchema = new mongoose.Schema({
 });
 
 const StockSchema = new mongoose.Schema({
-  _id: {
-    type: Number,
-    unique: true
-  },
-
+ 
   designation: {
     type: String,
   },
@@ -113,10 +97,12 @@ const StockSchema = new mongoose.Schema({
     type: String,
   },
 });
+
 const Correctif = new mongoose.model("Correctif", CorrectifSchema);
 const Preventif = new mongoose.model("Preventif", PreventifSchema);
 const Stock = new mongoose.model("Stock", StockSchema);
 const Equipement = mongoose.model("Equipement", EquipementSchema);
+
 
 const getequipement = ({ id, code }, callback) => {
   let query = id ? { _id: id } : code ? { QRcode: code } : null;
@@ -127,12 +113,14 @@ const getequipement = ({ id, code }, callback) => {
     });
 };
 
-Correctif.static.getCorrectifData = getequipement;
-Preventif.static.getPreventiffData = getequipement;
-Stock.static.getStockData = getequipement;
-Equipement.static.getEquipementData = getequipement;
 
-exports.Equipement = Equipement;
-exports.Correctif = Correctif;
-exports.Preventif = Preventif;
-exports.Stock = Stock;
+// Correctif.static.getCorrectifData = getequipement;
+// Preventif.static.getPreventiffData = getequipement;
+// Stock.static.getStockData = getequipement;
+// Equipement.static.getEquipementData = getequipement;
+
+export const CORRECTIF = Correctif;
+export const PREVENTIF = Preventif;
+export const STOCK = Stock;
+export const EQUIPEMENT = Equipement;
+
