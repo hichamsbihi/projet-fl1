@@ -271,4 +271,53 @@ router.get("/api/v1.0/getEquipement", async (req, res) => {
     );
   }
 });
+
+/*
+* @api {get} /api/v1.0/equipement/stock Get stock
+* @apiVersion 1.0.0
+* @apiGroup Stock
+* @apiHeader {String} x_access_token Users unique jwt-access-key.
+* @apiSuccess {Object} Stock all stock data from all tables.
+* @apiSuccessExample {json} Success, the Order state has been updated to pickedUp
+*    HTTP/1.1 200 OK
+*    {
+*      
+*    }
+* @apiErrorExample {json} stock not found
+*    HTTP/1.1 404 Error has occurred, the response describe the error
+*    {
+*      "demande_state":"stock data not found !!",
+*      "err_number" : 9
+*      }
+*/
+router.get("/api/v1.0/equipement/stock", (req, res) => {
+ if (!req.user_data || !req.usermobile_data)
+   setHeaders({ res, status: 450 }).then(() =>
+     res.end(
+       _JSON2STR({ err_number: 17, demande_state: ERROR_MESSAGES_EN[17] })
+     )
+   );
+ try {
+   
+     STOCK.find({}, (err, reply) => {
+       if (err || !reply) {
+         setHeaders({ res, status: 404 }).then(() =>
+           res.end(
+             _JSON2STR({ err_number: 9, demande_state: ERROR_MESSAGES_EN[9] })
+           )
+         );
+       } else {
+         setHeaders({ res, status: 200 }).then(() =>
+           res.end(_JSON2STR(reply))
+         );
+       }
+     });
+   
+ } catch (e) {
+   console.log(e);
+   setHeaders({ res, status: 450 }).then(() =>
+     res.end(_JSON2STR({ err_number: 1, demande_state: ERROR_MESSAGES_EN[1] }))
+   );
+ }
+});
 export const user_Router = router;
