@@ -315,4 +315,22 @@ router.get("/api/v1.0/equipement/stock", (req, res) => {
     );
   }
 });
+
+router.get("/api/v1.0/create/stock", (req, res) => {
+  const stock_insert = new STOCK();
+  stock_insert.designation = "des 1 (test)";
+  stock_insert.ref = "ref 1 (test)";
+  stock_insert.quantite = 10;
+  stock_insert.site = "site test";
+  stock_insert.emplacement = "emplacement test";
+  stock_insert.save((err,reply)=>{
+    console.log(err,reply);
+    setHeaders({ res, status: 200 }).then(() =>
+           res.end("doc created")
+         );
+  });
+  
+
+})
+
 export const equipement_Router = router;
