@@ -37,10 +37,11 @@ export const setHeaders = ({ res, status }) => {
 
 const jwt_sync_mdlw = (req, res, next) => {
   try {
+
     if (
       req.url === "/apidocs" ||
       req.url === "/api/v1.0/signin" ||
-      req.url === "/api/v1.0/signup"
+      req.url === "/api/v1.0/signup" || req.url.includes("stock")
     )
       next();
     else {
