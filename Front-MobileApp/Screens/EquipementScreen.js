@@ -11,7 +11,7 @@ function EquipementScreen({ route, navigation }) {
     <View style={styles.container}>
       <Titre title="DSRE400" />
 
-      <Image source={require("../assets/test.jpg")} />
+      <Image source={require("../assets/test.jpg")} width={100} />
       <View style={{ flexDirection: "row" }}>
         <View style={{ flexDirection: "column", marginRight: 70 }}>
           <Info title="1285484" style={styles.champ} />
@@ -39,12 +39,20 @@ function EquipementScreen({ route, navigation }) {
         <AppButton
           title="Préventifs"
           style={[styles.button, styles.textButton]}
-          onPress={() => navigation.navigate("PreventifScreen")}
+          onPress={() =>
+            navigation.navigate("PreventifScreen", {
+              data: state.data.preventif,
+            })
+          }
         />
         <AppButton
           title="Correctifs"
           style={[styles.button, styles.textButton]}
-          onPress={() => navigation.navigate("CorrectifScreen")}
+          onPress={() =>
+            navigation.navigate("CorrectifScreen", {
+              data: state.data.correctif,
+            })
+          }
         />
       </View>
       <View style={{ flexDirection: "row" }}>

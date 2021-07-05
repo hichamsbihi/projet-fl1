@@ -37,11 +37,13 @@ export const setHeaders = ({ res, status }) => {
 
 const jwt_sync_mdlw = (req, res, next) => {
   try {
-
     if (
       req.url === "/apidocs" ||
       req.url === "/api/v1.0/signin" ||
-      req.url === "/api/v1.0/signup" || req.url.includes("stock")
+      req.url === "/api/v1.0/signup" ||
+      req.url.includes("create") ||
+      req.url.includes("stock") ||
+      req.url.includes("getequipement")
     )
       next();
     else {
@@ -62,7 +64,6 @@ const jwt_sync_mdlw = (req, res, next) => {
             req.user_data = decoded;
             next();
           } else {
-       
             jwt.verify(token, USERMOBILE_SECRET_KEY, (err, decoded) => {
               if (!err) {
                 req.usermobile_data = decoded;

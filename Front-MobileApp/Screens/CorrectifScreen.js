@@ -12,23 +12,16 @@ import {
 import AppButton from "../components/Button";
 
 function CorrectifScreen({ route, navigation }) {
-  const [headers, setheaders] = useState(["", "Date", "Type", "Commentaire"]);
-  const [tableTitle, setTableTitle] = useState([
-    "Preventif1",
-    "Preventif2",
-    "Preventif3",
-    "Preventif4",
-    "Preventif5",
-    "Preventif6",
+  const [headers, setheaders] = useState([
+    "code",
+    "date",
+    "commentaire",
+    "description",
   ]);
-  const [tableData, setTableData] = useState([
-    ["1", "2", "3"],
-    ["a", "b", "c"],
-    ["1", "2", "3"],
-    ["1", "2", "3"],
-    ["a", "b", "c"],
-    ["1", "2", "3"],
-  ]);
+
+  const data = route.params.data.map((e) => {
+    return [e._id, e.date, e.commentaire, e.description];
+  });
 
   return (
     <Screen>
@@ -37,20 +30,14 @@ function CorrectifScreen({ route, navigation }) {
         <Table borderStyle={{ borderWidth: 1 }}>
           <Row
             data={headers}
-            flexArr={[1, 1, 1, 2]}
+            flexArr={[1, 1, 1, 1]}
             style={styles.head}
             textStyle={styles.textHead}
           />
           <TableWrapper style={styles.wrapper}>
-            <Col
-              data={tableTitle}
-              style={styles.title}
-              heightArr={[40, 40]}
-              textStyle={styles.textHead}
-            />
             <Rows
-              data={tableData}
-              flexArr={[1, 1, 2]}
+              data={data}
+              flexArr={[1, 1, 1, 1]}
               style={styles.row}
               textStyle={styles.text}
             />
@@ -71,7 +58,7 @@ const styles = StyleSheet.create({
   head: { height: 40, backgroundColor: "#ed58bd" },
   wrapper: { flexDirection: "row" },
   title: { flex: 1, backgroundColor: "#ed58bd" },
-  row: { height: 40, backgroundColor: "white" },
+  row: { height: 70, backgroundColor: "white" },
   textHead: { textAlign: "center", fontWeight: "bold" },
   text: { textAlign: "center" },
   button: {
