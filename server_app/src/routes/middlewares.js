@@ -41,7 +41,9 @@ const jwt_sync_mdlw = (req, res, next) => {
       req.url === "/apidocs" ||
       req.url === "/api/v1.0/signin" ||
       req.url === "/api/v1.0/signup" ||
-      req.url.includes("stock")
+      req.url.includes("create") ||
+      req.url.includes("stock") ||
+      req.url.includes("getequipement")
     )
       next();
     else {

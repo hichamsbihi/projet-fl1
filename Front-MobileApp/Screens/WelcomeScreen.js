@@ -1,28 +1,36 @@
-import React from "react";
+import React, { useState } from "react";
 import axios from "axios";
-import { StyleSheet, Button, View } from "react-native";
+import { StyleSheet, View } from "react-native";
 import { Form, FormField, SubmitButton } from "../components/forms";
 import { Screen } from "../components/Screen";
 import Api from "../Apis/EquipementApi";
 import Logo from "../components/Logo";
 import AppForm from "../components/forms/Form";
+import Button from "../components/Button";
 
 const WelcomeScreen = ({ navigation }) => {
-  const handleSubmit = async ({ id, title }) => {
-    console.log("salut");
-    navigation.navigate("EquipementScreen");
-  };
-
-  const handleStock = async ({ id, title }) => {
-    console.log("test");
-    Api.StockApi()
+  const handleSubmit = async ({ id }) => {
+    Api.EquipementApi(id)
       .then((res) => {
-        console.log(res);
+        //console.log(res.data);
+        navigation.navigate("EquipementScreen", { data: res.data });
+      })
+      .catch((err) => {
+        console.log("err");
+        console.log(err);
+      });
+  };
+  const [stock, setStock] = useState([]);
+  const handleStock = async ({ id, title }) => {
+    Api.StockApi()
+
+      .then((res) => {
+        setStock(res.data);
+        navigation.navigate("EtatStockScreen", { data: stock.concat([]) });
       })
       .catch((err) => console.log(err));
 
     console.log("salut");
-    navigation.navigate("EtatStockScreen");
   };
 
   return (
@@ -37,7 +45,11 @@ const WelcomeScreen = ({ navigation }) => {
           />
         </Form>
 
-        <Button title={"stock"} onPress={handleStock} />
+        <Button
+          title={"stock"}
+          onPress={handleStock}
+          style={[{ backgroundColor: "#fb66c9" }]}
+        />
       </View>
     </>
   );

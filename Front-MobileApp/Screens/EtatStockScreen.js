@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Text, Button, StyleSheet, View } from "react-native";
 import Screen from "../components/Screen";
 import Titre from "../components/Titre";
@@ -12,23 +12,17 @@ import {
 import AppButton from "../components/Button";
 
 function EtatStockScreen({ route, navigation }) {
-  const [headers, setheaders] = useState(["", "Code", "Nombre", "Etat"]);
-  const [tableTitle, setTableTitle] = useState([
-    "Piece 1",
-    "Piece 2",
-    "Piece 3",
-    "Piece 4",
-    "Piece 5",
-    "Piece 6",
+  const [headers, setheaders] = useState([
+    "code",
+    "désignation",
+    "réference",
+    "quantité",
   ]);
-  const [tableData, setTableData] = useState([
-    ["1", "2", "3"],
-    ["a", "b", "c"],
-    ["1", "2", "3"],
-    ["1", "2", "3"],
-    ["a", "b", "c"],
-    ["1", "2", "3"],
-  ]);
+  const [tableData, setTableData] = useState([]);
+
+  const data = route.params.data.map((e) => {
+    return [e._id, e.designation, e.ref, e.quantite];
+  });
 
   return (
     <Screen>
@@ -37,20 +31,14 @@ function EtatStockScreen({ route, navigation }) {
         <Table borderStyle={{ borderWidth: 1 }}>
           <Row
             data={headers}
-            flexArr={[1, 1, 1, 2]}
+            flexArr={[1, 1, 1, 1]}
             style={styles.head}
             textStyle={styles.textHead}
           />
           <TableWrapper style={styles.wrapper}>
-            <Col
-              data={tableTitle}
-              style={styles.title}
-              heightArr={[40, 40]}
-              textStyle={styles.textHead}
-            />
             <Rows
-              data={tableData}
-              flexArr={[1, 1, 2]}
+              data={data}
+              flexArr={[1, 1, 1, 1]}
               style={styles.row}
               textStyle={styles.text}
             />

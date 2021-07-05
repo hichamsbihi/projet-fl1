@@ -135,12 +135,13 @@ router.get("/api/v1.0/equipement/all", (req, res) => {
   }
 });
 
-router.get("/api/v1.0/getEquipement", async (req, res) => {
+router.get("/api/v1.0/getequipement/:QRcode", async (req, res) => {
   try {
     let inc = 0;
     const replybody = {};
-    const Equipement_serializer = new equipementSerializer(req);
-    !Equipement_serializer.is_valide({ raise_exception: false }) &&
+    // const Equipement_serializer = new equipementSerializer(req);
+    // !Equipement_serializer.is_valide({ raise_exception: false }) &&
+    !req.params.QRcode &&
       setHeaders({ res, status: 450 }).then(() =>
         res.end(
           _JSON2STR({ err_number: 11, demande_state: ERROR_MESSAGES_EN[11] })
@@ -149,12 +150,11 @@ router.get("/api/v1.0/getEquipement", async (req, res) => {
 
     EQUIPEMENT.getequipement(
       {
-        anyOf: [
-          { id: Equipement_serializer.validatedata["id"] },
-          { code: Equipement_serializer.validatedata["code"] },
-        ],
+        code: req.params.QRcode,
+        _this_ref: EQUIPEMENT,
       },
       (err, results) => {
+        console.log(err, results);
         if (err)
           setHeaders({ res, status: 450 }).then(() =>
             res.end(
@@ -165,13 +165,10 @@ router.get("/api/v1.0/getEquipement", async (req, res) => {
             )
           );
         else {
-          setHeaders({ res, status: 200 }).then(() =>
-            res.end(_JSON2STR(results))
-          );
           inc++;
-          replybody.preventif = results;
-
-          inc === 4 &&
+          replybody.equipement = results;
+          console.log(replybody);
+          inc === 3 &&
             setHeaders({ res, status: 200 }).then(() =>
               res.end(_JSON2STR(replybody))
             );
@@ -181,10 +178,8 @@ router.get("/api/v1.0/getEquipement", async (req, res) => {
 
     CORRECTIF.getequipement(
       {
-        anyOf: [
-          { id: Equipement_serializer.validatedata["id"] },
-          { code: Equipement_serializer.validatedata["code"] },
-        ],
+        id_equipement: req.params.QRcode,
+        _this_ref: CORRECTIF,
       },
       (err, results) => {
         if (err)
@@ -197,13 +192,10 @@ router.get("/api/v1.0/getEquipement", async (req, res) => {
             )
           );
         else {
-          setHeaders({ res, status: 200 }).then(() =>
-            res.end(_JSON2STR(results))
-          );
           inc++;
-          replybody.preventif = results;
+          replybody.correctif = results;
 
-          inc === 4 &&
+          inc === 3 &&
             setHeaders({ res, status: 200 }).then(() =>
               res.end(_JSON2STR(replybody))
             );
@@ -213,10 +205,8 @@ router.get("/api/v1.0/getEquipement", async (req, res) => {
 
     PREVENTIF.getequipement(
       {
-        anyOf: [
-          { id: Equipement_serializer.validatedata["id"] },
-          { code: Equipement_serializer.validatedata["code"] },
-        ],
+        id_equipement: req.params.QRcode,
+        _this_ref: PREVENTIF,
       },
       (err, results) => {
         if (err)
@@ -232,37 +222,7 @@ router.get("/api/v1.0/getEquipement", async (req, res) => {
           inc++;
           replybody.preventif = results;
 
-          inc === 4 &&
-            setHeaders({ res, status: 200 }).then(() =>
-              res.end(_JSON2STR(replybody))
-            );
-        }
-      }
-    );
-
-    STOCK.getequipement(
-      {
-        id: Equipement_serializer.validatedata["id"],
-        code: Equipement_serializer.validatedata["code"],
-      },
-      (err, results) => {
-        if (err)
-          setHeaders({ res, status: 450 }).then(() =>
-            res.end(
-              _JSON2STR({
-                err_number: 17,
-                demande_state: ERROR_MESSAGES_EN[17],
-              })
-            )
-          );
-        else {
-          setHeaders({ res, status: 200 }).then(() =>
-            res.end(_JSON2STR(results))
-          );
-          inc++;
-          replybody.preventif = results;
-
-          inc === 4 &&
+          inc === 3 &&
             setHeaders({ res, status: 200 }).then(() =>
               res.end(_JSON2STR(replybody))
             );
@@ -316,21 +276,45 @@ router.get("/api/v1.0/equipement/stock", (req, res) => {
   }
 });
 
-router.get("/api/v1.0/create/stock", (req, res) => {
+router.get("/api/v1.0/create", (req, res) => {
   const stock_insert = new STOCK();
-  stock_insert.designation = "des 1 (test)";
+  stock_insert.designation = "stock 1 (test)";
   stock_insert.ref = "ref 1 (test)";
   stock_insert.quantite = 10;
   stock_insert.site = "site test";
   stock_insert.emplacement = "emplacement test";
-  stock_insert.save((err,reply)=>{
-    console.log(err,reply);
-    setHeaders({ res, status: 200 }).then(() =>
-           res.end("doc created")
-         );
-  });
-  
+  stock_insert.save();
 
-})
+  const equip_insert = new EQUIPEMENT();
+
+  equip_insert.nom = "equipement 1 (test)";
+  equip_insert.QRcode = "QR456789";
+  equip_insert.date_visite = Date.now();
+  equip_insert.nom_constructeur = "nom constructeur";
+  equip_insert.ref = "code ref";
+  equip_insert.emplacement = "emplacement test";
+  equip_insert.niveau_strategique = "niveau_strategique test";
+  equip_insert.save();
+
+  const preventif_insert = new PREVENTIF();
+
+  preventif_insert.ots = "preventif 1 (test)";
+  preventif_insert.id_equipement = "QR456789";
+  preventif_insert.commentaire = "commentaire test";
+  preventif_insert.date = Date.now();
+
+  preventif_insert.save();
+
+  const correctif_insert = new CORRECTIF();
+
+  correctif_insert.description = "description 1 (test)";
+  correctif_insert.id_equipement = "QR456789";
+  correctif_insert.commentaire = "commentaire test";
+  correctif_insert.date = Date.now();
+
+  correctif_insert.save();
+
+  setHeaders({ res, status: 200 }).then(() => res.end("docs created"));
+});
 
 export const equipement_Router = router;

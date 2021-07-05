@@ -1,7 +1,6 @@
 import mongoose from "mongoose";
 
 const EquipementSchema = new mongoose.Schema({
-
   nom: {
     type: String,
   },
@@ -15,7 +14,7 @@ const EquipementSchema = new mongoose.Schema({
   },
 
   ref: {
-    type: Number,
+    type: String,
   },
 
   nom_constructeur: {
@@ -37,7 +36,7 @@ const EquipementSchema = new mongoose.Schema({
   QRcode: {
     type: String,
     unique: true,
-    required: true
+    required: true,
   },
 
   Qsse_pdf: {
@@ -46,8 +45,12 @@ const EquipementSchema = new mongoose.Schema({
 });
 
 const CorrectifSchema = new mongoose.Schema({
-
-  id_equipement: [],
+  id_equipement: {
+    type: String,
+  },
+  description: {
+    type: String,
+  },
 
   commentaire: {
     type: String,
@@ -59,12 +62,13 @@ const CorrectifSchema = new mongoose.Schema({
 });
 
 const PreventifSchema = new mongoose.Schema({
- 
   ots: {
-    type: Number,
+    type: String,
   },
 
-  id_equipement: [],
+  id_equipement: {
+    type: String,
+  },
 
   commentaire: {
     type: String,
@@ -72,11 +76,10 @@ const PreventifSchema = new mongoose.Schema({
 
   date: {
     type: Date,
-  }
+  },
 });
 
 const StockSchema = new mongoose.Schema({
- 
   designation: {
     type: String,
   },
@@ -86,7 +89,7 @@ const StockSchema = new mongoose.Schema({
   },
 
   quantite: {
-    type: Number,
+    type: String,
   },
 
   site: {
@@ -98,29 +101,32 @@ const StockSchema = new mongoose.Schema({
   },
 });
 
-const Correctif = new mongoose.model("Correctif", CorrectifSchema);
-const Preventif = new mongoose.model("Preventif", PreventifSchema);
-const Stock = new mongoose.model("Stock", StockSchema);
-const Equipement = mongoose.model("Equipement", EquipementSchema);
-
-
-const getequipement = ({ id, code }, callback) => {
-  let query = id ? { _id: id } : code ? { QRcode: code } : null;
+const getequipement = ({ id, code, id_equipement, _this_ref }, callback) => {
+  let query = id
+    ? { _id: id }
+    : code
+    ? { QRcode: code }
+    : id_equipement
+    ? { id_equipement: id_equipement }
+    : null;
   query &&
-    this.find(query, (err, rep) => {
+    _this_ref.find(query, (err, rep) => {
       if (err) callback(err, null);
       else callback(null, rep);
     });
 };
 
+CorrectifSchema.statics.getequipement = getequipement;
+PreventifSchema.statics.getequipement = getequipement;
+StockSchema.statics.getequipement = getequipement;
+EquipementSchema.statics.getequipement = getequipement;
 
-// Correctif.static.getCorrectifData = getequipement;
-// Preventif.static.getPreventiffData = getequipement;
-// Stock.static.getStockData = getequipement;
-// Equipement.static.getEquipementData = getequipement;
+const Correctif = new mongoose.model("Correctif", CorrectifSchema);
+const Preventif = new mongoose.model("Preventif", PreventifSchema);
+const Stock = new mongoose.model("Stock", StockSchema);
+const Equipement = mongoose.model("Equipement", EquipementSchema);
 
 export const CORRECTIF = Correctif;
 export const PREVENTIF = Preventif;
 export const STOCK = Stock;
 export const EQUIPEMENT = Equipement;
-
