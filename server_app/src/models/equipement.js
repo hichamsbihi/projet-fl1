@@ -53,6 +53,9 @@ const CorrectifSchema = new mongoose.Schema({
     type: String,
   },
 
+  description: {
+    type: String,
+  },
   date: {
     type: Date,
   },

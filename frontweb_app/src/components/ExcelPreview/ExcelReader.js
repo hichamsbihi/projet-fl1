@@ -36,7 +36,6 @@ export const ReactExcel = (props) => {
                         range: {s: {c: 0, r: 0}, e: {c: range.e.c > 30 ? 30 : range.e.c, r: range.e.r}},
                         blankrows: false
                     });
-
                     return {
                         [name]: dataParse
                     };
@@ -46,6 +45,7 @@ export const ReactExcel = (props) => {
                         defval: ""
                     });
 
+                    
                     return {
                         [name]: dataParse
                     };
@@ -53,6 +53,8 @@ export const ReactExcel = (props) => {
 
 
             });
+            catch_validated_data(result[3]["etat de stock"]);
+          
             setParsedData(result);
             setCurrentSheet(result[0]);
             onSheetUpdate && onSheetUpdate(result[0]);
