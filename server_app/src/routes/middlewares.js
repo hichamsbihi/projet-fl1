@@ -1,6 +1,5 @@
 import { Router } from "express";
 import jwt from "jsonwebtoken";
-import bodyParser from "body-parser";
 
 import { ERROR_MESSAGES_EN, SUCCESS_MESSAGES_EN } from "../core/constants.js";
 import { USER_SECRET_KEY, USERMOBILE_SECRET_KEY } from "../config/app.js";
@@ -8,7 +7,6 @@ import { USER_SECRET_KEY, USERMOBILE_SECRET_KEY } from "../config/app.js";
 const router = Router();
 const _JSON2STR = JSON.stringify;
 
-router.use(bodyParser.json());
 router.use((error, req, res, next) => {
   if (error instanceof SyntaxError)
     setHeaders({

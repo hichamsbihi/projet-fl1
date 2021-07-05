@@ -26,7 +26,7 @@ const EquipementSchema = new mongoose.Schema({
   },
 
   date_visite: {
-    type: Date,
+    type: String,
   },
 
   image_equipement: {
@@ -60,7 +60,7 @@ const CorrectifSchema = new mongoose.Schema({
     type: String,
   },
   date: {
-    type: Date,
+    type: String,
   },
 });
 
@@ -78,7 +78,7 @@ const PreventifSchema = new mongoose.Schema({
   },
 
   date: {
-    type: Date,
+    type: String,
   },
 });
 
@@ -94,14 +94,11 @@ const StockSchema = new mongoose.Schema({
   quantite: {
     type: String,
   },
-
-  site: {
+  code_article: {
     type: String,
   },
 
-  emplacement: {
-    type: String,
-  },
+  
 });
 
 const getequipement = ({ id, code, id_equipement, _this_ref }, callback) => {

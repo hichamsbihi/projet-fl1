@@ -13,7 +13,6 @@ import { USER } from "../models/User.js";
 const router = Router();
 const _JSON2STR = JSON.stringify;
 
-router.use(bodyParser.json());
 
 // overwrite hashCode function of the string prototype
 String.prototype.hashCode = getStringHash;

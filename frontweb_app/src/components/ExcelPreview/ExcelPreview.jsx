@@ -5,7 +5,7 @@ import './ExcelPreview.css';
 import { message, Spin,Row,Button } from "antd";
 import { _launch } from "./algo_excel_new";
 import { GRAPHICS_PAGE_FR ,ERROR_MESSAGES} from "../../utils/CONSTANTS";
-import {reqPostPreventifs,reqPostCorrectifs,reqPostEquipements} from "../../apis/index";
+import {reqPostPreventifs,reqPostCorrectifs,reqPostEquipements,reqPostStock} from "../../apis/index";
 class ExcelPreview extends React.Component {
 
     state = {
@@ -25,6 +25,12 @@ class ExcelPreview extends React.Component {
         "Equipement": "id_equipement",
         "Description": "description",
         "Date": "date",
+    };
+    stockColumnMapping = {
+        "code article": "code_article",
+        "désignation article": "designation",
+        "Référence": "ref",
+        "quantité magasin": "quantite",
     };
     equipementColumnMapping = {
         "Equipement": "QRcode",
@@ -77,6 +83,8 @@ getStaticName = (e,pageName)=>{
         return this.correctifColumnMapping[e] ? this.correctifColumnMapping[e] : e;
     if(pageName === 'données fixe Equipements')
         return this.equipementColumnMapping[e] ? this.equipementColumnMapping[e] : e;
+    if(pageName === 'etat de stock')
+        return this.stockColumnMapping[e] ? this.stockColumnMapping[e] : e;
 }
 
 
@@ -102,6 +110,7 @@ getStaticName = (e,pageName)=>{
                     />
                    <Button style={{backgroundColor: "#23AE96", border: "none",margineRight:"20px",float:'right'}} type="primary" shape="round" size='large' onClick={()=>{
                        if(Object.keys(this.state.currentSheet).length > 0){
+                           this.setState({isProcessingData:true});
                         const pageName = Object.keys(this.state.currentSheet)[0];
                         
                             const columnsNames = this.state.currentSheet[pageName][0];
@@ -110,6 +119,7 @@ getStaticName = (e,pageName)=>{
                             const reqPutItems = pageName === 'Preventifs' ? reqPostPreventifs : 
                                     pageName === 'Correctifs' ? reqPostCorrectifs :
                                     pageName === 'données fixe Equipements' ? reqPostEquipements :
+                                    pageName === 'etat de stock' ? reqPostStock :
                                     null;
                             this.state.currentSheet[pageName].forEach((elem,ind)=>{
                                 if(ind!=0)
@@ -126,11 +136,14 @@ getStaticName = (e,pageName)=>{
                                   
                             });
 
-                            reqPutItems(listToApi).then((res)=>{
+                            reqPutItems && reqPutItems(listToApi).then((res)=>{
                                 message.success('data was sent successfuly');
+                                this.setState({isProcessingData:false});
+
 
                             }).catch(e=>{
                                 message.error('please select the page');
+                                this.setState({isProcessingData:false});
 
                             })
                         }
