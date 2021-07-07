@@ -101,6 +101,21 @@ const StockSchema = new mongoose.Schema({
   
 });
 
+const CommentShema = new mongoose.Schema({
+  id_equipement: {
+    type: String,
+  },
+
+  commentaire: {
+    type: String,
+  },
+
+  date: {
+    type: Date,
+    default: Date.now(),
+  },
+});
+
 const getequipement = ({ id, code, id_equipement, _this_ref }, callback) => {
   let query = id
     ? { _id: id }
@@ -119,14 +134,17 @@ const getequipement = ({ id, code, id_equipement, _this_ref }, callback) => {
 CorrectifSchema.statics.getequipement = getequipement;
 PreventifSchema.statics.getequipement = getequipement;
 StockSchema.statics.getequipement = getequipement;
+CommentShema.statics.getequipement = getequipement;
 EquipementSchema.statics.getequipement = getequipement;
 
 const Correctif = new mongoose.model("Correctif", CorrectifSchema);
 const Preventif = new mongoose.model("Preventif", PreventifSchema);
 const Stock = new mongoose.model("Stock", StockSchema);
+const Comment = new mongoose.model("Stock", CommentShema);
 const Equipement = mongoose.model("Equipement", EquipementSchema);
 
 export const CORRECTIF = Correctif;
 export const PREVENTIF = Preventif;
 export const STOCK = Stock;
+export const COMMENT = Comment;
 export const EQUIPEMENT = Equipement;

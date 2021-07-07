@@ -50,7 +50,7 @@ function CommentaireScreen({ navigation }) {
           </View>
           <SubmitButton
             title="Enregistrer"
-            style={{ backgroundColor: "#fb66c9", width: 200, marginTop: 60 }}
+            style={[{ backgroundColor: "#fb66c9" }]}
           />
           <AppButton
             title="Retour"

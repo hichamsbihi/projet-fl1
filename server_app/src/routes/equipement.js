@@ -7,6 +7,7 @@ import {
   CORRECTIF,
   PREVENTIF,
   STOCK,
+  COMMENT,
 } from "../models/equipement.js";
 // import {equipementSerializer} from "../serializers/equipement_serializer.js";
 
@@ -228,6 +229,33 @@ router.get("/api/v1.0/getequipement/:QRcode", async (req, res) => {
         }
       }
     );
+
+    COMMENT.getequipement(
+      {
+        id_equipement: req.params.QRcode,
+        _this_ref: COMMENT,
+      },
+      (err, results) => {
+        if (err)
+          setHeaders({ res, status: 450 }).then(() =>
+            res.end(
+              _JSON2STR({
+                err_number: 17,
+                demande_state: ERROR_MESSAGES_EN[17],
+              })
+            )
+          );
+        else {
+          inc++;
+          replybody.comments = results;
+
+          inc === 3 &&
+            setHeaders({ res, status: 200 }).then(() =>
+              res.end(_JSON2STR(replybody))
+            );
+        }
+      }
+    );
   } catch (e) {
     console.log(e);
     setHeaders({ res, status: 450 }).then(() =>
@@ -326,6 +354,27 @@ router.post("/api/v1.0/correctifs", (req, res) => {
   });
 
 })
+
+router.get("/api/v1.0/equipement/comment", (req, res) => {
+  try {
+    COMMENT.find({}, (err, reply) => {
+      if (err || !reply) {
+        setHeaders({ res, status: 404 }).then(() =>
+          res.end(
+            _JSON2STR({ err_number: 9, demande_state: ERROR_MESSAGES_EN[9] })
+          )
+        );
+      } else {
+        setHeaders({ res, status: 200 }).then(() => res.end(_JSON2STR(reply)));
+      }
+    });
+  } catch (e) {
+    console.log(e);
+    setHeaders({ res, status: 450 }).then(() =>
+      res.end(_JSON2STR({ err_number: 1, demande_state: ERROR_MESSAGES_EN[1] }))
+    );
+  }
+});
 
 router.get("/api/v1.0/create", (req, res) => {
   const stock_insert = new STOCK();
