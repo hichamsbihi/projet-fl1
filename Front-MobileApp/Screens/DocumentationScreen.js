@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet } from "react-native";
+import { StyleSheet, WebView, Linking } from "react-native";
 import Screen from "../components/Screen";
 import Titre from "../components/Titre";
 import AppButton from "../components/Button";
@@ -8,7 +8,15 @@ function DocumentationScreen({ navigation }) {
   return (
     <Screen>
       <Titre title="Documentation" />
-      <AppButton title="Telecharger PDF" style={[styles.pdf]} />
+      <AppButton
+        title="Telecharger PDF"
+        style={[styles.pdf]}
+        onPress={() => {
+          Linking.openURL(
+            "https://drive.google.com/file/d/1vp3CEvvvnl3tLDu_S8S9d0LMyirN3NsQ/view?usp=sharing"
+          );
+        }}
+      />
       <AppButton
         title="Retour"
         style={[styles.retour]}

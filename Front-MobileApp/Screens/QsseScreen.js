@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet } from "react-native";
+import { StyleSheet, Linking } from "react-native";
 import Screen from "../components/Screen";
 import Titre from "../components/Titre";
 import AppButton from "../components/Button";
@@ -8,7 +8,15 @@ function QsseScreen({ navigation }) {
   return (
     <Screen>
       <Titre title="Qsse" />
-      <AppButton title="Telecharger PDF" style={[styles.pdf]} />
+      <AppButton
+        title="Telecharger PDF"
+        style={[styles.pdf]}
+        onPress={() => {
+          Linking.openURL(
+            "https://drive.google.com/file/d/1oLdrCH_h9cCo-7BwjQCeg3sB6Ev0kzrc/view?usp=sharing"
+          );
+        }}
+      />
       <AppButton
         title="Retour"
         style={[styles.retour]}

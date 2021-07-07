@@ -6,78 +6,93 @@ import Info from "../components/Info";
 
 function EquipementScreen({ route, navigation }) {
   const [state, setstate] = useState(route.params);
+  const date_visite = state.data.equipement.map((e) => {
+    return e.date_visite.split("T");
+  });
+  console.log(date_visite);
 
+  const image1 = require("../assets/20210401_114306.jpg");
+  const image2 = require("../assets/20210401_114312.jpg");
+  const image3 = require("../assets/20210401_114503.jpg");
+  const image = [image1, image2, image3];
+
+  function RandomInt(max) {
+    return Math.floor(Math.random() * max);
+  }
   return (
-    <View style={styles.container}>
-      <Titre title="DSRE400" />
+    <>
+      {state.data.equipement.map((e) => (
+        <View style={styles.container} key={e._id}>
+          <Titre title={e.nom} />
+          <Image source={image[RandomInt(3)]} width={100} />
+          <View style={{ flexDirection: "row" }}>
+            <View style={{ flexDirection: "column", marginRight: 70 }}>
+              <Info title={e.QRcode} style={styles.champ} />
+              <Info title={e.nom} style={styles.champ} />
+              <Info title={e.nom_constructeur} style={styles.champ} />
+            </View>
+            <View style={{ flexDirection: "column" }}>
+              <Info title={e.emplacement} style={styles.champ} />
+              <Info title={e.ref} style={styles.champ} />
+              <Info title={date_visite[0][0]} style={styles.champ} />
+            </View>
+          </View>
 
-      <Image source={require("../assets/test.jpg")} width={100} />
-      <View style={{ flexDirection: "row" }}>
-        <View style={{ flexDirection: "column", marginRight: 70 }}>
-          <Info title="1285484" style={styles.champ} />
-          <Info title="Societe &" style={styles.champ} />
-          <Info title="Ar25155" style={styles.champ} />
+          <View
+            style={{
+              flexDirection: "row",
+              marginTop: 20,
+            }}
+          >
+            <AppButton
+              title="schéma"
+              style={[styles.button, styles.textButton]}
+              onPress={() => navigation.navigate("SchemaScreen")}
+            />
+            <AppButton
+              title="Préventifs"
+              style={[styles.button, styles.textButton]}
+              onPress={() =>
+                navigation.navigate("PreventifScreen", {
+                  data: state.data.preventif,
+                })
+              }
+            />
+            <AppButton
+              title="Correctifs"
+              style={[styles.button, styles.textButton]}
+              onPress={() =>
+                navigation.navigate("CorrectifScreen", {
+                  data: state.data.correctif,
+                })
+              }
+            />
+          </View>
+          <View style={{ flexDirection: "row" }}>
+            <AppButton
+              title="Documentation"
+              style={[styles.button, styles.textButton]}
+              onPress={() => navigation.navigate("DocumentationScreen")}
+            />
+            <AppButton
+              title="Qsse"
+              style={[styles.button, styles.textButton]}
+              onPress={() => navigation.navigate("QsseScreen")}
+            />
+            <AppButton
+              title="mesure relevé"
+              style={[styles.button, styles.textButton]}
+              onPress={() => navigation.navigate("MesureScreen")}
+            />
+          </View>
+          <AppButton
+            title="Commentaire"
+            style={[styles.button, styles.textButton]}
+            onPress={() => navigation.navigate("CommentaireScreen")}
+          />
         </View>
-        <View style={{ flexDirection: "column" }}>
-          <Info title="Emplacement" style={styles.champ} />
-          <Info title="15/02/2021" style={styles.champ} />
-          <Info title="15/05/2022" style={styles.champ} />
-        </View>
-      </View>
-
-      <View
-        style={{
-          flexDirection: "row",
-          marginTop: 20,
-        }}
-      >
-        <AppButton
-          title="schéma"
-          style={[styles.button, styles.textButton]}
-          onPress={() => navigation.navigate("SchemaScreen")}
-        />
-        <AppButton
-          title="Préventifs"
-          style={[styles.button, styles.textButton]}
-          onPress={() =>
-            navigation.navigate("PreventifScreen", {
-              data: state.data.preventif,
-            })
-          }
-        />
-        <AppButton
-          title="Correctifs"
-          style={[styles.button, styles.textButton]}
-          onPress={() =>
-            navigation.navigate("CorrectifScreen", {
-              data: state.data.correctif,
-            })
-          }
-        />
-      </View>
-      <View style={{ flexDirection: "row" }}>
-        <AppButton
-          title="Documentation"
-          style={[styles.button, styles.textButton]}
-          onPress={() => navigation.navigate("DocumentationScreen")}
-        />
-        <AppButton
-          title="Qsse"
-          style={[styles.button, styles.textButton]}
-          onPress={() => navigation.navigate("QsseScreen")}
-        />
-        <AppButton
-          title="mesure relevé"
-          style={[styles.button, styles.textButton]}
-          onPress={() => navigation.navigate("MesureScreen")}
-        />
-      </View>
-      <AppButton
-        title="Commentaire"
-        style={[styles.button, styles.textButton]}
-        onPress={() => navigation.navigate("CommentaireScreen")}
-      />
-    </View>
+      ))}
+    </>
   );
 }
 
