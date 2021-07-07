@@ -1,13 +1,11 @@
 
 
 import {Router} from "express";
-import bodyParser from 'body-parser';
 import {setHeaders} from "./middlewares.js";
 import {ERROR_MESSAGES_EN} from "../core/constants.js";
 import {USER} from '../models/User.js';
 
 const router = Router();
-router.use(bodyParser.json());
 
 const _JSON2STR = JSON.stringify
 

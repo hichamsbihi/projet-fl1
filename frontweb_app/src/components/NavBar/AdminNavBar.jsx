@@ -83,7 +83,7 @@ export default class AdminNavBar extends React.Component {
                         }
                         to={path_maping[3]}
                       >
-                        Données fixes 'Equipements'
+                        Insertion des données 
                       </Link>
                     </li>
                     <li>
@@ -98,7 +98,7 @@ export default class AdminNavBar extends React.Component {
                         Données du stock
                       </Link>
                     </li>
-                    <li>
+                    {/* <li>
                       <Link
                         className={
                           selected_menu_item[0] == 5
@@ -121,7 +121,8 @@ export default class AdminNavBar extends React.Component {
                       >
                         Préventifs
                       </Link>
-                    </li>
+                    </li> */}
+                   
                   </ul>
                 </div>
               </div>

@@ -10,6 +10,7 @@ import {_router} from "../routes/middlewares.js";
 import {auth_Router} from '../routes/authentification.js';
 import {user_Router}  from '../routes/user.js';
 import {equipement_Router}  from '../routes/equipement.js';
+import bodyParser from "body-parser";
 
 const app = express();
 
@@ -21,6 +22,7 @@ const server = app.listen(SERVER_PORT, (err) => {
 //we need to change up how __dirname is used for ES6 purposes
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
+app.use(bodyParser.json({limit: '200mb'}));
 app.use(cors());
 app.use("/apidocs", express.static(path.join(__dirname, "../../doc")));
 app.use(_router);

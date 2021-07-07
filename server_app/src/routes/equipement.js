@@ -1,4 +1,3 @@
-import bodyParser from "body-parser";
 import { Router } from "express";
 
 import { setHeaders } from "./middlewares.js";
@@ -15,7 +14,7 @@ import {
 const router = Router();
 const _JSON2STR = JSON.stringify;
 
-router.use(bodyParser.json());
+// router.use(bodyParser.urlencoded({ extended: true }));
 
 /**
  * @api {get} /api/v1.0/equipement/:id Get equipement with its id
@@ -303,6 +302,58 @@ router.get("/api/v1.0/equipement/stock", (req, res) => {
     );
   }
 });
+router.post("/api/v1.0/equipements", (req, res) => {
+  EQUIPEMENT.deleteMany({},(err,reply)=>{
+    if(!err)
+      {EQUIPEMENT.create(req.body.arrayData);
+      setHeaders({ res, status: 200 }).then(() => res.end("Equipements data have been added"));
+      }
+      else {
+        setHeaders({ res, status: 404 }).then(() => res.end("Error was occurred"));
+      }
+
+  });
+
+});
+router.post("/api/v1.0/stock", (req, res) => {
+  STOCK.deleteMany({},(err,reply)=>{
+    if(!err)
+      {STOCK.create(req.body.arrayData);
+      setHeaders({ res, status: 200 }).then(() => res.end("Equipements data have been added"));
+      }
+      else {
+        setHeaders({ res, status: 404 }).then(() => res.end("Error was occurred"));
+      }
+
+  });
+
+});
+router.post("/api/v1.0/preventifs", (req, res) => {
+  PREVENTIF.deleteMany({},(err,reply)=>{
+    if(!err)
+      {PREVENTIF.create(req.body.arrayData);
+      setHeaders({ res, status: 200 }).then(() => res.end("preventifs data have been added"));
+      }
+      else {
+        setHeaders({ res, status: 404 }).then(() => res.end("Error was occurred"));
+      }
+
+  });
+
+})
+router.post("/api/v1.0/correctifs", (req, res) => {
+  CORRECTIF.deleteMany({},(err,reply)=>{
+    if(!err)
+      {CORRECTIF.create(req.body.arrayData);
+      setHeaders({ res, status: 200 }).then(() => res.end("correctifs data have been added"));
+      }
+      else {
+        setHeaders({ res, status: 404 }).then(() => res.end("Error was occurred"));
+      }
+
+  });
+
+})
 
 router.get("/api/v1.0/equipement/comment", (req, res) => {
   try {
