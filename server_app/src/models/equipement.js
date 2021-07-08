@@ -114,6 +114,7 @@ const CommentShema = new mongoose.Schema({
     type: Date,
     default: Date.now(),
   },
+  
 });
 
 const getequipement = ({ id, code, id_equipement, _this_ref }, callback) => {
@@ -140,7 +141,7 @@ EquipementSchema.statics.getequipement = getequipement;
 const Correctif = new mongoose.model("Correctif", CorrectifSchema);
 const Preventif = new mongoose.model("Preventif", PreventifSchema);
 const Stock = new mongoose.model("Stock", StockSchema);
-const Comment = new mongoose.model("Stock", CommentShema);
+const Comment = new mongoose.model("Comment", CommentShema);
 const Equipement = mongoose.model("Equipement", EquipementSchema);
 
 export const CORRECTIF = Correctif;

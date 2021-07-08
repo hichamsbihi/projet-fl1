@@ -4,6 +4,8 @@ import {Route,Switch} from "react-router-dom";
 import AdminNavBar from "../NavBar/AdminNavBar";
 import MainHome from "../MainHome/MainHome";
 import DataImport from "../DataImport/DataImport";
+import ExtractionData from "../ExtractionData/ExtractionData";
+
 import './style.css';
 import {Redirect} from "react-router-dom";
 import { _FOOTER } from "../../utils/CONSTANTS";
@@ -51,6 +53,7 @@ export default class MasterSwitcher extends React.Component {
                             <Route path='/home' render={props => <MainHome userData={userBody.userData.data} />} />
                             <Route path='/data-import/equipements/static' render={props => <DataImport {...props}dataType="_equip_data" />} />
                             <Route path='/data-import/stock' render={props => <DataImport {...props} dataType="_stock_data" />} />
+                            <Route path='/data-extraction' render={props => <ExtractionData {...props} />} />
                             {/* <Route path='/data-import/stock' render={props => <DataImport {...props} dataType="_stock_data" />} /> */}
                         </Switch>
                     </Content>
