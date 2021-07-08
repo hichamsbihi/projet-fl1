@@ -51,29 +51,7 @@ class ExcelPreview extends React.Component {
     }
 
     handleData = (enteteIdx) => {
-        // this.setState({ isProcessingData: true });
-        console.log(this.state.currentSheet);
-        // const tableau = Object.values(this.state.initialData])[0];
-
-        console.log(this.state.initialData);
-        // let resBody = _launch({
-        //     excelTable: tableau.slice(parseInt(data.enteteIdx)+1)
-        // });
-        // resBody.then((r)=>{
-        //     this.setState({ isProcessingData: false });
-
-        //     if(!r.length) message.warning("Le Fichier chargé ne contient aucune ligne valide !")
-        //     else
-        //     {
-        //         console.log(r);
-        //     }
-        // })
-        // .catch((err) => {
-        //     this.setState({ isProcessingData: false });
-
-        //   message.error("les noms des colonnes ne sont pas valides !");
-        // })
-    
+       
 }
 
 getStaticName = (e,pageName)=>{

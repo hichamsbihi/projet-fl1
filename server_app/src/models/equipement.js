@@ -114,6 +114,7 @@ const CommentShema = new mongoose.Schema({
     type: Date,
     default: Date.now(),
   },
+  
 });
 
 const getequipement = ({ id, code, id_equipement, _this_ref }, callback) => {
