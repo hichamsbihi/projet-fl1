@@ -5,6 +5,7 @@ import AppButton from "../components/Button";
 import Info from "../components/Info";
 
 function EquipementScreen({ route, navigation }) {
+  console.log(route.params)
   const [state, setstate] = useState(route.params);
   const date_visite = state.data.equipement.map((e) => {
     return e.date_visite.split("T");
