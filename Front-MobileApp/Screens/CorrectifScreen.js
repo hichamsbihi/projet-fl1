@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Text, Button, StyleSheet, View } from "react-native";
+import { Text, Button, StyleSheet, View, ScrollView } from "react-native";
 import Screen from "../components/Screen";
 import Titre from "../components/Titre";
 import {
@@ -24,33 +24,35 @@ function CorrectifScreen({ route, navigation }) {
   });
 
   return (
-    <Screen>
-      <Titre title="Historique des Correctifs" />
-      <View style={styles.container}>
-        <Table borderStyle={{ borderWidth: 1 }}>
-          <Row
-            data={headers}
-            flexArr={[1, 1, 1, 1]}
-            style={styles.head}
-            textStyle={styles.textHead}
-          />
-          <TableWrapper style={styles.wrapper}>
-            <Rows
-              data={data}
+    <ScrollView>
+      <Screen>
+        <Titre title="Historique des Correctifs" />
+        <View style={styles.container}>
+          <Table borderStyle={{ borderWidth: 1 }}>
+            <Row
+              data={headers}
               flexArr={[1, 1, 1, 1]}
-              style={styles.row}
-              textStyle={styles.text}
+              style={styles.head}
+              textStyle={styles.textHead}
             />
-          </TableWrapper>
-        </Table>
+            <TableWrapper style={styles.wrapper}>
+              <Rows
+                data={data}
+                flexArr={[1, 1, 1, 1]}
+                style={styles.row}
+                textStyle={styles.text}
+              />
+            </TableWrapper>
+          </Table>
 
-        <AppButton
-          title="Retour"
-          style={[styles.button]}
-          onPress={() => navigation.navigate("EquipementScreen")}
-        />
-      </View>
-    </Screen>
+          <AppButton
+            title="Retour"
+            style={[styles.button]}
+            onPress={() => navigation.navigate("EquipementScreen")}
+          />
+        </View>
+      </Screen>
+    </ScrollView>
   );
 }
 const styles = StyleSheet.create({
@@ -58,7 +60,7 @@ const styles = StyleSheet.create({
   head: { height: 40, backgroundColor: "#ed58bd" },
   wrapper: { flexDirection: "row" },
   title: { flex: 1, backgroundColor: "#ed58bd" },
-  row: { height: 70, backgroundColor: "white" },
+  row: { height: "auto", backgroundColor: "white" },
   textHead: { textAlign: "center", fontWeight: "bold" },
   text: { textAlign: "center" },
   button: {

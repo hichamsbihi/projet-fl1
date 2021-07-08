@@ -303,57 +303,87 @@ router.get("/api/v1.0/equipement/stock", (req, res) => {
   }
 });
 router.post("/api/v1.0/equipements", (req, res) => {
-  EQUIPEMENT.deleteMany({},(err,reply)=>{
-    if(!err)
-      {EQUIPEMENT.create(req.body.arrayData);
-      setHeaders({ res, status: 200 }).then(() => res.end("Equipements data have been added"));
-      }
-      else {
-        setHeaders({ res, status: 404 }).then(() => res.end("Error was occurred"));
-      }
-
+  EQUIPEMENT.deleteMany({}, (err, reply) => {
+    if (!err) {
+      EQUIPEMENT.create(req.body.arrayData);
+      setHeaders({ res, status: 200 }).then(() =>
+        res.end("Equipements data have been added")
+      );
+    } else {
+      setHeaders({ res, status: 404 }).then(() =>
+        res.end("Error was occurred")
+      );
+    }
   });
-
 });
 router.post("/api/v1.0/stock", (req, res) => {
-  STOCK.deleteMany({},(err,reply)=>{
-    if(!err)
-      {STOCK.create(req.body.arrayData);
-      setHeaders({ res, status: 200 }).then(() => res.end("Equipements data have been added"));
-      }
-      else {
-        setHeaders({ res, status: 404 }).then(() => res.end("Error was occurred"));
-      }
-
+  STOCK.deleteMany({}, (err, reply) => {
+    if (!err) {
+      STOCK.create(req.body.arrayData);
+      setHeaders({ res, status: 200 }).then(() =>
+        res.end("Equipements data have been added")
+      );
+    } else {
+      setHeaders({ res, status: 404 }).then(() =>
+        res.end("Error was occurred")
+      );
+    }
   });
-
 });
 router.post("/api/v1.0/preventifs", (req, res) => {
-  PREVENTIF.deleteMany({},(err,reply)=>{
-    if(!err)
-      {PREVENTIF.create(req.body.arrayData);
-      setHeaders({ res, status: 200 }).then(() => res.end("preventifs data have been added"));
-      }
-      else {
-        setHeaders({ res, status: 404 }).then(() => res.end("Error was occurred"));
-      }
-
+  PREVENTIF.deleteMany({}, (err, reply) => {
+    if (!err) {
+      PREVENTIF.create(req.body.arrayData);
+      setHeaders({ res, status: 200 }).then(() =>
+        res.end("preventifs data have been added")
+      );
+    } else {
+      setHeaders({ res, status: 404 }).then(() =>
+        res.end("Error was occurred")
+      );
+    }
   });
-
-})
+});
 router.post("/api/v1.0/correctifs", (req, res) => {
-  CORRECTIF.deleteMany({},(err,reply)=>{
-    if(!err)
-      {CORRECTIF.create(req.body.arrayData);
-      setHeaders({ res, status: 200 }).then(() => res.end("correctifs data have been added"));
-      }
-      else {
-        setHeaders({ res, status: 404 }).then(() => res.end("Error was occurred"));
-      }
-
+  CORRECTIF.deleteMany({}, (err, reply) => {
+    if (!err) {
+      CORRECTIF.create(req.body.arrayData);
+      setHeaders({ res, status: 200 }).then(() =>
+        res.end("correctifs data have been added")
+      );
+    } else {
+      setHeaders({ res, status: 404 }).then(() =>
+        res.end("Error was occurred")
+      );
+    }
   });
+});
 
-})
+router.post("/api/v1.0/comment", (req, res) => {
+  !req.body.QRcode &&
+    setHeaders({ res, status: 450 }).then(() =>
+      res.end(
+        _JSON2STR({ err_number: 11, demande_state: ERROR_MESSAGES_EN[11] })
+      )
+    );
+
+  if (req.body.QRcode) {
+    let newComment = COMMENT();
+    newComment.id_equipement = req.body.QRcode;
+    newComment.commentaire = req.body.commentaire;
+    newComment.nom_technicien = req.body.nom_technicien;
+    newComment.save((err, reply) => {
+      err &&
+        setHeaders({ res, status: 404 }).then(() =>
+          res.end("Error was occurred")
+        );
+      reply &&
+        setHeaders({ res, status: 200 }).then(() =>
+          res.end("comment has been added")
+        );
+    });
+  }
+});
 
 router.get("/api/v1.0/equipement/comment", (req, res) => {
   try {

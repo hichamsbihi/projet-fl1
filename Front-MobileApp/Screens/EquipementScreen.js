@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Text, View, StyleSheet, TouchableOpacity, Image } from "react-native";
 import Titre from "../components/Titre";
 import AppButton from "../components/Button";
@@ -6,11 +6,16 @@ import Info from "../components/Info";
 
 function EquipementScreen({ route, navigation }) {
   const [state, setstate] = useState(route.params);
-  const date_visite = state.data.equipement.map((e) => {
-    return e.date_visite.split("T");
-  });
-  console.log(date_visite);
+  // console.log(date_visite);
 
+  const date_visite = state.data.equipement.map((e) => {
+    return e.date_visite ? e.date_visite.split("T") : "";
+  });
+  useEffect(() => {
+    console.log(state);
+
+    console.log("route.params.data");
+  });
   const image1 = require("../assets/20210401_114306.jpg");
   const image2 = require("../assets/20210401_114312.jpg");
   const image3 = require("../assets/20210401_114503.jpg");
@@ -85,11 +90,18 @@ function EquipementScreen({ route, navigation }) {
               onPress={() => navigation.navigate("MesureScreen")}
             />
           </View>
-          <AppButton
-            title="Commentaire"
-            style={[styles.button, styles.textButton]}
-            onPress={() => navigation.navigate("CommentaireScreen")}
-          />
+          <View style={{ flexDirection: "row" }}>
+            <AppButton
+              title="Commentaire"
+              style={[styles.button, styles.textButton]}
+              onPress={() => navigation.navigate("CommentaireScreen")}
+            />
+            <AppButton
+              title="Fiabilisation"
+              style={[styles.button, styles.textButton]}
+              onPress={() => navigation.navigate("FiabilisationScreen")}
+            />
+          </View>
         </View>
       ))}
     </>

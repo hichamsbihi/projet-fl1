@@ -97,8 +97,6 @@ const StockSchema = new mongoose.Schema({
   code_article: {
     type: String,
   },
-
-  
 });
 
 const CommentShema = new mongoose.Schema({
@@ -109,7 +107,9 @@ const CommentShema = new mongoose.Schema({
   commentaire: {
     type: String,
   },
-
+  nom_technicien: {
+    type: String,
+  },
   date: {
     type: Date,
     default: Date.now(),
@@ -140,7 +140,7 @@ EquipementSchema.statics.getequipement = getequipement;
 const Correctif = new mongoose.model("Correctif", CorrectifSchema);
 const Preventif = new mongoose.model("Preventif", PreventifSchema);
 const Stock = new mongoose.model("Stock", StockSchema);
-const Comment = new mongoose.model("Stock", CommentShema);
+const Comment = new mongoose.model("Comment", CommentShema);
 const Equipement = mongoose.model("Equipement", EquipementSchema);
 
 export const CORRECTIF = Correctif;

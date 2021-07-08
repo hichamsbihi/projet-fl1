@@ -26,11 +26,11 @@ const WelcomeScreen = ({ navigation }) => {
 
       .then((res) => {
         setStock(res.data);
-        navigation.navigate("EtatStockScreen", { data: stock.concat([]) });
+        console.log("salut");
+        console.log(res.data);
+        navigation.navigate("EtatStockScreen", { data: res.data });
       })
       .catch((err) => console.log(err));
-
-    console.log("salut");
   };
 
   return (

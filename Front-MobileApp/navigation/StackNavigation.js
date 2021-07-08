@@ -11,6 +11,7 @@ import SchemaScreen from "../Screens/SchemaScreen";
 import QsseScreen from "../Screens/QsseScreen";
 import CommentaireScreen from "../Screens/CommentaireScreen";
 import { NavigationContainer } from "@react-navigation/native";
+import FiabilisationScreen from "../Screens/FiabilisationScreen";
 
 const StackNavigator = () => {
   const Stack = createStackNavigator();
@@ -41,6 +42,10 @@ const StackNavigator = () => {
         <Stack.Screen name="SchemaScreen" component={SchemaScreen} />
         <Stack.Screen name="QsseScreen" component={QsseScreen} />
         <Stack.Screen name="CommentaireScreen" component={CommentaireScreen} />
+        <Stack.Screen
+          name="FiabilisationScreen"
+          component={FiabilisationScreen}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );
