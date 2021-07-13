@@ -10,6 +10,7 @@ import MesureScreen from "../Screens/MesureScreen";
 import SchemaScreen from "../Screens/SchemaScreen";
 import QsseScreen from "../Screens/QsseScreen";
 import CommentaireScreen from "../Screens/CommentaireScreen";
+import FiabilisationsScreen from "../Screens/FiabilisationsScreen";
 import { NavigationContainer } from "@react-navigation/native";
 import FiabilisationScreen from "../Screens/FiabilisationScreen";
 

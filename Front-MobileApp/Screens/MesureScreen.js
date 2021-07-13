@@ -2,7 +2,7 @@ import React from "react";
 import { Text, Button, StyleSheet, Dimensions } from "react-native";
 import Screen from "../components/Screen";
 
-import Pdf from "react-native-pdf";
+
 
 function MesureScreen(props) {
   const source = require("../assets/ed812.pdf");

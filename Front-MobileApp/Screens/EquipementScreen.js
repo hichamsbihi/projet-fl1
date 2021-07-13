@@ -5,6 +5,7 @@ import AppButton from "../components/Button";
 import Info from "../components/Info";
 
 function EquipementScreen({ route, navigation }) {
+  console.log(route.params);
   const [state, setstate] = useState(route.params);
   // console.log(date_visite);
 
@@ -92,14 +93,14 @@ function EquipementScreen({ route, navigation }) {
           </View>
           <View style={{ flexDirection: "row" }}>
             <AppButton
-              title="Commentaire"
+              title="Modification gamme"
               style={[styles.button, styles.textButton]}
               onPress={() => navigation.navigate("CommentaireScreen")}
             />
             <AppButton
               title="Fiabilisation"
               style={[styles.button, styles.textButton]}
-              onPress={() => navigation.navigate("FiabilisationScreen")}
+              onPress={() => navigation.navigate("FiabilisationsScreen")}
             />
           </View>
         </View>

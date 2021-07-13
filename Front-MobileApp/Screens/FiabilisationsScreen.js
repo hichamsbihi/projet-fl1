@@ -5,10 +5,10 @@ import Titre from "../components/Titre";
 import { SubmitButton, Form, FormField } from "../components/forms";
 import AppButton from "../components/Button";
 
-function CommentaireScreen({ navigation }) {
+function FiabilisationsScreen({ navigation }) {
   return (
     <Screen>
-      <Titre title="Modification gamme" />
+      <Titre title="Fiabilisation" />
       <View style={styles.container}>
         <Form initialValues={{ id: "" }}>
           <View style={{ flexDirection: "row" }}>
@@ -18,10 +18,9 @@ function CommentaireScreen({ navigation }) {
                 marginRight: 10,
                 fontSize: 17,
                 fontWeight: "bold",
-                textAlign:"justify",
               }}
             >
-         Nom Technicien:
+              Nom Technicien :
             </Text>
             <FormField
               name="id"
@@ -30,45 +29,6 @@ function CommentaireScreen({ navigation }) {
               defaultValue="aa"
             />
           </View>
-        
-
-          <View style={{ flexDirection: "row" }}>
-            <Text
-              style={{
-                marginTop: 30,
-                marginRight: 10,
-                fontSize: 17,
-                fontWeight: "bold",
-                
-              }}
-            >
-          Type de la gamme:
-            </Text>
-            <FormField
-              name="id1"
-              width={200}
-              placeholder="VG, GVG, ATS, GL..."
-            />
-          </View>
-
-          <View style={{ flexDirection: "row" }}>
-            <Text
-              style={{
-                marginTop: 30,
-                marginRight: 10,
-                fontSize: 17,
-                fontWeight: "bold",
-              }}
-            >
-          Numéro d'opération:
-            </Text>
-            <FormField
-              name="id1"
-              width={200}
-              placeholder="10, 20, 30, 40, 50,..."
-            />
-          </View>  
-
           <View style={{ flexDirection: "row" }}>
             <Text
               style={{
@@ -79,13 +39,13 @@ function CommentaireScreen({ navigation }) {
                 fontWeight: "bold",
               }}
             >
-              Commentaire :
+              Fiabilisations :
             </Text>
             <FormField
               name="id2"
               width={200}
               height={200}
-              placeholder="Modification gamme"
+              placeholder="Fiabilisations"
             />
           </View>
           <SubmitButton
@@ -122,4 +82,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default CommentaireScreen;
+export default FiabilisationsScreen;

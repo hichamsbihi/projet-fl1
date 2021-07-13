@@ -21,32 +21,13 @@ export default class AdminNavBar extends React.Component {
       "/data-import/stock",
       "/data-import/correctifs",
       "/data-import/preventifs",
+      "/data-extraction"
     ];
     const selected_menu_item = [
       path_maping.indexOf(this.props.location).toString(),
     ];
     return (
-      // <Menu  theme="dark" mode="horizontal" selectedKeys={selected_menu_item}>
-      //     <Menu key="0">
-      //         <img className="ant-menu-item" src="office-building.png"/>
-
-      //     </Menu .Item>
-      // <Menu.Item key="1"><Link to={path_maping[1]}><FileSyncOutlined/></Link>Acceuil</Menu.Item>
-      // <Menu.SubMenu icon={<UploadOutlined/>} title="Import des données">
-      //         <Menu.ItemGroup>
-      //             <Menu.Item key="3" ><Link to={path_maping[3]}> </Link>Données fixes 'Equipements'</Menu.Item>
-      //             <Menu.Item key="4" ><Link to={path_maping[4]}> </Link>Données du stock</Menu.Item>
-      //         </Menu.ItemGroup>
-      //     </Menu.SubMenu>
-
-      //     <Menu.SubMenu style={{float: 'right'}} icon={<UserOutlined/>} title="Compte">
-      //         <Menu.ItemGroup>
-      //         <Menu.Item key="2" ><Link to={path_maping[2]}> <ContactsOutlined /> </Link>Mon profile</Menu.Item>
-      //             <Menu.Item key="3"><Link to="/login" onClick={() => sessionStorage.clear()}> <LogoutOutlined />  </Link>Se déconnecter</Menu.Item>
-      //         </Menu.ItemGroup>
-      //     </Menu.SubMenu>
-
-      // </Menu>
+      
       <>
         <div className="header-area onepage-head try-100">
           <div className="container-sustain">
@@ -71,7 +52,7 @@ export default class AdminNavBar extends React.Component {
                         }
                         to={path_maping[1]}
                       >
-                        Acceuil
+                        Accueil
                       </Link>
                     </li>
                     <li>
@@ -96,6 +77,18 @@ export default class AdminNavBar extends React.Component {
                         to={path_maping[4]}
                       >
                         Données du stock
+                      </Link>
+                    </li>
+                    <li>
+                      <Link
+                        className={
+                          selected_menu_item[0] == 7
+                            ? "sustain-nave-selected"
+                            : ""
+                        }
+                        to={path_maping[7]}
+                      >
+                        Extraction des données
                       </Link>
                     </li>
                     {/* <li>
