@@ -9,4 +9,5 @@ export const reqPostCorrectifs = (data) => api_interface(API_URL + 'api/v1.0/cor
 export const reqPostEquipements = (data) => api_interface(API_URL + 'api/v1.0/equipements', {arrayData: data}, 'POST');
 export const reqPostStock = (data) => api_interface(API_URL + 'api/v1.0/stock', {arrayData: data}, 'POST');
 export const reqGetComments = (data) => api_interface(API_URL + 'api/v1.0/equipement/comment', {}, 'GET');
+export const reqGetFiabilisation = (data) => api_interface(API_URL + 'api/v1.0/equipement/fiabilisation', {}, 'GET');
 

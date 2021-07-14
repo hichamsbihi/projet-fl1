@@ -8,6 +8,7 @@ import {
   PREVENTIF,
   STOCK,
   COMMENT,
+  FIABILISATION
 } from "../models/equipement.js";
 // import {equipementSerializer} from "../serializers/equipement_serializer.js";
 
@@ -406,6 +407,60 @@ router.get("/api/v1.0/equipement/comment", (req, res) => {
   }
 });
 
+router.post("/api/v1.0/equipement/comment", (req, res) => {
+  try {
+          const comment_insert = new COMMENT();
+          comment_insert.id_equipement = req.body.id_equipement;
+          comment_insert.commentaire = req.body.commentaire;
+          comment_insert.save();
+          setHeaders({ res, status: 200 }).then(() => res.end("comment has been saved"));
+  } catch (e) {
+    console.log(e);
+    setHeaders({ res, status: 450 }).then(() =>
+      res.end(_JSON2STR({ err_number: 1, demande_state: ERROR_MESSAGES_EN[1] }))
+    );
+  }
+});
+
+router.post("/api/v1.0/equipement/fiabilisation", (req, res) => {
+  try {
+          const fiab_insert = new COMMENT();
+          fiab_insert.id_equipement = req.body.id_equipement;
+          fiab_insert.commentaire = req.body.commentaire;
+          fiab_insert.nom_technicien = req.body.nom_technicien;
+          fiab_insert.gamme = req.body.gamme;
+          fiab_insert.num_operation = req.body.num_operation;
+          fiab_insert.save();
+          setHeaders({ res, status: 200 }).then(() => res.end("fiabilisation row has been saved"));
+  } catch (e) {
+    console.log(e);
+    setHeaders({ res, status: 450 }).then(() =>
+      res.end(_JSON2STR({ err_number: 1, demande_state: ERROR_MESSAGES_EN[1] }))
+    );
+  }
+});
+
+router.get("/api/v1.0/equipement/fiabilisation", (req, res) => {
+  try {
+    FIABILISATION.find({}, (err, reply) => {
+      if (err || !reply) {
+        setHeaders({ res, status: 404 }).then(() =>
+          res.end(
+            _JSON2STR({ err_number: 9, demande_state: ERROR_MESSAGES_EN[9] })
+          )
+        );
+      } else {
+        setHeaders({ res, status: 200 }).then(() => res.end(_JSON2STR(reply)));
+      }
+    });
+  } catch (e) {
+    console.log(e);
+    setHeaders({ res, status: 450 }).then(() =>
+      res.end(_JSON2STR({ err_number: 1, demande_state: ERROR_MESSAGES_EN[1] }))
+    );
+  }
+});
+
 router.get("/api/v1.0/create", (req, res) => {
   const stock_insert = new STOCK();
   stock_insert.designation = "stock 1 (test)";
@@ -420,10 +475,12 @@ router.get("/api/v1.0/create", (req, res) => {
   equip_insert.nom = "equipement 1 (test)";
   equip_insert.QRcode = "QR456789";
   equip_insert.date_visite = Date.now();
-  equip_insert.nom_constructeur = "nom constructeur";
-  equip_insert.ref = "code ref";
-  equip_insert.emplacement = "emplacement test";
-  equip_insert.niveau_strategique = "niveau_strategique test";
+  equip_insert.nom_constructeur = "GOUPIL";
+  equip_insert.ref = "VRWG3SNBCD0000314";
+  equip_insert.emplacement = "VV-EQUIPES-PE";
+  equip_insert.niveau_strategique = "IMPORTANT";
+  equip_insert.image_equipement = "https://drive.google.com/file/d/1m1bJ4-LKHArO8fQx1N_wKNeRA_naJi2S/view?usp=sharing";
+  equip_insert.Qsse_pdf = "https://drive.google.com/file/d/1SJ977XuxOm4_9TLrU4dxmU32Tu12-f61/view?usp=sharing";
   equip_insert.save();
 
   const preventif_insert = new PREVENTIF();
