@@ -42,6 +42,7 @@ const EquipementSchema = new mongoose.Schema({
   Qsse_pdf: {
     type: String,
   },
+
 });
 
 const CorrectifSchema = new mongoose.Schema({
@@ -117,6 +118,29 @@ const CommentShema = new mongoose.Schema({
   
 });
 
+const FiabilisationShema = new mongoose.Schema({
+  id_equipement: {
+    type: String,
+  },
+
+  commentaire: {
+    type: String,
+  },
+
+  nom_technicien: {
+    type: String,
+  },
+
+  gamme: {
+    type: String,
+  },
+
+  num_operation: {
+    type: Number,
+  },
+
+});
+
 const getequipement = ({ id, code, id_equipement, _this_ref }, callback) => {
   let query = id
     ? { _id: id }
@@ -137,15 +161,18 @@ PreventifSchema.statics.getequipement = getequipement;
 StockSchema.statics.getequipement = getequipement;
 CommentShema.statics.getequipement = getequipement;
 EquipementSchema.statics.getequipement = getequipement;
+FiabilisationShema.statics.getequipement = getequipement;
 
 const Correctif = new mongoose.model("Correctif", CorrectifSchema);
 const Preventif = new mongoose.model("Preventif", PreventifSchema);
 const Stock = new mongoose.model("Stock", StockSchema);
 const Comment = new mongoose.model("Comment", CommentShema);
 const Equipement = mongoose.model("Equipement", EquipementSchema);
+const Fiabilisation = mongoose.model("Fiabilisation", FiabilisationShema);
 
 export const CORRECTIF = Correctif;
 export const PREVENTIF = Preventif;
 export const STOCK = Stock;
 export const COMMENT = Comment;
 export const EQUIPEMENT = Equipement;
+export const FIABILISATION = Fiabilisation;

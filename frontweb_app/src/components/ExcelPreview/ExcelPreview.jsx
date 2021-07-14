@@ -40,7 +40,8 @@ class ExcelPreview extends React.Component {
         "nom de constructeur": "nom_constructeur",
         "Référence": "ref",
         "Document constructeur format PDF": "constructeur_pdf",
-        "QSSE format PDF": "Qsse_pdf"
+        "QSSE format PDF": "Qsse_pdf",
+        "Image équipement": "image_equipement",
 
     };
 
@@ -93,7 +94,7 @@ getStaticName = (e,pageName)=>{
                         
                             const columnsNames = this.state.currentSheet[pageName][0];
                             const listToApi = [];
-                            const skippedCol = ["DI","QR Code équipement","Image équipement",];
+                            const skippedCol = ["DI","QR Code équipement"];
                             const reqPutItems = pageName === 'Preventifs' ? reqPostPreventifs : 
                                     pageName === 'Correctifs' ? reqPostCorrectifs :
                                     pageName === 'données fixe Equipements' ? reqPostEquipements :
@@ -113,7 +114,7 @@ getStaticName = (e,pageName)=>{
                                     }
                                   
                             });
-
+                            console.log(listToApi)
                             reqPutItems && reqPutItems(listToApi).then((res)=>{
                                 message.success('data was sent successfuly');
                                 this.setState({isProcessingData:false});
