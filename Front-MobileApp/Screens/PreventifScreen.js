@@ -13,7 +13,7 @@ import AppButton from "../components/Button";
 
 function PreventifScreen({ route, navigation }) {
   const [headers, setheaders] = useState([
-    "code",
+    "Equipement",
     "date",
     "commentaire",
     "ots",
