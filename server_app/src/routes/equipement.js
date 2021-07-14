@@ -382,6 +382,10 @@ router.post("/api/v1.0/equipement/comment", (req, res) => {
           const comment_insert = new COMMENT();
           comment_insert.id_equipement = req.body.id_equipement;
           comment_insert.commentaire = req.body.commentaire;
+          comment_insert.gamme = req.body.gamme;
+          comment_insert.num_operation = req.body.num_operation;
+          comment_insert.nom_technicien = req.body.nom_technicien;
+
           comment_insert.save();
           setHeaders({ res, status: 200 }).then(() => res.end("comment has been saved"));
   } catch (e) {
@@ -398,8 +402,7 @@ router.post("/api/v1.0/equipement/fiabilisation", (req, res) => {
           fiab_insert.id_equipement = req.body.id_equipement;
           fiab_insert.commentaire = req.body.commentaire;
           fiab_insert.nom_technicien = req.body.nom_technicien;
-          fiab_insert.gamme = req.body.gamme;
-          fiab_insert.num_operation = req.body.num_operation;
+          
           fiab_insert.save();
           setHeaders({ res, status: 200 }).then(() => res.end("fiabilisation row has been saved"));
   } catch (e) {
