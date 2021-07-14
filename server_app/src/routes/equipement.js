@@ -8,7 +8,7 @@ import {
   PREVENTIF,
   STOCK,
   COMMENT,
-  FIABILISATION
+  FIABILISATION,
 } from "../models/equipement.js";
 // import {equipementSerializer} from "../serializers/equipement_serializer.js";
 
@@ -409,15 +409,17 @@ router.get("/api/v1.0/equipement/comment", (req, res) => {
 
 router.post("/api/v1.0/equipement/comment", (req, res) => {
   try {
-          const comment_insert = new COMMENT();
-          comment_insert.id_equipement = req.body.id_equipement;
-          comment_insert.commentaire = req.body.commentaire;
-          comment_insert.gamme = req.body.gamme;
-          comment_insert.num_operation = req.body.num_operation;
-          comment_insert.nom_technicien = req.body.nom_technicien;
+    const comment_insert = new COMMENT();
+    comment_insert.id_equipement = req.body.id_equipement;
+    comment_insert.commentaire = req.body.commentaire;
+    comment_insert.gamme = req.body.gamme;
+    comment_insert.num_operation = req.body.num_operation;
+    comment_insert.nom_technicien = req.body.nom_technicien;
 
-          comment_insert.save();
-          setHeaders({ res, status: 200 }).then(() => res.end("comment has been saved"));
+    comment_insert.save();
+    setHeaders({ res, status: 200 }).then(() =>
+      res.end("comment has been saved")
+    );
   } catch (e) {
     console.log(e);
     setHeaders({ res, status: 450 }).then(() =>
@@ -428,13 +430,15 @@ router.post("/api/v1.0/equipement/comment", (req, res) => {
 
 router.post("/api/v1.0/equipement/fiabilisation", (req, res) => {
   try {
-          const fiab_insert = new COMMENT();
-          fiab_insert.id_equipement = req.body.id_equipement;
-          fiab_insert.commentaire = req.body.commentaire;
-          fiab_insert.nom_technicien = req.body.nom_technicien;
-          
-          fiab_insert.save();
-          setHeaders({ res, status: 200 }).then(() => res.end("fiabilisation row has been saved"));
+    const fiab_insert = new FIABILISATION();
+    fiab_insert.id_equipement = req.body.id_equipement;
+    fiab_insert.commentaire = req.body.commentaire;
+    fiab_insert.nom_technicien = req.body.nom_technicien;
+
+    fiab_insert.save();
+    setHeaders({ res, status: 200 }).then(() =>
+      res.end("fiabilisation row has been saved")
+    );
   } catch (e) {
     console.log(e);
     setHeaders({ res, status: 450 }).then(() =>
@@ -482,11 +486,14 @@ router.get("/api/v1.0/create", (req, res) => {
   equip_insert.ref = "VRWG3SNBCD0000314";
   equip_insert.emplacement = "VV-EQUIPES-PE";
   equip_insert.niveau_strategique = "IMPORTANT";
-  equip_insert.image_equipement = "https://drive.google.com/file/d/1m1bJ4-LKHArO8fQx1N_wKNeRA_naJi2S/view?usp=sharing";
-  equip_insert.Qsse_pdf = "https://drive.google.com/file/d/10rCeSDYzdhmQZjUvo1rEuX2uCJgkQ_aq/view?usp=sharing";
-  equip_insert.constructeur_pdf = "https://drive.google.com/file/d/1SJ977XuxOm4_9TLrU4dxmU32Tu12-f61/view?usp=sharing";
+  equip_insert.image_equipement =
+    "https://drive.google.com/file/d/1m1bJ4-LKHArO8fQx1N_wKNeRA_naJi2S/view?usp=sharing";
+  equip_insert.Qsse_pdf =
+    "https://drive.google.com/file/d/10rCeSDYzdhmQZjUvo1rEuX2uCJgkQ_aq/view?usp=sharing";
+  equip_insert.constructeur_pdf =
+    "https://drive.google.com/file/d/1SJ977XuxOm4_9TLrU4dxmU32Tu12-f61/view?usp=sharing";
   equip_insert.save();
-  
+
   const preventif_insert = new PREVENTIF();
 
   preventif_insert.ots = "preventif 1 (test)";

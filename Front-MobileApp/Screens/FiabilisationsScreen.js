@@ -1,16 +1,35 @@
-import React from "react";
+import React, { useState } from "react";
 import { Text, Button, StyleSheet, View } from "react-native";
 import Screen from "../components/Screen";
 import Titre from "../components/Titre";
 import { SubmitButton, Form, FormField } from "../components/forms";
 import AppButton from "../components/Button";
+import axios from "axios";
 
-function FiabilisationsScreen({ navigation }) {
+function FiabilisationsScreen({ navigation, route }) {
+  const handleSubmit = async ({ nom, fiabilisation }) => {
+    axios
+      .post("http://10.130.227.186:8089/api/v1.0/equipement/fiabilisation", {
+        id_equipement: route.params.id,
+        nom_technicien: nom,
+        commentaire: fiabilisation,
+      })
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
   return (
     <Screen>
       <Titre title="Fiabilisation" />
       <View style={styles.container}>
-        <Form initialValues={{ id: "" }}>
+        <Form
+          initialValues={{ id: route.params.data, nom: "", fiabilisation: "" }}
+          onSubmit={handleSubmit}
+        >
           <View style={{ flexDirection: "row" }}>
             <Text
               style={{
@@ -23,7 +42,7 @@ function FiabilisationsScreen({ navigation }) {
               Nom Technicien :
             </Text>
             <FormField
-              name="id"
+              name="nom"
               width={200}
               placeholder="Technicien"
               defaultValue="aa"
@@ -42,7 +61,7 @@ function FiabilisationsScreen({ navigation }) {
               Fiabilisations :
             </Text>
             <FormField
-              name="id2"
+              name="fiabilisation"
               width={200}
               height={200}
               placeholder="Fiabilisations"
