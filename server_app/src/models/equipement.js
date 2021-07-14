@@ -110,7 +110,17 @@ const CommentShema = new mongoose.Schema({
   commentaire: {
     type: String,
   },
+  nom_technicien: {
+    type: String,
 
+  },
+  gamme: {
+    type: String,
+  },
+
+  num_operation: {
+    type: Number,
+  },
   date: {
     type: Date,
     default: Date.now(),
@@ -129,14 +139,6 @@ const FiabilisationShema = new mongoose.Schema({
 
   nom_technicien: {
     type: String,
-  },
-
-  gamme: {
-    type: String,
-  },
-
-  num_operation: {
-    type: Number,
   },
 
 });
