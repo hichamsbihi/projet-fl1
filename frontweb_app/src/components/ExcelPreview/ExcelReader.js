@@ -33,6 +33,7 @@ export const ReactExcel = (props) => {
                    const dataParse = XLSX.utils.sheet_to_json(ws, {
                         header: 1,
                         defval: "",
+                        dateNF:'yyyy-mm-dd',
                         range: {s: {c: 0, r: 0}, e: {c: range.e.c > 30 ? 30 : range.e.c, r: range.e.r}},
                         blankrows: false
                     });
@@ -57,6 +58,7 @@ export const ReactExcel = (props) => {
           
             setParsedData(result);
             setCurrentSheet(result[0]);
+            console.log(result[0])
             onSheetUpdate && onSheetUpdate(result[0]);
 
         };
@@ -91,7 +93,14 @@ export const ReactExcel = (props) => {
             let tmp = {};
             tmp.key = id.toString();
             row.map((cell, idx) => {
-                tmp[idx] = cell.toString().substring(0,28);
+                if(idx===3 && !isNaN(cell.toString()))
+                {
+                    let date = new Date(Math.round((cell.toString() - (25567+2 )) * 86400 * 1000));
+                    tmp[idx] = date.toISOString().split('T')[0];
+                    // tmp[idx] = date.toISOString();
+                    
+                }
+                else tmp[idx] = cell.toString();
             });
             if (id > enteteId)
                 data.push(tmp);
