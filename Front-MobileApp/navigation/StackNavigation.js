@@ -42,7 +42,10 @@ const StackNavigator = () => {
         <Stack.Screen name="SchemaScreen" component={SchemaScreen} />
         <Stack.Screen name="QsseScreen" component={QsseScreen} />
         <Stack.Screen name="CommentaireScreen" component={CommentaireScreen} />
-        <Stack.Screen name="FiabilisationsScreen" component={FiabilisationsScreen} />
+        <Stack.Screen
+          name="FiabilisationsScreen"
+          component={FiabilisationsScreen}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );

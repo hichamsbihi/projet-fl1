@@ -1,31 +1,29 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Text, View, StyleSheet, TouchableOpacity, Image } from "react-native";
 import Titre from "../components/Titre";
 import AppButton from "../components/Button";
 import Info from "../components/Info";
 
 function EquipementScreen({ route, navigation }) {
-  console.log(route.params)
+  console.log(route.params);
   const [state, setstate] = useState(route.params);
+  // console.log(date_visite);
+
   const date_visite = state.data.equipement.map((e) => {
-    return e.date_visite.split("T");
+    return e.date_visite ? e.date_visite.split("T") : "";
   });
-  console.log(date_visite);
+  useEffect(() => {
+    console.log(state);
 
-  const image1 = require("../assets/20210401_114306.jpg");
-  const image2 = require("../assets/20210401_114312.jpg");
-  const image3 = require("../assets/20210401_114503.jpg");
-  const image = [image1, image2, image3];
+    console.log("route.params.data");
+  });
 
-  function RandomInt(max) {
-    return Math.floor(Math.random() * max);
-  }
   return (
     <>
       {state.data.equipement.map((e) => (
         <View style={styles.container} key={e._id}>
           <Titre title={e.nom} />
-          <Image source={image[RandomInt(3)]} width={100} />
+
           <View style={{ flexDirection: "row" }}>
             <View style={{ flexDirection: "column", marginRight: 70 }}>
               <Info title={e.QRcode} style={styles.champ} />
@@ -73,12 +71,18 @@ function EquipementScreen({ route, navigation }) {
             <AppButton
               title="Documentation"
               style={[styles.button, styles.textButton]}
-              onPress={() => navigation.navigate("DocumentationScreen")}
+              onPress={() =>
+                navigation.navigate("DocumentationScreen", {
+                  data: e.documentation,
+                })
+              }
             />
             <AppButton
               title="Qsse"
               style={[styles.button, styles.textButton]}
-              onPress={() => navigation.navigate("QsseScreen")}
+              onPress={() =>
+                navigation.navigate("QsseScreen", { data: e.Qsse_pdf })
+              }
             />
             <AppButton
               title="mesure relevé"
@@ -87,16 +91,21 @@ function EquipementScreen({ route, navigation }) {
             />
           </View>
           <View style={{ flexDirection: "row" }}>
-          <AppButton
-            title="Modification gamme"
-            style={[styles.button, styles.textButton]}
-            onPress={() => navigation.navigate("CommentaireScreen")}
-          />
-          <AppButton
-            title="Fiabilisation"
-            style={[styles.button, styles.textButton]}
-            onPress={() => navigation.navigate("FiabilisationsScreen")}
-          />
+            <AppButton
+              title="Modification gamme"
+              style={[styles.button, styles.textButton]}
+              onPress={() =>
+                navigation.navigate("CommentaireScreen", { id: e.QRcode })
+              }
+            />
+            <AppButton
+              title="Fiabilisation"
+              style={[styles.button, styles.textButton]}
+              onPress={
+                (() => navigation.navigate("FiabilisationsScreen"),
+                { id: e.QRcode })
+              }
+            />
           </View>
         </View>
       ))}

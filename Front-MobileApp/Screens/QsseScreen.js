@@ -4,7 +4,9 @@ import Screen from "../components/Screen";
 import Titre from "../components/Titre";
 import AppButton from "../components/Button";
 
-function QsseScreen({ navigation }) {
+function QsseScreen({ navigation, route }) {
+  const pdf = route.params;
+  console.log(pdf.data);
   return (
     <Screen>
       <Titre title="Qsse" />
@@ -12,9 +14,7 @@ function QsseScreen({ navigation }) {
         title="Telecharger PDF"
         style={[styles.pdf]}
         onPress={() => {
-          Linking.openURL(
-            "https://drive.google.com/file/d/1oLdrCH_h9cCo-7BwjQCeg3sB6Ev0kzrc/view?usp=sharing"
-          );
+          Linking.openURL(pdf.data);
         }}
       />
       <AppButton
