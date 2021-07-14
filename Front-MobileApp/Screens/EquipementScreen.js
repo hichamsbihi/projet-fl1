@@ -23,7 +23,7 @@ function EquipementScreen({ route, navigation }) {
       {state.data.equipement.map((e) => (
         <View style={styles.container} key={e._id}>
           <Titre title={e.nom} />
-
+          {/* <Image source={{uri:e.image_equipement}} style={{width:150,height:150}}/> */}
           <View style={{ flexDirection: "row" }}>
             <View style={{ flexDirection: "column", marginRight: 70 }}>
               <Info title={e.QRcode} style={styles.champ} />
@@ -73,7 +73,7 @@ function EquipementScreen({ route, navigation }) {
               style={[styles.button, styles.textButton]}
               onPress={() =>
                 navigation.navigate("DocumentationScreen", {
-                  data: e.documentation,
+                  data: e.constructeur_pdf,
                 })
               }
             />
@@ -101,9 +101,8 @@ function EquipementScreen({ route, navigation }) {
             <AppButton
               title="Fiabilisation"
               style={[styles.button, styles.textButton]}
-              onPress={
-                (() => navigation.navigate("FiabilisationsScreen"),
-                { id: e.QRcode })
+              onPress={() =>
+                navigation.navigate("FiabilisationsScreen", { id: e.QRcode })
               }
             />
           </View>

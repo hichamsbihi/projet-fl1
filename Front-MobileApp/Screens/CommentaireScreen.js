@@ -4,14 +4,41 @@ import Screen from "../components/Screen";
 import Titre from "../components/Titre";
 import { SubmitButton, Form, FormField } from "../components/forms";
 import AppButton from "../components/Button";
+import Api from "../Apis/EquipementApi";
+import axios from "axios";
 
 function CommentaireScreen({ navigation, route }) {
+  console.log(route.params);
+  const handleSubmit = async ({ nom, commentaire, gamme, numero }) => {
+    axios
+      .post("http://10.130.227.186:8089/api/v1.0/equipement/comment", {
+        id_equipement: route.params.id,
+        nom_technicien: nom,
+        commentaire: commentaire,
+        num_operation: numero,
+        gamme: gamme,
+      })
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
   return (
     <Screen>
       <Titre title="Modification gamme" />
       <View style={styles.container}>
-        <Form initialValues={{ id_equipement: route.params }}>
-          {/* <Image source={{uri:e.image_equipement}} style={{width:150,height:150}}/> */}
+        <Form
+          initialValues={{
+            id: route.params.data,
+            nom: "",
+            commentaire: "",
+            gamme: "",
+            numero: "",
+          }}
+          onSubmit={handleSubmit}
+        >
           <View style={{ flexDirection: "row" }}>
             <Text
               style={{
@@ -25,7 +52,7 @@ function CommentaireScreen({ navigation, route }) {
               Nom Technicien:
             </Text>
             <FormField
-              name="id"
+              name="nom"
               width={200}
               placeholder="Technicien"
               defaultValue="aa"
@@ -44,7 +71,7 @@ function CommentaireScreen({ navigation, route }) {
               Modification gamme:
             </Text>
             <FormField
-              name="id1"
+              name="gamme"
               width={200}
               placeholder="VG, GVG, ATS, GL..."
             />
@@ -62,7 +89,7 @@ function CommentaireScreen({ navigation, route }) {
               Numéro d'opération:
             </Text>
             <FormField
-              name="id1"
+              name="numero"
               width={200}
               placeholder="10, 20, 30, 40, 50,..."
             />
@@ -81,7 +108,7 @@ function CommentaireScreen({ navigation, route }) {
               Commentaire :
             </Text>
             <FormField
-              name="id2"
+              name="commentaire"
               width={200}
               height={200}
               placeholder="Modification gamme"
@@ -91,12 +118,12 @@ function CommentaireScreen({ navigation, route }) {
             title="Enregistrer"
             style={[{ backgroundColor: "#fb66c9" }]}
           />
-          <AppButton
-            title="Retour"
-            style={[styles.button]}
-            onPress={() => navigation.navigate("EquipementScreen")}
-          />
         </Form>
+        <AppButton
+          title="Retour"
+          style={[styles.button]}
+          onPress={() => navigation.navigate("EquipementScreen")}
+        />
       </View>
     </Screen>
   );
