@@ -102,12 +102,12 @@ export default class ExtractionData extends Component {
             <TabPane tab="Tab 1" key="1">
               Commentaires
               <Table columns={commentsColumns} dataSource={_data_comments}></Table>
-              <Button style={{backgroundColor: "#23AE96", border: "none",margineRight:"20px",float:'right'}} type="primary" shape="round" size='large' onClick={()=>this.exportFile("commentaires",_data_comments)}>Télécharger fichier Excel</Button> 
+              <Button style={{backgroundColor: "#ce53a9", border: "none",margineRight:"20px",float:'right'}} type="primary" shape="round" size='large' onClick={()=>this.exportFile("commentaires",_data_comments)}>Télécharger fichier Excel</Button> 
             </TabPane>
             <TabPane tab="Tab 2" key="2">
               Fiabilisation
               <Table columns={commentsColumns} dataSource={_data_fiab}></Table>
-              <Button style={{backgroundColor: "#23AE96", border: "none",margineRight:"20px",float:'right'}} type="primary" shape="round" size='large' onClick={()=>this.exportFile("fiabilisation",_data_fiab)}>Télécharger fichier Excel</Button> 
+              <Button style={{backgroundColor: "#ce53a9", border: "none",margineRight:"20px",float:'right'}} type="primary" shape="round" size='large' onClick={()=>this.exportFile("fiabilisation",_data_fiab)}>Télécharger fichier Excel</Button> 
             </TabPane>
           </Tabs>
         )

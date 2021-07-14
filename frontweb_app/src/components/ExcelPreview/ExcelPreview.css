@@ -62,7 +62,7 @@ button {
 }
 
 .ant-steps-item-process[class~="ant-steps-item-sustain_3"] .ant-steps-item-icon {
-    border-color: #23ae96 !important;
+    border-color: #ce53a9 !important;
 }
 
 .ant-steps-item-process[class~="ant-steps-item-sustain_4"] .ant-steps-item-icon {
@@ -195,7 +195,7 @@ button {
 }
 
 ._step_desc_text_3 {
-    color: #23ae96 !important;
+    color: #ce53a9 !important;
     font-size: 80%;
     font-weight: 400;
     text-align: left;
@@ -260,7 +260,7 @@ button {
     font-style: italic;
     line-height: 1;
     letter-spacing: normal;
-    color: #23ae96;
+    color: #ce53a9;
     display: inline-block;
     margin-left: 31%;
 }
