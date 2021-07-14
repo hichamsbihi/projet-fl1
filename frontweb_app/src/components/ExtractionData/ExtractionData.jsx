@@ -35,6 +35,8 @@ export default class ExtractionData extends Component {
                     return {
                         equipement: e.id_equipement, 
                         date: e.date,
+                        num_operation: e.num_operation,
+                        gamme: e.gamme,
                         commentaire: e.commentaire
                     };
                 });
@@ -51,8 +53,6 @@ export default class ExtractionData extends Component {
                 const fiabilisations = res.data.map(e=>{
                     return {
                         equipement: e.id_equipement, 
-                        num_operation: e.num_operation,
-                        gamme: e.gamme,
                         nom_technicien: e.nom_technicien,
                         commentaire: e.commentaire
                     };

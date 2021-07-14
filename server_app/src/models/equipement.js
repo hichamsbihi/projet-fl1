@@ -42,7 +42,6 @@ const EquipementSchema = new mongoose.Schema({
   Qsse_pdf: {
     type: String,
   },
-
 });
 
 const CorrectifSchema = new mongoose.Schema({
@@ -111,11 +110,17 @@ const CommentShema = new mongoose.Schema({
   nom_technicien: {
     type: String,
   },
+  gamme: {
+    type: String,
+  },
+
+  num_operation: {
+    type: Number,
+  },
   date: {
     type: Date,
     default: Date.now(),
   },
-  
 });
 
 const FiabilisationShema = new mongoose.Schema({
@@ -130,15 +135,6 @@ const FiabilisationShema = new mongoose.Schema({
   nom_technicien: {
     type: String,
   },
-
-  gamme: {
-    type: String,
-  },
-
-  num_operation: {
-    type: Number,
-  },
-
 });
 
 const getequipement = ({ id, code, id_equipement, _this_ref }, callback) => {

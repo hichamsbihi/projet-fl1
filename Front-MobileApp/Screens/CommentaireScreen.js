@@ -5,12 +5,13 @@ import Titre from "../components/Titre";
 import { SubmitButton, Form, FormField } from "../components/forms";
 import AppButton from "../components/Button";
 
-function CommentaireScreen({ navigation }) {
+function CommentaireScreen({ navigation, route }) {
   return (
     <Screen>
       <Titre title="Modification gamme" />
       <View style={styles.container}>
-        <Form initialValues={{ id: "" }}>
+        <Form initialValues={{ id_equipement: route.params }}>
+          {/* <Image source={{uri:e.image_equipement}} style={{width:150,height:150}}/> */}
           <View style={{ flexDirection: "row" }}>
             <Text
               style={{
@@ -18,10 +19,10 @@ function CommentaireScreen({ navigation }) {
                 marginRight: 10,
                 fontSize: 17,
                 fontWeight: "bold",
-                textAlign:"justify",
+                textAlign: "justify",
               }}
             >
-         Nom Technicien:
+              Nom Technicien:
             </Text>
             <FormField
               name="id"
@@ -30,7 +31,6 @@ function CommentaireScreen({ navigation }) {
               defaultValue="aa"
             />
           </View>
-        
 
           <View style={{ flexDirection: "row" }}>
             <Text
@@ -39,10 +39,9 @@ function CommentaireScreen({ navigation }) {
                 marginRight: 10,
                 fontSize: 17,
                 fontWeight: "bold",
-                
               }}
             >
-          Type de la gamme:
+              Modification gamme:
             </Text>
             <FormField
               name="id1"
@@ -60,14 +59,14 @@ function CommentaireScreen({ navigation }) {
                 fontWeight: "bold",
               }}
             >
-          Numéro d'opération:
+              Numéro d'opération:
             </Text>
             <FormField
               name="id1"
               width={200}
               placeholder="10, 20, 30, 40, 50,..."
             />
-          </View>  
+          </View>
 
           <View style={{ flexDirection: "row" }}>
             <Text

@@ -9,7 +9,7 @@ export  default class App extends Component{
     render() {
 
         return(
-
+            <div style={{backgroundColor: "aqua"}}>
             <BrowserRouter>
                 <Switch>
                 <Route path='/login' component={SignIn}/>
@@ -17,6 +17,7 @@ export  default class App extends Component{
                 <Route path='/' component={MasterSwitcher}/>
                 </Switch>
             </BrowserRouter>
+            </div>
         )
 
     }
