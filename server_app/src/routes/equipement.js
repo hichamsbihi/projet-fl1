@@ -450,9 +450,10 @@ router.get("/api/v1.0/create", (req, res) => {
   equip_insert.emplacement = "VV-EQUIPES-PE";
   equip_insert.niveau_strategique = "IMPORTANT";
   equip_insert.image_equipement = "https://drive.google.com/file/d/1m1bJ4-LKHArO8fQx1N_wKNeRA_naJi2S/view?usp=sharing";
-  equip_insert.Qsse_pdf = "https://drive.google.com/file/d/1SJ977XuxOm4_9TLrU4dxmU32Tu12-f61/view?usp=sharing";
+  equip_insert.Qsse_pdf = "https://drive.google.com/file/d/10rCeSDYzdhmQZjUvo1rEuX2uCJgkQ_aq/view?usp=sharing";
+  equip_insert.constructeur_pdf = "https://drive.google.com/file/d/1SJ977XuxOm4_9TLrU4dxmU32Tu12-f61/view?usp=sharing";
   equip_insert.save();
-
+  
   const preventif_insert = new PREVENTIF();
 
   preventif_insert.ots = "preventif 1 (test)";
