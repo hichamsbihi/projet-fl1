@@ -90,13 +90,13 @@ class DataImport extends React.Component {
                             </Row>
                             <Row align="middle" justify="center" className="fourth_row_wrapper" key='e'>
                                 <Col>
-                                    <Button style={{backgroundColor: "#23AE96", border: "none"}} type="primary" shape="round" size='large' onClick={this.onSubmit}>
+                                    <Button style={{backgroundColor: "#ce53a9", border: "none"}} type="primary" shape="round" size='large' onClick={this.onSubmit}>
                                         Valider
                         </Button>
                                 </Col>
                             </Row></div>
                         <div className={"sustain-bottom-button-next"}>
-                            <Button style={{backgroundColor: "#23AE96", border: "none"}} type="primary" shape="circle" icon={<CaretRightOutlined />} size="large" onClick={this.onSubmit}/>
+                            <Button style={{backgroundColor: "#ce53a9", border: "none"}} type="primary" shape="circle" icon={<CaretRightOutlined />} size="large" onClick={this.onSubmit}/>
                             <br></br>
                             {/*Suivant*/}
                         </div>
@@ -107,7 +107,7 @@ class DataImport extends React.Component {
 
                 }
                 <div className="sustain-bottom-button-previous">
-                    <Button style={{backgroundColor: "#23AE96", border: "none"}} type="primary" shape="circle" icon={<CaretLeftOutlined />} size="large" onClick={()=>{
+                    <Button style={{backgroundColor: "#ce53a9", border: "none"}} type="primary" shape="circle" icon={<CaretLeftOutlined />} size="large" onClick={()=>{
                         this.setState({isSubmitted: false});
                     }} />
                     <br></br>

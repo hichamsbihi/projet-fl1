@@ -87,7 +87,7 @@ getStaticName = (e,pageName)=>{
                         activeSheetClassName='active-sheet'
                         reactExcelClassName='react-excel'
                     />
-                   <Button style={{backgroundColor: "#23AE96", border: "none",margineRight:"20px",float:'right'}} type="primary" shape="round" size='large' onClick={()=>{
+                   <Button style={{backgroundColor: "#ce53a9", border: "none",margineRight:"20px",float:'right'}} type="primary" shape="round" size='large' onClick={()=>{
                        if(Object.keys(this.state.currentSheet).length > 0){
                            this.setState({isProcessingData:true});
                         const pageName = Object.keys(this.state.currentSheet)[0];

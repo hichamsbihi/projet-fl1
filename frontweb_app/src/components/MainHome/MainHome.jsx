@@ -14,7 +14,7 @@ export default class MainHome extends Component {
         color: '#fff',
         lineHeight: '160px',
         textAlign: 'center',
-        background: '#ae007c',
+        background: '#f2daeb',
         backgroundImage: "url(" + "https://webasset.fivesgroup.com/_Never_Delete_/1/1/csm_SOHAR_ALU490_06176c035c.jpg" + ")",
         backgroundPosition: 'center',
         backgroundSize: 'cover',
