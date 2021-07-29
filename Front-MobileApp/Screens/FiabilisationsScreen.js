@@ -8,8 +8,9 @@ import axios from "axios";
 
 function FiabilisationsScreen({ navigation, route }) {
   const handleSubmit = async ({ nom, fiabilisation }) => {
+    console.log(route.params);
     axios
-      .post("http://10.130.227.186:8089/api/v1.0/equipement/fiabilisation", {
+      .post("http://192.168.0.129:8089/api/v1.0/equipement/fiabilisation", {
         id_equipement: route.params.id,
         nom_technicien: nom,
         commentaire: fiabilisation,

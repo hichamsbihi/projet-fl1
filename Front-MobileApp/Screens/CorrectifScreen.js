@@ -13,7 +13,7 @@ import AppButton from "../components/Button";
 
 function CorrectifScreen({ route, navigation }) {
   const [headers, setheaders] = useState([
-    "code",
+    "Numéro DI",
     "date",
     "commentaire",
     "description",

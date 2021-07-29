@@ -8,10 +8,11 @@ import Api from "../Apis/EquipementApi";
 import axios from "axios";
 
 function CommentaireScreen({ navigation, route }) {
-  console.log(route.params);
+  
   const handleSubmit = async ({ nom, commentaire, gamme, numero }) => {
+    console.log(route.params);
     axios
-      .post("http://10.130.227.186:8089/api/v1.0/equipement/comment", {
+      .post("http://192.168.0.18:8089/api/v1.0/equipement/comment", {
         id_equipement: route.params.id,
         nom_technicien: nom,
         commentaire: commentaire,

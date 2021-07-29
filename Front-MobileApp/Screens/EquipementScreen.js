@@ -7,23 +7,19 @@ import Info from "../components/Info";
 function EquipementScreen({ route, navigation }) {
   console.log(route.params);
   const [state, setstate] = useState(route.params);
-  // console.log(date_visite);
+   console.log(state.preventif)
 
   const date_visite = state.data.equipement.map((e) => {
     return e.date_visite ? e.date_visite.split("T") : "";
   });
-  useEffect(() => {
-    console.log(state);
-
-    console.log("route.params.data");
-  });
-
+  
+ 
   return (
     <>
       {state.data.equipement.map((e) => (
         <View style={styles.container} key={e._id}>
           <Titre title={e.nom} />
-          {/* <Image source={{uri:e.image_equipement}} style={{width:150,height:150}}/> */}
+          <Image source={{uri:e.image_equipement}} style={{width:150,height:150}}/>
           <View style={{ flexDirection: "row" }}>
             <View style={{ flexDirection: "column", marginRight: 70 }}>
               <Info title={e.QRcode} style={styles.champ} />

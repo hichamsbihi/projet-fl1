@@ -408,7 +408,8 @@ router.get("/api/v1.0/equipement/comment", (req, res) => {
 });
 
 router.post("/api/v1.0/equipement/comment", (req, res) => {
-  try {
+  try { 
+    console.log('test');
     const comment_insert = new COMMENT();
     comment_insert.id_equipement = req.body.id_equipement;
     comment_insert.commentaire = req.body.commentaire;

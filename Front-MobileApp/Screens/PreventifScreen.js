@@ -14,13 +14,13 @@ import AppButton from "../components/Button";
 function PreventifScreen({ route, navigation }) {
   const [headers, setheaders] = useState([
     "Equipement",
-    "date",
     "commentaire",
     "ots",
   ]);
 
   const data = route.params.data.map((e) => {
-    return [e._id, e.date, e.commentaire, e.ots];
+    console.log(e)
+    return [e._id, e.commentaire, e.ots];
   });
 
   return (
