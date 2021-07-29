@@ -9,6 +9,8 @@ import {
   STOCK,
   COMMENT,
   FIABILISATION,
+  DOCUMENTATION,
+  QSSE
 } from "../models/equipement.js";
 // import {equipementSerializer} from "../serializers/equipement_serializer.js";
 
@@ -450,6 +452,54 @@ router.post("/api/v1.0/equipement/fiabilisation", (req, res) => {
 router.get("/api/v1.0/equipement/fiabilisation", (req, res) => {
   try {
     FIABILISATION.find({}, (err, reply) => {
+      if (err || !reply) {
+        setHeaders({ res, status: 404 }).then(() =>
+          res.end(
+            _JSON2STR({ err_number: 9, demande_state: ERROR_MESSAGES_EN[9] })
+          )
+        );
+      } else {
+        setHeaders({ res, status: 200 }).then(() => res.end(_JSON2STR(reply)));
+      }
+    });
+  } catch (e) {
+    console.log(e);
+    setHeaders({ res, status: 450 }).then(() =>
+      res.end(_JSON2STR({ err_number: 1, demande_state: ERROR_MESSAGES_EN[1] }))
+    );
+  }
+});
+
+router.get("/api/v1.0/equipement/documentation", (req, res) => {
+  try {
+    DOCUMENTATION.find({
+      id_equipement: req.params.id_equipement,
+      type: req.params.type
+    }, (err, reply) => {
+      if (err || !reply) {
+        setHeaders({ res, status: 404 }).then(() =>
+          res.end(
+            _JSON2STR({ err_number: 9, demande_state: ERROR_MESSAGES_EN[9] })
+          )
+        );
+      } else {
+        setHeaders({ res, status: 200 }).then(() => res.end(_JSON2STR(reply)));
+      }
+    });
+  } catch (e) {
+    console.log(e);
+    setHeaders({ res, status: 450 }).then(() =>
+      res.end(_JSON2STR({ err_number: 1, demande_state: ERROR_MESSAGES_EN[1] }))
+    );
+  }
+});
+
+router.get("/api/v1.0/equipement/qssedata", (req, res) => {
+  try {
+    QSSE.find({
+      id_equipement: req.params.id_equipement,
+      type: req.params.type
+    }, (err, reply) => {
       if (err || !reply) {
         setHeaders({ res, status: 404 }).then(() =>
           res.end(

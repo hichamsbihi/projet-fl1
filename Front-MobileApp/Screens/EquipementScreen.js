@@ -14,7 +14,7 @@ function EquipementScreen({ route, navigation }) {
   });
   useEffect(() => {
     console.log(state);
-
+    
     console.log("route.params.data");
   });
 
