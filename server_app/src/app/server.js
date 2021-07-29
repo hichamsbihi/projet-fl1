@@ -16,6 +16,9 @@ const app = express();
 
 const server = app.listen(SERVER_PORT, (err) => {
   if (err) throw err;
+  console.log("last version 29/07/2021");
+  console.log("the last push is comming after this last veriosn of the code !! ") // noted by zak
+  
   console.log(`Server is running on http://${SERVER_HOST}:${SERVER_PORT}`);
 });
 

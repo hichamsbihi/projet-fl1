@@ -13,32 +13,32 @@ import AppButton from "../components/Button";
 
 function CorrectifScreen({ route, navigation }) {
   const [headers, setheaders] = useState([
-    "Numéro DI",
+    "N°DI",
     "date",
+    "description DI",
     "commentaire",
-    "description",
   ]);
 
   const data = route.params.data.map((e) => {
-    return [e._id, e.date, e.commentaire, e.description];
+    return [e.id_equipement, e.date, e.description, e.commentaire];
   });
 
   return (
-    <ScrollView>
+    <ScrollView alwaysBounceHorizontal={true}>
       <Screen>
         <Titre title="Historique des Correctifs" />
         <View style={styles.container}>
           <Table borderStyle={{ borderWidth: 1 }}>
             <Row
               data={headers}
-              flexArr={[1, 1, 1, 1]}
+              flexArr={[1, 1, 2, 4]}
               style={styles.head}
               textStyle={styles.textHead}
             />
             <TableWrapper style={styles.wrapper}>
               <Rows
                 data={data}
-                flexArr={[1, 1, 1, 1]}
+                flexArr={[1, 1, 2, 4]}
                 style={styles.row}
                 textStyle={styles.text}
               />

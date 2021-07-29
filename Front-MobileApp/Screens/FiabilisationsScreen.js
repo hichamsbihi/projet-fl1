@@ -5,12 +5,13 @@ import Titre from "../components/Titre";
 import { SubmitButton, Form, FormField } from "../components/forms";
 import AppButton from "../components/Button";
 import axios from "axios";
+import Client from "../Apis/ApiClient";
 
 function FiabilisationsScreen({ navigation, route }) {
   const handleSubmit = async ({ nom, fiabilisation }) => {
     console.log(route.params);
     axios
-      .post("http://192.168.0.129:8089/api/v1.0/equipement/fiabilisation", {
+      .post(Client.URL + "api/v1.0/equipement/fiabilisation", {
         id_equipement: route.params.id,
         nom_technicien: nom,
         commentaire: fiabilisation,

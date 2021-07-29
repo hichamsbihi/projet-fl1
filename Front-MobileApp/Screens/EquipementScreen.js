@@ -1,5 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { Text, View, StyleSheet, TouchableOpacity, Image } from "react-native";
+import {
+  Text,
+  View,
+  StyleSheet,
+  TouchableOpacity,
+  Image,
+  ScrollView,
+} from "react-native";
 import Titre from "../components/Titre";
 import AppButton from "../components/Button";
 import Info from "../components/Info";
@@ -15,20 +22,51 @@ function EquipementScreen({ route, navigation }) {
   
  
   return (
-    <>
+    <ScrollView>
       {state.data.equipement.map((e) => (
         <View style={styles.container} key={e._id}>
           <Titre title={e.nom} />
-          <Image source={{uri:e.image_equipement}} style={{width:150,height:150}}/>
+          {/* <Image source={{uri:e.image_equipement}} style={{width:150,height:150}}/> */}
+          <Image source={require("../assets/20210401_114306.jpg")} />
           <View style={{ flexDirection: "row" }}>
             <View style={{ flexDirection: "column", marginRight: 70 }}>
+              <Text
+                style={{ alignSelf: "center", padding: 10, fontWeight: "bold" }}
+              >
+                Numéro Equipement :
+              </Text>
               <Info title={e.QRcode} style={styles.champ} />
-              <Info title={e.nom} style={styles.champ} />
+              <Text
+                style={{ alignSelf: "center", padding: 10, fontWeight: "bold" }}
+              >
+                Niveau strategique :
+              </Text>
+              <Info title={e.niveau_strategique} style={styles.champ} />
+              <Text
+                style={{ alignSelf: "center", padding: 10, fontWeight: "bold" }}
+              >
+                Constructeur :
+              </Text>
               <Info title={e.nom_constructeur} style={styles.champ} />
             </View>
             <View style={{ flexDirection: "column" }}>
+              <Text
+                style={{ alignSelf: "center", padding: 10, fontWeight: "bold" }}
+              >
+                Emplacement :
+              </Text>
               <Info title={e.emplacement} style={styles.champ} />
+              <Text
+                style={{ alignSelf: "center", padding: 10, fontWeight: "bold" }}
+              >
+                Référence :
+              </Text>
               <Info title={e.ref} style={styles.champ} />
+              <Text
+                style={{ alignSelf: "center", padding: 10, fontWeight: "bold" }}
+              >
+                dernière date VR :
+              </Text>
               <Info title={date_visite[0][0]} style={styles.champ} />
             </View>
           </View>
@@ -42,7 +80,9 @@ function EquipementScreen({ route, navigation }) {
             <AppButton
               title="schéma"
               style={[styles.button, styles.textButton]}
-              onPress={() => navigation.navigate("SchemaScreen")}
+              onPress={() =>
+                navigation.navigate("SchemaScreen", { id: e.QRcode })
+              }
             />
             <AppButton
               title="Préventifs"
@@ -56,11 +96,7 @@ function EquipementScreen({ route, navigation }) {
             <AppButton
               title="Correctifs"
               style={[styles.button, styles.textButton]}
-              onPress={() =>
-                navigation.navigate("CorrectifScreen", {
-                  data: state.data.correctif,
-                })
-              }
+              onPress={() => navigation.navigate("CorrectifScreen")}
             />
           </View>
           <View style={{ flexDirection: "row" }}>
@@ -69,7 +105,7 @@ function EquipementScreen({ route, navigation }) {
               style={[styles.button, styles.textButton]}
               onPress={() =>
                 navigation.navigate("DocumentationScreen", {
-                  data: e.constructeur_pdf,
+                  id: e.QRcode,
                 })
               }
             />
@@ -77,7 +113,7 @@ function EquipementScreen({ route, navigation }) {
               title="Qsse"
               style={[styles.button, styles.textButton]}
               onPress={() =>
-                navigation.navigate("QsseScreen", { data: e.Qsse_pdf })
+                navigation.navigate("QsseScreen", { id: e.QRcode })
               }
             />
             <AppButton
@@ -104,7 +140,7 @@ function EquipementScreen({ route, navigation }) {
           </View>
         </View>
       ))}
-    </>
+    </ScrollView>
   );
 }
 
@@ -120,9 +156,8 @@ const styles = StyleSheet.create({
   },
 
   champ: {
-    marginTop: 20,
     width: 157,
-    height: 35,
+    height: 55,
     justifyContent: "center",
     borderRadius: 6,
   },
