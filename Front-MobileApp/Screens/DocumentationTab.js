@@ -8,33 +8,55 @@ import {
   Row,
   Rows,
   Col,
+  Cell,
 } from "react-native-table-component";
 import AppButton from "../components/Button";
 
-function PreventifScreen({ route, navigation }) {
-  const [headers, setheaders] = useState(["ots", "date", "commentaire"]);
+function DocumentationTab({ route, navigation }) {
+  const [headers, setheaders] = useState(["Description", "Lien"]);
+  const [data, setData] = useState([
+    ["1", "2"],
+    ["a", "b"],
+    ["1", "2"],
+    ["a", "b"],
+  ]);
+  const element = (data, index) => (
+    <TouchableOpacity onPress={() => this._alertIndex(index)}>
+      <Text style={{ color: "blue" }}>{data}</Text>
+    </TouchableOpacity>
+  );
 
-  const data = route.params.data.map((e) => {
-    return [e.ots, e.date, e.commentaire];
-  });
+  //   const data = route.params.data.map((e) => {
+  //     return [e.description, e.lien];
+  //   });
 
   return (
-    <ScrollView>
+    <ScrollView alwaysBounceHorizontal={true}>
       <Screen>
-        {console.log(route.params)}
-        <Titre title="Historique des Preventifs" />
+        <Titre title="Historique des Correctifs" />
         <View style={styles.container}>
           <Table borderStyle={{ borderWidth: 1 }}>
             <Row
               data={headers}
-              flexArr={[1, 2, 4]}
+              flexArr={[3, 3]}
               style={styles.head}
               textStyle={styles.textHead}
             />
+            {data.map((rowData, index) => (
+              <TableWrapper key={index} style={styles.wrapper}>
+                {rowData.map((cellData, cellIndex) => (
+                  <Cell
+                    key={cellIndex}
+                    data={cellIndex === 1 ? element(cellData, index) : cellData}
+                    textStyle={styles.text}
+                  />
+                ))}
+              </TableWrapper>
+            ))}
             <TableWrapper style={styles.wrapper}>
               <Rows
                 data={data}
-                flexArr={[1, 2, 4]}
+                flexArr={[3, 3]}
                 style={styles.row}
                 textStyle={styles.text}
               />
@@ -67,4 +89,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default PreventifScreen;
+export default DocumentationTab;

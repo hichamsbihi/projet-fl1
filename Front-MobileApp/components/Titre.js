@@ -18,10 +18,11 @@ const styles = StyleSheet.create({
     width: 300,
     marginBottom: 30,
     marginTop: 30,
-    height: 40,
+    height: 60,
     padding: 2,
     backgroundColor: "white",
     borderRadius: 20,
+    justifyContent: "center",
   },
   container: {
     alignItems: "center",
@@ -31,7 +32,7 @@ const styles = StyleSheet.create({
   text: {
     textAlign: "center",
     fontWeight: "bold",
-    fontSize: 20,
+    fontSize: 17,
   },
 });
 

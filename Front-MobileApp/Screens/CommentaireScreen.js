@@ -6,12 +6,13 @@ import { SubmitButton, Form, FormField } from "../components/forms";
 import AppButton from "../components/Button";
 import Api from "../Apis/EquipementApi";
 import axios from "axios";
+import Client from "../Apis/ApiClient";
 
 function CommentaireScreen({ navigation, route }) {
   console.log(route.params);
   const handleSubmit = async ({ nom, commentaire, gamme, numero }) => {
     axios
-      .post("http://10.130.227.186:8089/api/v1.0/equipement/comment", {
+      .post(Client.URL + "api/v1.0/equipement/comment", {
         id_equipement: route.params.id,
         nom_technicien: nom,
         commentaire: commentaire,
