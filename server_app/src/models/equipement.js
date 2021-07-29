@@ -131,6 +131,9 @@ const DocumentationSchema = new mongoose.Schema({
   type: {
     type: String,
   },
+  description: {
+    type: String,
+  },
   document_pdf: {
     type: String,
   }
@@ -141,6 +144,9 @@ const QsseSchema = new mongoose.Schema({
     type: String,
   },
   type: {
+    type: String,
+  },
+  description: {
     type: String,
   },
   document_pdf: {

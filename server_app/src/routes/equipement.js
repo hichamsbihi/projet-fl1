@@ -473,8 +473,8 @@ router.get("/api/v1.0/equipement/fiabilisation", (req, res) => {
 router.get("/api/v1.0/equipement/documentation", (req, res) => {
   try {
     DOCUMENTATION.find({
-      id_equipement: req.params.id_equipement,
-      type: req.params.type
+      id_equipement: req.query.id_equipement,
+      type: req.query.type
     }, (err, reply) => {
       if (err || !reply) {
         setHeaders({ res, status: 404 }).then(() =>
@@ -497,8 +497,8 @@ router.get("/api/v1.0/equipement/documentation", (req, res) => {
 router.get("/api/v1.0/equipement/qssedata", (req, res) => {
   try {
     QSSE.find({
-      id_equipement: req.params.id_equipement,
-      type: req.params.type
+      id_equipement: req.query.id_equipement,
+      type: req.query.type
     }, (err, reply) => {
       if (err || !reply) {
         setHeaders({ res, status: 404 }).then(() =>
