@@ -155,6 +155,22 @@ const QsseSchema = new mongoose.Schema({
 });
 
 
+const SchemaSchema = new mongoose.Schema({
+  id_equipement: {
+    type: String,
+  },
+  type: {
+    type: String,
+  },
+  description: {
+    type: String,
+  },
+  document_pdf: {
+    type: String,
+  }
+});
+
+
 
 const FiabilisationShema = new mongoose.Schema({
   id_equipement: {
@@ -193,6 +209,8 @@ EquipementSchema.statics.getequipement = getequipement;
 FiabilisationShema.statics.getequipement = getequipement;
 DocumentationSchema.statics.getequipement = getequipement;
 QsseSchema.statics.getequipement = getequipement;
+SchemaSchema.statics.getequipement = getequipement;
+
 
 const Correctif = new mongoose.model("Correctif", CorrectifSchema);
 const Preventif = new mongoose.model("Preventif", PreventifSchema);
@@ -202,6 +220,7 @@ const Equipement = mongoose.model("Equipement", EquipementSchema);
 const Fiabilisation = mongoose.model("Fiabilisation", FiabilisationShema);
 const Documentation = mongoose.model("Documentation", DocumentationSchema);
 const Qsse = mongoose.model("Qsse", QsseSchema);
+const Schema = mongoose.model("Schema", SchemaSchema);
 
 export const CORRECTIF = Correctif;
 export const PREVENTIF = Preventif;
@@ -211,3 +230,4 @@ export const EQUIPEMENT = Equipement;
 export const FIABILISATION = Fiabilisation;
 export const DOCUMENTATION = Documentation;
 export const QSSE = Qsse;
+export const SCHEMA = Schema;

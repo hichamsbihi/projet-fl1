@@ -10,7 +10,8 @@ import {
   COMMENT,
   FIABILISATION,
   DOCUMENTATION,
-  QSSE
+  QSSE,
+  SCHEMA
 } from "../models/equipement.js";
 // import {equipementSerializer} from "../serializers/equipement_serializer.js";
 
@@ -518,6 +519,32 @@ router.get("/api/v1.0/equipement/qssedata", (req, res) => {
   }
 });
 
+
+router.get("/api/v1.0/equipement/schema", (req, res) => {
+  try {
+    SCHEMA.find({
+      id_equipement: req.query.id_equipement,
+      type: req.query.type
+    }, (err, reply) => {
+      if (err || !reply) {
+        setHeaders({ res, status: 404 }).then(() =>
+          res.end(
+            _JSON2STR({ err_number: 9, demande_state: ERROR_MESSAGES_EN[9] })
+          )
+        );
+      } else {
+        setHeaders({ res, status: 200 }).then(() => res.end(_JSON2STR(reply)));
+      }
+    });
+  } catch (e) {
+    console.log(e);
+    setHeaders({ res, status: 450 }).then(() =>
+      res.end(_JSON2STR({ err_number: 1, demande_state: ERROR_MESSAGES_EN[1] }))
+    );
+  }
+});
+
+
 router.get("/api/v1.0/create", (req, res) => {
   const stock_insert = new STOCK();
   stock_insert.designation = "stock 1 (test)";
@@ -559,8 +586,32 @@ router.get("/api/v1.0/create", (req, res) => {
   correctif_insert.id_equipement = "QR456789";
   correctif_insert.commentaire = "commentaire test";
   correctif_insert.date = Date.now();
-
   correctif_insert.save();
+
+  const schema_insert = new SCHEMA();
+
+  schema_insert.description = "description 1 (test)";
+  schema_insert.id_equipement = "QR456789";
+  schema_insert.type = "commentaire test";
+  schema_insert.document_pdf = "document_pdf lien test";
+  
+  const documentation_insert = new DOCUMENTATION();
+
+  documentation_insert.description = "description 1 (test)";
+  documentation_insert.id_equipement = "QR456789";
+  documentation_insert.type = "commentaire test";
+  documentation_insert.document_pdf = "document_pdf lien test";
+
+  documentation_insert.save();
+
+  const qsse_insert = new QSSE();
+
+  qsse_insert.description = "description 1 (test)";
+  qsse_insert.id_equipement = "QR456789";
+  qsse_insert.type = "commentaire test";
+  qsse_insert.document_pdf = "document_pdf lien test";
+
+  qsse_insert.save();
 
   setHeaders({ res, status: 200 }).then(() => res.end("docs created"));
 });
