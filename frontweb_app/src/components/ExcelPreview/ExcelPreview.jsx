@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from 'prop-types';
 import {ReactExcel, readFile} from './ExcelReader';
 import './ExcelPreview.css';
-import { message, Spin,Row,Button } from "antd";
+import { message, Spin,Row,Button, Input} from "antd";
 import { _launch } from "./algo_excel_new";
 import { GRAPHICS_PAGE_FR ,ERROR_MESSAGES} from "../../utils/CONSTANTS";
 import {reqPostPreventifs,reqPostCorrectifs,reqPostEquipements,reqPostStock,reqPostDocs,reqPostQsseData,reqPostSchema} from "../../apis/index";
