@@ -123,6 +123,33 @@ const CommentShema = new mongoose.Schema({
   },
 });
 
+
+const DocumentationSchema = new mongoose.Schema({
+  id_equipement: {
+    type: String,
+  },
+  type: {
+    type: String,
+  },
+  document_pdf: {
+    type: String,
+  }
+});
+
+const QsseSchema = new mongoose.Schema({
+  id_equipement: {
+    type: String,
+  },
+  type: {
+    type: String,
+  },
+  document_pdf: {
+    type: String,
+  }
+});
+
+
+
 const FiabilisationShema = new mongoose.Schema({
   id_equipement: {
     type: String,
@@ -158,6 +185,8 @@ StockSchema.statics.getequipement = getequipement;
 CommentShema.statics.getequipement = getequipement;
 EquipementSchema.statics.getequipement = getequipement;
 FiabilisationShema.statics.getequipement = getequipement;
+DocumentationSchema.statics.getequipement = getequipement;
+QsseSchema.statics.getequipement = getequipement;
 
 const Correctif = new mongoose.model("Correctif", CorrectifSchema);
 const Preventif = new mongoose.model("Preventif", PreventifSchema);
@@ -165,6 +194,8 @@ const Stock = new mongoose.model("Stock", StockSchema);
 const Comment = new mongoose.model("Comment", CommentShema);
 const Equipement = mongoose.model("Equipement", EquipementSchema);
 const Fiabilisation = mongoose.model("Fiabilisation", FiabilisationShema);
+const Documentation = mongoose.model("Documentation", DocumentationSchema);
+const Qsse = mongoose.model("Qsse", QsseSchema);
 
 export const CORRECTIF = Correctif;
 export const PREVENTIF = Preventif;
@@ -172,3 +203,5 @@ export const STOCK = Stock;
 export const COMMENT = Comment;
 export const EQUIPEMENT = Equipement;
 export const FIABILISATION = Fiabilisation;
+export const DOCUMENTATION = Documentation;
+export const QSSE = Qsse;
