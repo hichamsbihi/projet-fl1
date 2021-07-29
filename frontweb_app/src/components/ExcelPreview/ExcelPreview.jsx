@@ -2,17 +2,18 @@ import React from "react";
 import PropTypes from 'prop-types';
 import {ReactExcel, readFile} from './ExcelReader';
 import './ExcelPreview.css';
-import { message, Spin,Row,Button } from "antd";
+import { message, Spin,Row,Button, Input} from "antd";
 import { _launch } from "./algo_excel_new";
 import { GRAPHICS_PAGE_FR ,ERROR_MESSAGES} from "../../utils/CONSTANTS";
-import {reqPostPreventifs,reqPostCorrectifs,reqPostEquipements,reqPostStock} from "../../apis/index";
+import {reqPostPreventifs,reqPostCorrectifs,reqPostEquipements,reqPostStock,reqPostDocs,reqPostQsseData,reqPostSchema} from "../../apis/index";
 class ExcelPreview extends React.Component {
 
     state = {
         isProcessingData: false,
         processingMessage: "Chargement...",
         initialData: undefined,
-        currentSheet: {}
+        currentSheet: {},
+        selectedEq: ""
     }
     preventifColumnMapping = {
         "Ots": "ots",
@@ -42,7 +43,13 @@ class ExcelPreview extends React.Component {
         "Document constructeur format PDF": "constructeur_pdf",
         "QSSE format PDF": "Qsse_pdf",
         "Image équipement": "image_equipement",
+    };
 
+    documentationColumnMapping = {
+        "Equipement" : "id_equipement",
+        "Description" : "description",
+        "Type": "type",
+        "Lien pdf" : "document_pdf"
     };
 
     componentDidMount() {
@@ -64,6 +71,10 @@ getStaticName = (e,pageName)=>{
         return this.equipementColumnMapping[e] ? this.equipementColumnMapping[e] : e;
     if(pageName === 'etat de stock')
         return this.stockColumnMapping[e] ? this.stockColumnMapping[e] : e;
+    if(this.props.dataType==="_doc_data" || this.props.dataType==="_qsse_data" || this.props.dataType==="_schema_data")
+        return this.documentationColumnMapping[e] ? this.documentationColumnMapping[e] : e;
+    if(this.props.dataType==="_mesures_data")
+        return e;
 }
 
 
@@ -87,6 +98,8 @@ getStaticName = (e,pageName)=>{
                         activeSheetClassName='active-sheet'
                         reactExcelClassName='react-excel'
                     />
+                    <Input placeholder="Id equipement" value={this.selectedEq} onChange={(e)=> this.setState({selectedEq: e.target.value})}>
+                    </Input>
                    <Button style={{backgroundColor: "#ce53a9", border: "none",margineRight:"20px",float:'right'}} type="primary" shape="round" size='large' onClick={()=>{
                        if(Object.keys(this.state.currentSheet).length > 0){
                            this.setState({isProcessingData:true});
@@ -99,6 +112,10 @@ getStaticName = (e,pageName)=>{
                                     pageName === 'Correctifs' ? reqPostCorrectifs :
                                     pageName === 'données fixe Equipements' ? reqPostEquipements :
                                     pageName === 'etat de stock' ? reqPostStock :
+                                    this.props.dataType === "_doc_data" ? reqPostDocs : 
+                                    this.props.dataType === "_qsse_data" ? reqPostQsseData : 
+                                    this.props.dataType === "_schema_data" ? reqPostSchema : 
+                                    this.props.dataType === "_mesures_data" ? null : 
                                     null;
                             this.state.currentSheet[pageName].forEach((elem,ind)=>{
                                 if(ind!=0)

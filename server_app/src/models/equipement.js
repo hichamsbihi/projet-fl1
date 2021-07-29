@@ -170,6 +170,16 @@ const SchemaSchema = new mongoose.Schema({
   }
 });
 
+const MesureSchema = new mongoose.Schema({
+  id_equipement: {
+    type: String,
+  },
+  param: {
+    type: String,
+  },
+  value: [String]
+});
+
 
 
 const FiabilisationShema = new mongoose.Schema({
@@ -221,6 +231,7 @@ const Fiabilisation = mongoose.model("Fiabilisation", FiabilisationShema);
 const Documentation = mongoose.model("Documentation", DocumentationSchema);
 const Qsse = mongoose.model("Qsse", QsseSchema);
 const Schema = mongoose.model("Schema", SchemaSchema);
+const Mesure = mongoose.model("Mesure", MesureSchema);
 
 export const CORRECTIF = Correctif;
 export const PREVENTIF = Preventif;
@@ -231,3 +242,4 @@ export const FIABILISATION = Fiabilisation;
 export const DOCUMENTATION = Documentation;
 export const QSSE = Qsse;
 export const SCHEMA = Schema;
+export const MESURE = Mesure;

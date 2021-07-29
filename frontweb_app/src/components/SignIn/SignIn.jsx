@@ -26,7 +26,6 @@ export default class SignIn extends React.Component {
                 if (res.status === 200) {
 
                 const user = { email: email, token: res.data.x_access_token, id: res.data.idUser };
-                console.log(user.token);
                 sessionStorage.setItem("user", JSON.stringify(user));
 
                 // here to sync all user informations and store them in the memory before openning the plateform.

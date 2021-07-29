@@ -320,6 +320,38 @@ router.post("/api/v1.0/equipements", (req, res) => {
     }
   });
 });
+
+router.post("/api/v1.0/equipement/documentation", (req, res) => {
+  DOCUMENTATION.deleteMany({}, (err, reply) => {
+    if (!err) {
+      DOCUMENTATION.create(req.body.arrayData);
+      setHeaders({ res, status: 200 }).then(() =>
+        res.end("DOCUMENTATION data have been added")
+      );
+    } else {
+      setHeaders({ res, status: 404 }).then(() =>
+        res.end("Error was occurred")
+      );
+    }
+  });
+});
+
+router.post("/api/v1.0/equipement/qssedata", (req, res) => {
+  QSSE.deleteMany({}, (err, reply) => {
+    if (!err) {
+      QSSE.create(req.body.arrayData);
+      setHeaders({ res, status: 200 }).then(() =>
+        res.end("QSSE data have been added")
+      );
+    } else {
+      setHeaders({ res, status: 404 }).then(() =>
+        res.end("Error was occurred")
+      );
+    }
+  });
+});
+
+
 router.post("/api/v1.0/stock", (req, res) => {
   STOCK.deleteMany({}, (err, reply) => {
     if (!err) {
