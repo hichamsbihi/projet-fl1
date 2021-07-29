@@ -25,7 +25,7 @@ const styles = StyleSheet.create({
   text: {
     textAlign: "center",
     fontWeight: "500",
-    fontSize: 15,
+    fontSize: 13,
   },
 });
 

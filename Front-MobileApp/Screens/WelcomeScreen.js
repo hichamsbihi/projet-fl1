@@ -7,28 +7,17 @@ import Api from "../Apis/EquipementApi";
 import Logo from "../components/Logo";
 import AppForm from "../components/forms/Form";
 import Button from "../components/Button";
+import AppButton from "../components/Button";
 
 const WelcomeScreen = ({ navigation }) => {
-  const handleSubmit = async ({ id }) => {
-    Api.EquipementApi(id)
-      .then((res) => {
-        //console.log(res.data);
-        navigation.navigate("EquipementScreen", { data: res.data });
-      })
-      .catch((err) => {
-        console.log("err");
-        console.log(err);
-      });
-  };
-  const [stock, setStock] = useState([]);
-  const handleStock = async ({ id, title }) => {
+  const [stock, setStock] = useState();
+  const handleStock = async () => {
+    console.log("test");
     Api.StockApi()
-
       .then((res) => {
         setStock(res.data);
-        console.log("salut");
-        console.log(res.data);
-        navigation.navigate("EtatStockScreen", { data: res.data });
+        console.log(stock);
+        navigation.navigate("StockSearchScreen", { data: stock });
       })
       .catch((err) => console.log(err));
   };
@@ -37,18 +26,15 @@ const WelcomeScreen = ({ navigation }) => {
     <>
       <Logo />
       <View style={styles.container}>
-        <Form initialValues={{ id: "", title: "" }} onSubmit={handleSubmit}>
-          <FormField name="id" placeholder="Code Equipement" width={200} />
-          <SubmitButton
-            title="Equipement"
-            style={[{ backgroundColor: "#fb66c9" }]}
-          />
-        </Form>
-
-        <Button
-          title={"stock"}
+        <AppButton
+          title="Equipement"
+          onPress={() => navigation.navigate("EquipementSearchScreen")}
+          style={[styles.button]}
+        />
+        <AppButton
+          title="Stock"
           onPress={handleStock}
-          style={[{ backgroundColor: "#fb66c9" }]}
+          style={[styles.button]}
         />
       </View>
     </>
@@ -65,9 +51,12 @@ const styles = StyleSheet.create({
   },
   container: {
     flex: 1,
-
+    flexDirection: "column",
     alignItems: "center",
     justifyContent: "center",
+  },
+  button: {
+    backgroundColor: "#fb66c9",
   },
 });
 
