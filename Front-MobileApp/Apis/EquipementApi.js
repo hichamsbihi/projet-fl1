@@ -7,14 +7,34 @@ const EquipementApi = (id) =>
 
 const StockApi = () => axios.get(Client.URL + "api/v1.0/equipement/stock");
 
-const MesureApi = (id) => axios.get(Client.URL + "api/v1.0/getmesure/" + id);
+const MesureApi = (id) => axios.get(Client.URL + "api/v1.0/mesures/" + id);
 
-const QsseApi = (type) => axios.get(Client.URL + "api/v1.0/getqsse/" + type);
+const QsseApi = (type, id) =>
+  axios.get(
+    Client.URL +
+      "api/v1.0/equipement/qssedata?type=" +
+      type +
+      "&id_equipement=" +
+      id
+  );
 
-const DocumentationApi = (type) =>
-  axios.get(Client.URL + "api/v1.0/getqsse/" + type);
+const DocumentationApi = (type, id) =>
+  axios.get(
+    Client.URL +
+      "api/v1.0/equipement/documentation?type=" +
+      type +
+      "&id_equipement=" +
+      id
+  );
 
-const SchemaApi = (type) => axios.get(Client.URL + "api/v1.0/getqsse/" + type);
+const SchemaApi = (type, id) =>
+  axios.get(
+    Client.URL +
+      "api/v1.0/equipement/schema?type=" +
+      type +
+      "&id_equipement=" +
+      id
+  );
 
 const AddFiabilisationApi = (id, nom, fiabilisation) => {
   axios.post(Client.URL + "api/v1.0/equipement/fiabilisation", {

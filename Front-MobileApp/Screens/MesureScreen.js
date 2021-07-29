@@ -6,29 +6,44 @@ import Titre from "../components/Titre";
 import AppButton from "../components/Button";
 const colors = ["red", "blue", "orange", "black", "#b2ab14", "green"];
 const test = [
-  [8.75, 8.25, 7.8, 7.8, 7.7, 6.8, 6.8, 6.3],
-  [6.5, 6.5, 6.5, 6.5, 6.5, 6.5, 6.5, 6.5],
+  { param: "param1", values: [8.75, 8.25, 7.8, 7.8, 7.7, 6.8, 6.8, 6.3] },
+  { param: "param2", values: [8.75, 8.25, 7.8, 7.8, 7.7, 6.8, 6.8, 6.3] },
+  { param: "param3", values: [8.75, 8.25, 7.8, 7.8, 7.7, 6.8, 6.8, 6.3] },
+  { param: "param4", values: [8.75, 8.25, 7.8, 7.8, 7.7, 6.8, 6.8, 6.3] },
+];
+const labels = [
+  "dec-19",
+  "juin-20",
+  "nov-20",
+  "jui-20",
+  "mars-20",
+  "oct-20",
+  "janv-21",
+  "Juil-21",
+  "oct-20",
+  "janv-21",
+  "Juil-21",
 ];
 
-const data = {
-  labels: [
-    "dec-19",
-    "juin-20",
-    "nov-20",
-    "jui-20",
-    "mars-20",
-    "oct-20",
-    "janv-21",
-    "Juil-21",
-    "oct-20",
-    "janv-21",
-    "Juil-21",
-  ],
-  datasets: [
-    { data: test[0], color: () => colors[0] },
-    { data: test[1], color: () => colors[1] },
-  ],
-  legend: ["Rainy Days"],
+const data0 = {
+  labels: labels,
+  datasets: [{ data: test[0].values, color: () => colors[0] }],
+  legend: [test[0].param],
+};
+const data1 = {
+  labels: labels,
+  datasets: [{ data: test[1].values, color: () => colors[1] }],
+  legend: [test[1].param],
+};
+const data2 = {
+  labels: labels,
+  datasets: [{ data: test[2].values, color: () => colors[2] }],
+  legend: [test[2].param],
+};
+const data3 = {
+  labels: labels,
+  datasets: [{ data: test[3].values, color: () => colors[3] }],
+  legend: [test[3].param],
 };
 
 function MesureScreen({ navigation }) {
@@ -40,7 +55,7 @@ function MesureScreen({ navigation }) {
           <View style={styles.container}>
             <View style={{ marginBottom: 30 }}>
               <LineChart
-                data={data}
+                data={data0}
                 height={220}
                 width={600}
                 chartConfig={{
@@ -57,7 +72,7 @@ function MesureScreen({ navigation }) {
             </View>
             <View style={{ marginBottom: 30 }}>
               <LineChart
-                data={data}
+                data={data1}
                 height={220}
                 width={600}
                 chartConfig={{
@@ -74,7 +89,7 @@ function MesureScreen({ navigation }) {
             </View>
             <View style={{ marginBottom: 30 }}>
               <LineChart
-                data={data}
+                data={data2}
                 height={220}
                 width={600}
                 chartConfig={{
@@ -91,7 +106,7 @@ function MesureScreen({ navigation }) {
             </View>
             <View style={{ marginBottom: 30 }}>
               <LineChart
-                data={data}
+                data={data3}
                 height={220}
                 width={600}
                 chartConfig={{

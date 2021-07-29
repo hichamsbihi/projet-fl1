@@ -10,7 +10,7 @@ function SchemaScreen({ navigation, route }) {
     console.log("test");
     Api.DocumentationApi(type)
       .then((res) => {
-        setStock(res.data);
+        setDoc(res.data);
         console.log(doc);
         navigation.navigate("DocumentationTab", { data: doc });
       })

@@ -3,19 +3,18 @@ import { StyleSheet, WebView, Linking, View } from "react-native";
 import Screen from "../components/Screen";
 import Titre from "../components/Titre";
 import AppButton from "../components/Button";
+import Api from "../Apis/EquipementApi";
 
 function QsseScreen({ navigation, route }) {
-  const [doc, setDoc] = useState();
-  const handleDoc = async (type) => {
-    console.log("test");
-    Api.DocumentationApi(type)
+  const handleDoc = (type) => {
+    console.log(type, route.params.id);
+    Api.DocumentationApi(type, route.params.id)
       .then((res) => {
-        setStock(res.data);
-        console.log(doc);
-        navigation.navigate("DocumentationTab", { data: doc });
+        navigation.navigate("DocumentationTab", { data: res.data });
       })
       .catch((err) => console.log(err));
   };
+
   return (
     <Screen>
       <Titre title="QSSE" />
