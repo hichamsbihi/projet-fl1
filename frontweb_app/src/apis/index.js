@@ -8,6 +8,9 @@ export const reqPostPreventifs = (data) => api_interface(API_URL + 'api/v1.0/pre
 export const reqPostCorrectifs = (data) => api_interface(API_URL + 'api/v1.0/correctifs', {arrayData: data}, 'POST');
 export const reqPostEquipements = (data) => api_interface(API_URL + 'api/v1.0/equipements', {arrayData: data}, 'POST');
 export const reqPostStock = (data) => api_interface(API_URL + 'api/v1.0/stock', {arrayData: data}, 'POST');
+export const reqPostDocs = (data) => api_interface(API_URL + 'api/v1.0/equipement/documentation', {arrayData: data}, 'POST');
+export const reqPostQsseData= (data) => api_interface(API_URL + 'api/v1.0/equipement/qssedata', {arrayData: data}, 'POST');
+export const reqPostSchema = (data) => api_interface(API_URL + 'api/v1.0/equipement/schema', {arrayData: data}, 'POST');
 export const reqGetComments = (data) => api_interface(API_URL + 'api/v1.0/equipement/comment', {}, 'GET');
 export const reqGetFiabilisation = (data) => api_interface(API_URL + 'api/v1.0/equipement/fiabilisation', {}, 'GET');
 

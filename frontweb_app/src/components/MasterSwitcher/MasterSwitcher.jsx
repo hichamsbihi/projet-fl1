@@ -53,6 +53,10 @@ export default class MasterSwitcher extends React.Component {
                             <Route path='/home' render={props => <MainHome userData={userBody.userData.data} />} />
                             <Route path='/data-import/equipements/static' render={props => <DataImport {...props}dataType="_equip_data" />} />
                             <Route path='/data-import/stock' render={props => <DataImport {...props} dataType="_stock_data" />} />
+                            <Route path='/data-import/documentation' render={props => <DataImport {...props} dataType="_doc_data" />} />
+                            <Route path='/data-import/qssedata' render={props => <DataImport {...props} dataType="_qsse_data" />} />
+                            <Route path='/data-import/schema' render={props => <DataImport {...props} dataType="_schema_data" />} />
+                            <Route path='/data-import/mesures' render={props => <DataImport {...props} dataType="_mesures_data" />} />
                             <Route path='/data-extraction' render={props => <ExtractionData {...props} />} />
                             {/* <Route path='/data-import/stock' render={props => <DataImport {...props} dataType="_stock_data" />} /> */}
                         </Switch>

@@ -21,7 +21,12 @@ export default class AdminNavBar extends React.Component {
       "/data-import/stock",
       "/data-import/correctifs",
       "/data-import/preventifs",
-      "/data-extraction"
+      "/data-extraction",
+      "/data-import/documentation",
+      "/data-import/qssedata",
+      "/data-import/schema",
+      "/data-import/mesures",
+
     ];
     const selected_menu_item = [
       path_maping.indexOf(this.props.location).toString(),
@@ -89,6 +94,54 @@ export default class AdminNavBar extends React.Component {
                         to={path_maping[7]}
                       >
                         Extraction des données
+                      </Link>
+                    </li>
+                    <li>
+                      <Link
+                        className={
+                          selected_menu_item[0] == 8
+                            ? "sustain-nave-selected"
+                            : ""
+                        }
+                        to={path_maping[8]}
+                      >
+                        Documentation
+                      </Link>
+                    </li>
+                    <li>
+                      <Link
+                        className={
+                          selected_menu_item[0] == 9
+                            ? "sustain-nave-selected"
+                            : ""
+                        }
+                        to={path_maping[9]}
+                      >
+                        Qsse Data
+                      </Link>
+                    </li>
+                    <li>
+                      <Link
+                        className={
+                          selected_menu_item[0] == 10
+                            ? "sustain-nave-selected"
+                            : ""
+                        }
+                        to={path_maping[10]}
+                      >
+                        Schemas Data
+                      </Link>
+                    </li>
+                    <li>
+                      <Link
+                        className={
+                          selected_menu_item[0] == 11
+                            ? "sustain-nave-selected"
+                            : ""
+                        }
+                        to={path_maping[11]}
+                      >
+                        Insertion des mesures
                       </Link>
                     </li>
                     {/* <li>
