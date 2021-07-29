@@ -1,5 +1,13 @@
 import React, { useState } from "react";
-import { Text, Button, StyleSheet, View, ScrollView } from "react-native";
+import {
+  Text,
+  Button,
+  StyleSheet,
+  View,
+  ScrollView,
+  Linking,
+  TouchableOpacity,
+} from "react-native";
 import Screen from "../components/Screen";
 import Titre from "../components/Titre";
 import {
@@ -13,22 +21,23 @@ import {
 import AppButton from "../components/Button";
 
 function DocumentationTab({ route, navigation }) {
-  const [headers, setheaders] = useState(["Description", "Lien"]);
-  const [data, setData] = useState([
-    ["1", "2"],
-    ["a", "b"],
-    ["1", "2"],
-    ["a", "b"],
-  ]);
-  const element = (data, index) => (
-    <TouchableOpacity onPress={() => this._alertIndex(index)}>
-      <Text style={{ color: "blue" }}>{data}</Text>
-    </TouchableOpacity>
-  );
+  console.log(route.params);
+  const [headers, setHeaders] = useState(["Description", "Lien"]);
 
-  //   const data = route.params.data.map((e) => {
-  //     return [e.description, e.lien];
-  //   });
+  const data = route.params.data.map((e) => {
+    return [e.description, e.document_pdf];
+  });
+
+  const element = (data, index) => (
+    console.log(data),
+    (
+      <TouchableOpacity onPress={async () => await Linking.openURL(data)}>
+        <View style={styles.btn}>
+          <Text style={styles.btnText}>PDF</Text>
+        </View>
+      </TouchableOpacity>
+    )
+  );
 
   return (
     <ScrollView alwaysBounceHorizontal={true}>
@@ -43,30 +52,22 @@ function DocumentationTab({ route, navigation }) {
               textStyle={styles.textHead}
             />
             {data.map((rowData, index) => (
-              <TableWrapper key={index} style={styles.wrapper}>
+              <TableWrapper key={index} style={styles.row1}>
                 {rowData.map((cellData, cellIndex) => (
                   <Cell
                     key={cellIndex}
                     data={cellIndex === 1 ? element(cellData, index) : cellData}
-                    textStyle={styles.text}
+                    textStyle={styles.text1}
                   />
                 ))}
               </TableWrapper>
             ))}
-            <TableWrapper style={styles.wrapper}>
-              <Rows
-                data={data}
-                flexArr={[3, 3]}
-                style={styles.row}
-                textStyle={styles.text}
-              />
-            </TableWrapper>
           </Table>
 
           <AppButton
             title="Retour"
             style={[styles.button]}
-            onPress={() => navigation.navigate("EquipementScreen")}
+            onPress={() => navigation.goBack()}
           />
         </View>
       </Screen>
@@ -79,6 +80,12 @@ const styles = StyleSheet.create({
   wrapper: { flexDirection: "row" },
   title: { flex: 1, backgroundColor: "#ed58bd" },
   row: { height: "auto", backgroundColor: "white" },
+  row1: {
+    flexDirection: "row",
+    backgroundColor: "#FFF1C1",
+    height: "auto",
+    backgroundColor: "white",
+  },
   textHead: { textAlign: "center", fontWeight: "bold" },
   text: { textAlign: "center" },
   button: {
@@ -86,6 +93,26 @@ const styles = StyleSheet.create({
     marginTop: 120,
     marginLeft: 120,
     width: "35%",
+  },
+  btn: {
+    width: 80,
+    height: 40,
+    margin: 15,
+    backgroundColor: "#78B7BB",
+    borderRadius: 2,
+    alignItems: "center",
+    alignSelf: "center",
+    borderRadius: 5,
+    backgroundColor: "#a71b88",
+  },
+  text1: { margin: 6, alignItems: "center" },
+  btnText: {
+    justifyContent: "center",
+    justifyContent: "center",
+    fontSize: 17,
+    paddingTop: 8,
+    fontWeight: "bold",
+    color: "white",
   },
 });
 

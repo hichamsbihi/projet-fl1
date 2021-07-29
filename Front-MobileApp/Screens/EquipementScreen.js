@@ -21,7 +21,7 @@ function EquipementScreen({ route, navigation }) {
   });
   useEffect(() => {
     console.log(state);
-    
+
     console.log("route.params.data");
   });
 
@@ -84,7 +84,9 @@ function EquipementScreen({ route, navigation }) {
             <AppButton
               title="schéma"
               style={[styles.button, styles.textButton]}
-              onPress={() => navigation.navigate("SchemaScreen")}
+              onPress={() =>
+                navigation.navigate("SchemaScreen", { id: e.QRcode })
+              }
             />
             <AppButton
               title="Préventifs"
@@ -105,13 +107,17 @@ function EquipementScreen({ route, navigation }) {
             <AppButton
               title="Documentation"
               style={[styles.button, styles.textButton]}
-              onPress={() => navigation.navigate("DocumentationScreen")}
+              onPress={() =>
+                navigation.navigate("DocumentationScreen", {
+                  id: e.QRcode,
+                })
+              }
             />
             <AppButton
               title="Qsse"
               style={[styles.button, styles.textButton]}
               onPress={() =>
-                navigation.navigate("QsseScreen", { data: e.Qsse_pdf })
+                navigation.navigate("QsseScreen", { id: e.QRcode })
               }
             />
             <AppButton

@@ -6,17 +6,13 @@ import AppButton from "../components/Button";
 import Api from "../Apis/EquipementApi";
 
 function DocumentationScreen({ navigation, route }) {
-  const [doc, setDoc] = useState();
-  const handleDoc = async (type) => {
-    console.log("test");
-    // Api.DocumentationApi(type)
-    //   .then((res) => {
-    //     setStock(res.data);
-    //     console.log(doc);
-    // //     navigation.navigate("DocumentationTab", { data: doc });
-    //   })
-    //   .catch((err) => console.log(err));
-    navigation.navigate("DocumentationTab", { data: doc });
+  const handleDoc = (type) => {
+    console.log(type, route.params.id);
+    Api.DocumentationApi(type, route.params.id)
+      .then((res) => {
+        navigation.navigate("DocumentationTab", { data: res.data });
+      })
+      .catch((err) => console.log(err));
   };
 
   return (
