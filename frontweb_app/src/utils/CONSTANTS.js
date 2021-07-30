@@ -52,7 +52,7 @@ export const SUCCESS_MESSAGES = {
 }
 export const _FOOTER = {
 
-    COMPANY_NAME: 'ACHRAF',
+    COMPANY_NAME: 'FIVES',
     YEAR: '@'+ new Date().getFullYear(),
 
 }

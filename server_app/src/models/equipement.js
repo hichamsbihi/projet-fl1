@@ -143,9 +143,6 @@ const QsseSchema = new mongoose.Schema({
   id_equipement: {
     type: String,
   },
-  type: {
-    type: String,
-  },
   description: {
     type: String,
   },
@@ -177,10 +174,10 @@ const MesureSchema = new mongoose.Schema({
   param: {
     type: String,
   },
-  value: [String]
+  seuil: { type: String},
+  values: [
+  ]
 });
-
-
 
 const FiabilisationShema = new mongoose.Schema({
   id_equipement: {
@@ -193,6 +190,10 @@ const FiabilisationShema = new mongoose.Schema({
 
   nom_technicien: {
     type: String,
+  },
+  date: {
+    type: Date,
+    default: Date.now(),
   },
 });
 

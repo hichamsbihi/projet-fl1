@@ -16,7 +16,7 @@ const WelcomeScreen = ({ navigation }) => {
     Api.StockApi()
       .then((res) => {
         setStock(res.data);
-        console.log(stock);
+        console.log(res);
         navigation.navigate("StockSearchScreen", { data: stock });
       })
       .catch((err) => console.log(err));

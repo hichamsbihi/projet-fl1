@@ -11,7 +11,8 @@ import {
   FIABILISATION,
   DOCUMENTATION,
   QSSE,
-  SCHEMA
+  SCHEMA,
+  MESURE
 } from "../models/equipement.js";
 // import {equipementSerializer} from "../serializers/equipement_serializer.js";
 
@@ -351,6 +352,14 @@ router.post("/api/v1.0/equipement/qssedata", (req, res) => {
   });
 });
 
+router.post("/api/v1.0/equipement/mesures", (req, res) => {
+      MESURE.create(req.body.arrayData);
+      setHeaders({ res, status: 200 }).then(() =>
+        res.end("Mesures data have been added")
+      );
+    
+  });
+
 
 router.post("/api/v1.0/stock", (req, res) => {
   STOCK.deleteMany({}, (err, reply) => {
@@ -528,11 +537,33 @@ router.get("/api/v1.0/equipement/documentation", (req, res) => {
   }
 });
 
+router.get("/api/v1.0/equipement/mesures/:id", (req, res) => {
+  try {
+    MESURE.find({
+      id_equipement: req.params.id,
+    }, (err, reply) => {
+      if (err || !reply) {
+        setHeaders({ res, status: 404 }).then(() =>
+          res.end(
+            _JSON2STR({ err_number: 9, demande_state: ERROR_MESSAGES_EN[9] })
+          )
+        );
+      } else {
+        setHeaders({ res, status: 200 }).then(() => res.end(_JSON2STR(reply)));
+      }
+    });
+  } catch (e) {
+    console.log(e);
+    setHeaders({ res, status: 450 }).then(() =>
+      res.end(_JSON2STR({ err_number: 1, demande_state: ERROR_MESSAGES_EN[1] }))
+    );
+  }
+});
+
 router.get("/api/v1.0/equipement/qssedata", (req, res) => {
   try {
     QSSE.find({
       id_equipement: req.query.id_equipement,
-      type: req.query.type
     }, (err, reply) => {
       if (err || !reply) {
         setHeaders({ res, status: 404 }).then(() =>
@@ -627,7 +658,8 @@ router.get("/api/v1.0/create", (req, res) => {
   schema_insert.id_equipement = "QR456789";
   schema_insert.type = "commentaire test";
   schema_insert.document_pdf = "document_pdf lien test";
-  
+  schema_insert.save();
+
   const documentation_insert = new DOCUMENTATION();
 
   documentation_insert.description = "description 1 (test)";

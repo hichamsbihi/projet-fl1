@@ -5,7 +5,7 @@ import './ExcelPreview.css';
 import { message, Spin,Row,Button, Input} from "antd";
 import { _launch } from "./algo_excel_new";
 import { GRAPHICS_PAGE_FR ,ERROR_MESSAGES} from "../../utils/CONSTANTS";
-import {reqPostPreventifs,reqPostCorrectifs,reqPostEquipements,reqPostStock,reqPostDocs,reqPostQsseData,reqPostSchema} from "../../apis/index";
+import {reqPostPreventifs,reqPostCorrectifs,reqPostEquipements,reqPostStock,reqPostDocs,reqPostQsseData,reqPostSchema,reqPostMesure} from "../../apis/index";
 class ExcelPreview extends React.Component {
 
     state = {
@@ -43,6 +43,7 @@ class ExcelPreview extends React.Component {
         "Document constructeur format PDF": "constructeur_pdf",
         "QSSE format PDF": "Qsse_pdf",
         "Image équipement": "image_equipement",
+        "Date derniere visite" :"date_visite"
     };
 
     documentationColumnMapping = {
@@ -50,6 +51,12 @@ class ExcelPreview extends React.Component {
         "Description" : "description",
         "Type": "type",
         "Lien pdf" : "document_pdf"
+    };
+
+    mesuresColumnMapping = {
+        "Valeur" : "id_equipement",
+        "Seuil" : "seuil",
+        "Date": "date"
     };
 
     componentDidMount() {
@@ -74,7 +81,7 @@ getStaticName = (e,pageName)=>{
     if(this.props.dataType==="_doc_data" || this.props.dataType==="_qsse_data" || this.props.dataType==="_schema_data")
         return this.documentationColumnMapping[e] ? this.documentationColumnMapping[e] : e;
     if(this.props.dataType==="_mesures_data")
-        return e;
+        return this.mesuresColumnMapping[e] ? this.mesuresColumnMapping[e] : e;
 }
 
 
@@ -98,7 +105,7 @@ getStaticName = (e,pageName)=>{
                         activeSheetClassName='active-sheet'
                         reactExcelClassName='react-excel'
                     />
-                    <Input placeholder="Id equipement" value={this.selectedEq} onChange={(e)=> this.setState({selectedEq: e.target.value})}>
+                    <Input style={{width:"250px", float:"center"}} placeholder="Id equipement" value={this.selectedEq} onChange={(e)=> this.setState({selectedEq: e.target.value})}>
                     </Input>
                    <Button style={{backgroundColor: "#ce53a9", border: "none",margineRight:"20px",float:'right'}} type="primary" shape="round" size='large' onClick={()=>{
                        if(Object.keys(this.state.currentSheet).length > 0){
@@ -115,9 +122,13 @@ getStaticName = (e,pageName)=>{
                                     this.props.dataType === "_doc_data" ? reqPostDocs : 
                                     this.props.dataType === "_qsse_data" ? reqPostQsseData : 
                                     this.props.dataType === "_schema_data" ? reqPostSchema : 
-                                    this.props.dataType === "_mesures_data" ? null : 
+                                    this.props.dataType === "_mesures_data" ? reqPostMesure : 
                                     null;
-                            this.state.currentSheet[pageName].forEach((elem,ind)=>{
+                            
+                            
+                            if(this.props.dataType !== "_mesures_data" )
+                            {
+                                this.state.currentSheet[pageName].forEach((elem,ind)=>{
                                 if(ind!=0)
                                 {
                                     let res ={};
@@ -131,7 +142,6 @@ getStaticName = (e,pageName)=>{
                                     }
                                   
                             });
-                            console.log(listToApi)
                             reqPutItems && reqPutItems(listToApi).then((res)=>{
                                 message.success('data was sent successfuly');
                                 this.setState({isProcessingData:false});
@@ -142,6 +152,38 @@ getStaticName = (e,pageName)=>{
                                 this.setState({isProcessingData:false});
 
                             })
+                        }
+                        else {
+                            let res ={
+                                param: pageName,
+                                id_equipement: this.state.selectedEq,
+                                seuil: this.state.currentSheet[pageName][1][columnsNames.indexOf("Seuil")],
+                                values: []
+                            };
+                            this.state.currentSheet[pageName].forEach((elem,ind)=>{
+                            if(ind!=0)
+                                {
+                                    res.values.push(
+                                        {
+                                            value: elem[columnsNames.indexOf("Valeur")],
+                                            date: elem[columnsNames.indexOf("Date")]
+                                        });
+                                }
+                            });
+                            reqPutItems && reqPutItems(res).then((res)=>{
+                                message.success('data was sent successfuly');
+                                this.setState({isProcessingData:false});
+
+
+                            }).catch(e=>{
+                                message.error('please select the page');
+                                this.setState({isProcessingData:false});
+
+                            })
+
+                        }
+
+                            
                         }
 
                        
