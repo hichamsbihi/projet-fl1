@@ -42,7 +42,7 @@ function DocumentationTab({ route, navigation }) {
   return (
     <ScrollView alwaysBounceHorizontal={true}>
       <Screen>
-        <Titre title="Historique des Correctifs" />
+        <Titre title="Données" />
         <View style={styles.container}>
           <Table borderStyle={{ borderWidth: 1 }}>
             <Row
