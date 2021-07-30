@@ -175,10 +175,8 @@ const MesureSchema = new mongoose.Schema({
     type: String,
   },
   seuil: { type: String},
-  values: {
-    date: String,
-    value: String,
-  }
+  values: [
+  ]
 });
 
 const FiabilisationShema = new mongoose.Schema({
