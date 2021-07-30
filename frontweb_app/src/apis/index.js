@@ -11,6 +11,7 @@ export const reqPostStock = (data) => api_interface(API_URL + 'api/v1.0/stock', 
 export const reqPostDocs = (data) => api_interface(API_URL + 'api/v1.0/equipement/documentation', {arrayData: data}, 'POST');
 export const reqPostQsseData= (data) => api_interface(API_URL + 'api/v1.0/equipement/qssedata', {arrayData: data}, 'POST');
 export const reqPostSchema = (data) => api_interface(API_URL + 'api/v1.0/equipement/schema', {arrayData: data}, 'POST');
+export const reqPostMesure = (data) => api_interface(API_URL + 'api/v1.0/equipement/mesures', {arrayData: data}, 'POST');
 export const reqGetComments = (data) => api_interface(API_URL + 'api/v1.0/equipement/comment', {}, 'GET');
 export const reqGetFiabilisation = (data) => api_interface(API_URL + 'api/v1.0/equipement/fiabilisation', {}, 'GET');
 

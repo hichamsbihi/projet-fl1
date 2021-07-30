@@ -54,8 +54,8 @@ export const ReactExcel = (props) => {
 
 
             });
-            catch_validated_data(result[3]["etat de stock"]);
-          
+            // catch_validated_data(result[3]["etat de stock"]);
+            
             setParsedData(result);
             setCurrentSheet(result[0]);
             console.log(result[0])

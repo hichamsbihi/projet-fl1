@@ -129,7 +129,7 @@ export default class AdminNavBar extends React.Component {
                         }
                         to={path_maping[10]}
                       >
-                        Schemas Data
+                        Schema Data
                       </Link>
                     </li>
                     <li>
