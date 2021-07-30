@@ -156,6 +156,7 @@ getStaticName = (e,pageName)=>{
                         else {
                             let res ={
                                 param: pageName,
+                                id_equipement: this.state.selectedEq,
                                 seuil: this.state.currentSheet[pageName][1][columnsNames.indexOf("Seuil")],
                                 values: []
                             };
