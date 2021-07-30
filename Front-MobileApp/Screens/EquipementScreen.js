@@ -12,18 +12,13 @@ import AppButton from "../components/Button";
 import Info from "../components/Info";
 
 function EquipementScreen({ route, navigation }) {
-  console.log(route.params);
   const [state, setstate] = useState(route.params);
   // console.log(date_visite);
 
   const date_visite = state.data.equipement.map((e) => {
     return e.date_visite ? e.date_visite.split("T") : "";
   });
-  useEffect(() => {
-    console.log(state);
-
-    console.log("route.params.data");
-  });
+  console.log(route.params.data.correctif);
 
   return (
     <ScrollView>
@@ -93,14 +88,18 @@ function EquipementScreen({ route, navigation }) {
               style={[styles.button, styles.textButton]}
               onPress={() =>
                 navigation.navigate("PreventifScreen", {
-                  data: state.data.preventif,
+                  data: route.params.data.preventif,
                 })
               }
             />
             <AppButton
               title="Correctifs"
               style={[styles.button, styles.textButton]}
-              onPress={() => navigation.navigate("CorrectifScreen")}
+              onPress={() =>
+                navigation.navigate("CorrectifScreen", {
+                  data: route.params.data.correctif,
+                })
+              }
             />
           </View>
           <View style={{ flexDirection: "row" }}>
@@ -123,7 +122,11 @@ function EquipementScreen({ route, navigation }) {
             <AppButton
               title="mesure relevé"
               style={[styles.button, styles.textButton]}
-              onPress={() => navigation.navigate("MesureScreen")}
+              onPress={() =>
+                navigation.navigate("MesureScreen", {
+                  id: e.QRcode,
+                })
+              }
             />
           </View>
           <View style={{ flexDirection: "row" }}>

@@ -7,16 +7,11 @@ const EquipementApi = (id) =>
 
 const StockApi = () => axios.get(Client.URL + "api/v1.0/equipement/stock");
 
-const MesureApi = (id) => axios.get(Client.URL + "api/v1.0/mesures/" + id);
+const MesureApi = (id) =>
+  axios.get(Client.URL + "api/v1.0/equipement/mesures/" + id);
 
-const QsseApi = (type, id) =>
-  axios.get(
-    Client.URL +
-      "api/v1.0/equipement/qssedata?type=" +
-      type +
-      "&id_equipement=" +
-      id
-  );
+const QsseApi = (id) =>
+  axios.get(Client.URL + "api/v1.0/equipement/qssedata?&id_equipement=" + id);
 
 const DocumentationApi = (type, id) =>
   axios.get(

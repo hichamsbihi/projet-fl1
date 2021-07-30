@@ -3,16 +3,17 @@ import { StyleSheet, WebView, Linking, View } from "react-native";
 import Screen from "../components/Screen";
 import Titre from "../components/Titre";
 import AppButton from "../components/Button";
+import Api from "../Apis/EquipementApi";
 
 function SchemaScreen({ navigation, route }) {
-  const [doc, setDoc] = useState();
+  const [schema, setSchema] = useState();
   const handleDoc = async (type) => {
     console.log("test");
-    Api.DocumentationApi(type)
+    Api.SchemaApi(type, route.params.id)
       .then((res) => {
-        setDoc(res.data);
-        console.log(doc);
-        navigation.navigate("DocumentationTab", { data: doc });
+        setSchema(res.data);
+        console.log(res.data);
+        navigation.navigate("DocumentationTab", { data: res.data });
       })
       .catch((err) => console.log(err));
   };
