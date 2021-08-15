@@ -6,6 +6,7 @@ import { SubmitButton, Form, FormField } from "../components/forms";
 import AppButton from "../components/Button";
 import axios from "axios";
 import Client from "../Apis/ApiClient";
+import * as ImagePicker from "expo-image-picker";
 
 function FiabilisationsScreen({ navigation, route }) {
   const handleSubmit = async ({ nom, fiabilisation }) => {
