@@ -15,14 +15,26 @@ function MesureScreen({ navigation, route }) {
     Api.MesureApi(route.params.id)
       .then((res) => {
         let seuilWrapper = {};
-
+        console.log(res.data)
         res.data.forEach((e) => {
           e.values.forEach((val) => {
             if (!seuilWrapper[e.param]) seuilWrapper[e.param] = [];
             seuilWrapper[e.param].push(e.seuil);
           });
           chartArray.push({
-            labels: e.values.map((e) => e.date),
+            // labels: e.values.map((e) =>{let date = new Date(Math.round((e.date.toString() - (25567+2 )) * 86400 * 1000));
+            //   return date.toISOString().split('T')[0];}),
+            labels:[
+              "2018",
+              "2018",
+              "2019",
+              "2019",
+              "2020",
+              "2020",
+              "2020",
+              "2021",
+              "2021",
+            ],
             datasets: [
               {
                 data: e.values.map((elt) => elt.value),
@@ -34,12 +46,13 @@ function MesureScreen({ navigation, route }) {
           });
         });
         setMesure(res.data);
+        console.log(chartArray[0])
       })
       .catch((err) => console.log(err));
   }, []);
 
   useEffect(() => {
-    data = mesure.concat([]);
+    // data = mesure.concat([]);
   }, [mesure]);
 
   return (
@@ -48,10 +61,21 @@ function MesureScreen({ navigation, route }) {
         <Screen>
           <Titre title="Mesure" />
           <View style={styles.container}>
-            {chartArray[0] && (
-              <View style={{ marginBottom: 30 }}>
+           <View style={{ marginBottom: 30 }}>
                 <LineChart
-                  data={chartArray[0]}
+                  data={ 
+                  //   {labels: ["January", "February", "March", "April", "May", "June"],
+                  // datasets: [
+                  //   {
+                  //     data: [20, 45, 28, 80, 99, 43],
+                  //     color: (opacity = 1) => `rgba(134, 65, 244, ${opacity})`, // optional
+                  //     strokeWidth: 2 // optional
+                  //   }
+                  // ],
+                  // legend: ["Rainy Days"] // optional
+                  // }
+                  chartArray[0]
+                }
                   height={220}
                   width={600}
                   chartConfig={{
@@ -66,7 +90,8 @@ function MesureScreen({ navigation, route }) {
                   }}
                 />
               </View>
-            )}
+             
+          
 
             {chartArray[1] && (
               <View style={{ marginBottom: 30 }}>
