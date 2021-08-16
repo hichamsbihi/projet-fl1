@@ -9,6 +9,7 @@ export const STATIC_CONFIGS = {
 export const ERROR_MESSAGES_EN = {
     1:  "internal error! please contact your admin (find the err message in the server logs",
     2:  "Database connection error ## ",
+    8: "Image not found",
     9:  "equipement not found !!",
     10: "id equipement wasn't provided !!",
     11: "please verify your inputs !",

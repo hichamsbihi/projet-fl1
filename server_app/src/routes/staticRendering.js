@@ -13,13 +13,14 @@ router.get("/statics/images/:id_equipement", function(req, res) {
     FIABILISATION.find({
         id_equipement: req.params.id_equipement,
       }, (err, reply) => {
-        if (err || !reply) {
+        if (err || !reply || !reply.length) {
           setHeaders({ res, status: 404 }).then(() =>
             res.end(
-              _JSON2STR({ err_number: 9, demande_state: ERROR_MESSAGES_EN[9] })
+              _JSON2STR({ err_number: 8, demande_state: ERROR_MESSAGES_EN[8] })
             )
           );
         } else {
+            console.log(reply);
             var img = Buffer.from(reply.image, 'base64');
             setHeaders({ res, status: 200,
                 extraProps:{
