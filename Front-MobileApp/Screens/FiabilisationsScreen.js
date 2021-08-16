@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { Text, Button, StyleSheet, View } from "react-native";
+import React, { useState, useEffect } from "react";
+import { Text, Button, StyleSheet, View, Image } from "react-native";
 import Screen from "../components/Screen";
 import Titre from "../components/Titre";
 import { SubmitButton, Form, FormField } from "../components/forms";
@@ -9,12 +9,15 @@ import Client from "../Apis/ApiClient";
 import * as ImagePicker from "expo-image-picker";
 
 function FiabilisationsScreen({ navigation, route }) {
+  const [image, setImage] = useState(null);
+  const [imageBase64, setImageBase64] = useState(null);
   const handleSubmit = async ({ nom, fiabilisation }) => {
     axios
       .post(Client.URL + "api/v1.0/equipement/fiabilisation", {
         id_equipement: route.params.id,
         nom_technicien: nom,
         commentaire: fiabilisation,
+        image: imageBase64,
       })
       .then((res) => {
         console.log(res);
@@ -22,6 +25,35 @@ function FiabilisationsScreen({ navigation, route }) {
       .catch((err) => {
         console.log(err);
       });
+  };
+
+  useEffect(() => {
+    (async () => {
+      if (Platform.OS !== "web") {
+        const { status } =
+          await ImagePicker.requestMediaLibraryPermissionsAsync();
+        if (status !== "granted") {
+          alert("Sorry, we need camera roll permissions to make this work!");
+        }
+      }
+    })();
+  }, []);
+
+  const pickImage = async () => {
+    let result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.All,
+      allowsEditing: true,
+      aspect: [4, 3],
+      quality: 0.1,
+      base64: true,
+    });
+
+    console.log(result);
+
+    if (!result.cancelled) {
+      setImage(result.uri);
+      setImageBase64(result.base64);
+    }
   };
 
   return (
@@ -68,6 +100,20 @@ function FiabilisationsScreen({ navigation, route }) {
               height={200}
               placeholder="Fiabilisations"
             />
+          </View>
+          <View
+            style={{ flex: 1, alignItems: "center", justifyContent: "center" }}
+          >
+            <Button
+              title="Pick an image from camera roll"
+              onPress={pickImage}
+            />
+            {image && (
+              <Image
+                source={{ uri: image }}
+                style={{ width: 100, height: 100 }}
+              />
+            )}
           </View>
           <SubmitButton
             title="Enregistrer"

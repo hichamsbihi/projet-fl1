@@ -59,7 +59,6 @@ function MesureScreen({ navigation, route }) {
   if (!isLoading)
     return (
       <ActivityIndicator
-        animating="true"
         size="large"
         color="black"
         style={{ justifyContent: "center", alignItems: "center" }}
