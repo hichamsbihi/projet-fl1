@@ -32,7 +32,8 @@ export default class ExtractionData extends Component {
         title: 'Date',
         dataIndex: 'date',
 }],
-fiabColumns : [{
+fiabColumns : 
+[{
     title: 'Equipement',
     dataIndex: 'equipement',
 },
@@ -43,7 +44,11 @@ dataIndex: 'commentaire',
 {
     title: 'Nom technicien',
     dataIndex: 'nom_technicien',
-    }],
+    },
+    {
+        title: 'Date',
+        dataIndex: 'date',
+}],
 
 
         _data_comments: [],
@@ -79,7 +84,8 @@ dataIndex: 'commentaire',
                     return {
                         equipement: e.id_equipement, 
                         nom_technicien: e.nom_technicien,
-                        commentaire: e.commentaire
+                        commentaire: e.commentaire,
+                        date: e.date
                     };
                 });
                 this.setState({
@@ -124,13 +130,13 @@ dataIndex: 'commentaire',
         const {commentsColumns,fiabColumns, _data_comments,_data_fiab} = this.state;
         return (
             <Tabs defaultActiveKey="1">
-            <TabPane tab="Tab 1" key="1">
-              Commentaires
+            <TabPane tab="Commentaires" key="1">
+              
               <Table columns={commentsColumns} dataSource={_data_comments}></Table>
               <Button style={{backgroundColor: "#ce53a9", border: "none",margineRight:"20px",float:'right'}} type="primary" shape="round" size='large' onClick={()=>this.exportFile("commentaires",_data_comments)}>Télécharger fichier Excel</Button> 
             </TabPane>
-            <TabPane tab="Tab 2" key="2">
-              Fiabilisation
+            <TabPane tab="Fiabilisation" key="2">
+              
               <Table columns={fiabColumns} dataSource={_data_fiab}></Table>
               <Button style={{backgroundColor: "#ce53a9", border: "none",margineRight:"20px",float:'right'}} type="primary" shape="round" size='large' onClick={()=>this.exportFile("fiabilisation",_data_fiab)}>Télécharger fichier Excel</Button> 
             </TabPane>

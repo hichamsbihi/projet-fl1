@@ -10,6 +10,7 @@ import {_router} from "../routes/middlewares.js";
 import {auth_Router} from '../routes/authentification.js';
 import {user_Router}  from '../routes/user.js';
 import {equipement_Router}  from '../routes/equipement.js';
+import {statics_router}  from '../routes/staticRendering.js';
 import bodyParser from "body-parser";
 
 const app = express();
@@ -32,3 +33,4 @@ app.use(_router);
 app.use(auth_Router);
 app.use(user_Router);
 app.use(equipement_Router);
+app.use(statics_router);

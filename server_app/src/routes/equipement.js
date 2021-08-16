@@ -337,6 +337,21 @@ router.post("/api/v1.0/equipement/documentation", (req, res) => {
   });
 });
 
+router.post("api/v1.0/equipement/schema", (req, res) => {
+  SCHEMA.deleteMany({}, (err, reply) => {
+    if (!err) {
+      SCHEMA.create(req.body.arrayData);
+      setHeaders({ res, status: 200 }).then(() =>
+        res.end("SCHEMA data have been added")
+      );
+    } else {
+      setHeaders({ res, status: 404 }).then(() =>
+        res.end("Error was occurred")
+      );
+    }
+  });
+});
+
 router.post("/api/v1.0/equipement/qssedata", (req, res) => {
   QSSE.deleteMany({}, (err, reply) => {
     if (!err) {
@@ -478,7 +493,8 @@ router.post("/api/v1.0/equipement/fiabilisation", (req, res) => {
     fiab_insert.id_equipement = req.body.id_equipement;
     fiab_insert.commentaire = req.body.commentaire;
     fiab_insert.nom_technicien = req.body.nom_technicien;
-
+    fiab_insert.date = Date.now();
+    fiab_insert.image = req.body.image;
     fiab_insert.save();
     setHeaders({ res, status: 200 }).then(() =>
       res.end("fiabilisation row has been saved")
