@@ -509,7 +509,7 @@ router.post("/api/v1.0/equipement/fiabilisation", (req, res) => {
 
 router.get("/api/v1.0/equipement/fiabilisation", (req, res) => {
   try {
-    FIABILISATION.find({}, (err, reply) => {
+    FIABILISATION.find({},{image:false}, (err, reply) => {
       if (err || !reply) {
         setHeaders({ res, status: 404 }).then(() =>
           res.end(

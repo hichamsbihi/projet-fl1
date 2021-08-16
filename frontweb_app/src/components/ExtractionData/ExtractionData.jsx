@@ -1,7 +1,7 @@
 import { message, Tabs,Table,Button } from 'antd';
 import {Component} from 'react';
 import XLSX from 'xlsx';
-
+import {API_URL} from '../../configs/api_url';
 import { reqGetComments,reqGetFiabilisation } from '../../apis';
 
 const { TabPane } = Tabs;
@@ -48,6 +48,17 @@ dataIndex: 'commentaire',
     {
         title: 'Date',
         dataIndex: 'date',
+},
+{
+    title: 'Image',
+    dataIndex: 'image',
+    key: 'image',
+    render: (text, record) => {
+     return (
+      <div>
+        <img src={record}/>
+      </div>
+    );}
 }],
 
 
@@ -85,7 +96,8 @@ dataIndex: 'commentaire',
                         equipement: e.id_equipement, 
                         nom_technicien: e.nom_technicien,
                         commentaire: e.commentaire,
-                        date: e.date
+                        date: e.date,
+                        image: API_URL+'statics/images/'+e.id_equipement
                     };
                 });
                 this.setState({
