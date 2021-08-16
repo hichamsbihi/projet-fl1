@@ -1,5 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { Text, Button, StyleSheet, View, ScrollView } from "react-native";
+import {
+  Text,
+  Button,
+  StyleSheet,
+  View,
+  ScrollView,
+  ActivityIndicator,
+} from "react-native";
 import { LineChart } from "react-native-chart-kit";
 import Screen from "../components/Screen";
 import Titre from "../components/Titre";
@@ -7,6 +14,8 @@ import AppButton from "../components/Button";
 import Api from "../Apis/EquipementApi";
 
 function MesureScreen({ navigation, route }) {
+  const [isLoading, setIsLoading] = useState(false);
+  const [chartArrays, setChartArrays] = useState([]);
   const chartArray = [];
   const colors = ["red", "blue", "orange", "black", "#b2ab14", "green"];
   let seuilWrapper = {};
@@ -46,121 +55,123 @@ function MesureScreen({ navigation, route }) {
           });
         });
         setMesure(res.data);
-        console.log(chartArray[0])
+
+        setChartArrays(chartArray.concat([]));
+
+        //console.log(chartArray);
+        // console.log(mesure);
       })
       .catch((err) => console.log(err));
   }, []);
 
   useEffect(() => {
-    // data = mesure.concat([]);
-  }, [mesure]);
+    setIsLoading(true);
+  }, [chartArrays]);
 
-  return (
-    <ScrollView horizontal={true}>
-      <ScrollView>
-        <Screen>
-          <Titre title="Mesure" />
-          <View style={styles.container}>
-           <View style={{ marginBottom: 30 }}>
-                <LineChart
-                  data={ 
-                  //   {labels: ["January", "February", "March", "April", "May", "June"],
-                  // datasets: [
-                  //   {
-                  //     data: [20, 45, 28, 80, 99, 43],
-                  //     color: (opacity = 1) => `rgba(134, 65, 244, ${opacity})`, // optional
-                  //     strokeWidth: 2 // optional
-                  //   }
-                  // ],
-                  // legend: ["Rainy Days"] // optional
-                  // }
-                  chartArray[0]
-                }
-                  height={220}
-                  width={600}
-                  chartConfig={{
-                    backgroundColor: "#efc7df",
-                    backgroundGradientFrom: "#efc7df",
-                    backgroundGradientTo: "#f0a5d2",
-                    decimalPlaces: 0, // optional, defaults to 2dp
-                    color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
-                    style: {
-                      borderRadius: 16,
-                    },
-                  }}
-                />
-              </View>
-             
-          
+  if (!isLoading)
+    return (
+      <ActivityIndicator
+        animating="true"
+        size="large"
+        color="black"
+        style={{ justifyContent: "center", alignItems: "center" }}
+      />
+    );
+  else
+    return (
+      <ScrollView horizontal={true}>
+        <ScrollView>
+          <Screen>
+            <Titre title="Mesure" />
+            <View style={styles.container}>
+              {chartArrays[0] && (
+                <View style={{ marginBottom: 30 }}>
+                  <LineChart
+                    data={chartArrays[0]}
+                    height={220}
+                    width={600}
+                    chartConfig={{
+                      backgroundColor: "#efc7df",
+                      backgroundGradientFrom: "#efc7df",
+                      backgroundGradientTo: "#f0a5d2",
+                      decimalPlaces: 0, // optional, defaults to 2dp
+                      color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
+                      style: {
+                        borderRadius: 16,
+                      },
+                    }}
+                  />
+                </View>
+              )}
 
-            {chartArray[1] && (
-              <View style={{ marginBottom: 30 }}>
-                <LineChart
-                  data={chartArray[1]}
-                  height={220}
-                  width={600}
-                  chartConfig={{
-                    backgroundColor: "#efc7df",
-                    backgroundGradientFrom: "#efc7df",
-                    backgroundGradientTo: "#f0a5d2",
-                    decimalPlaces: 0, // optional, defaults to 2dp
-                    color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
-                    style: {
-                      borderRadius: 16,
-                    },
-                  }}
-                />
-              </View>
-            )}
-            {chartArray[2] && (
-              <View style={{ marginBottom: 30 }}>
-                <LineChart
-                  data={chartArray[2]}
-                  height={220}
-                  width={600}
-                  chartConfig={{
-                    backgroundColor: "#efc7df",
-                    backgroundGradientFrom: "#efc7df",
-                    backgroundGradientTo: "#f0a5d2",
-                    decimalPlaces: 0, // optional, defaults to 2dp
-                    color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
-                    style: {
-                      borderRadius: 16,
-                    },
-                  }}
-                />
-              </View>
-            )}
-            {chartArray[3] && (
-              <View style={{ marginBottom: 30 }}>
-                <LineChart
-                  data={chartArray[3]}
-                  height={220}
-                  width={600}
-                  chartConfig={{
-                    backgroundColor: "#efc7df",
-                    backgroundGradientFrom: "#efc7df",
-                    backgroundGradientTo: "#f0a5d2",
-                    decimalPlaces: 0, // optional, defaults to 2dp
-                    color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
-                    style: {
-                      borderRadius: 16,
-                    },
-                  }}
-                />
-              </View>
-            )}
+              {chartArrays[1] && (
+                <View style={{ marginBottom: 30 }}>
+                  <LineChart
+                    data={chartArrays[1]}
+                    height={220}
+                    width={600}
+                    chartConfig={{
+                      backgroundColor: "#efc7df",
+                      backgroundGradientFrom: "#efc7df",
+                      backgroundGradientTo: "#f0a5d2",
+                      decimalPlaces: 0, // optional, defaults to 2dp
+                      color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
+                      style: {
+                        borderRadius: 16,
+                      },
+                    }}
+                  />
+                </View>
+              )}
+              {chartArrays[2] && (
+                <View style={{ marginBottom: 30 }}>
+                  <LineChart
+                    data={chartArrays[2]}
+                    height={220}
+                    width={600}
+                    chartConfig={{
+                      backgroundColor: "#efc7df",
+                      backgroundGradientFrom: "#efc7df",
+                      backgroundGradientTo: "#f0a5d2",
+                      decimalPlaces: 0, // optional, defaults to 2dp
+                      color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
+                      style: {
+                        borderRadius: 16,
+                      },
+                    }}
+                  />
+                </View>
+              )}
+              {chartArrays[3] && (
+                <View style={{ marginBottom: 30 }}>
+                  <LineChart
+                    data={chartArrays[3]}
+                    height={220}
+                    width={600}
+                    chartConfig={{
+                      backgroundColor: "#efc7df",
+                      backgroundGradientFrom: "#efc7df",
+                      backgroundGradientTo: "#f0a5d2",
+                      decimalPlaces: 0, // optional, defaults to 2dp
+                      color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
+                      style: {
+                        borderRadius: 16,
+                      },
+                    }}
+                  />
+                </View>
+              )}
 
-            <AppButton
-              title="Retour"
-              style={[styles.button]}
-              onPress={() => navigation.navigate("EquipementScreen")}
-            />
-          </View>
-        </Screen>
+              <AppButton
+                title="Retour"
+                style={[styles.button]}
+                onPress={() => navigation.navigate("EquipementScreen")}
+              />
+            </View>
+          </Screen>
+        </ScrollView>
       </ScrollView>
-    </ScrollView>
-  );
+    );
 }
 
 const styles = StyleSheet.create({
