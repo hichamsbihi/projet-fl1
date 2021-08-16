@@ -195,6 +195,9 @@ const FiabilisationShema = new mongoose.Schema({
     type: Date,
     default: Date.now(),
   },
+  image: {
+    type: String,
+  }
 });
 
 const getequipement = ({ id, code, id_equipement, _this_ref }, callback) => {

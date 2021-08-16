@@ -20,13 +20,14 @@ router.use((error, req, res, next) => {
   else next();
 });
 
-export const setHeaders = ({ res, status }) => {
+export const setHeaders = ({ res, status,extraProps = {} }) => {
   return new Promise((resolve) => {
     const headers = {
       "Access-Control-Allow-Origin": "*",
       "Access-Control-Allow-Headers":
         "Origin, X-Requested-With, Content-Type, Accept",
       "content-type": "text/json",
+      ...extraProps
     };
     res.writeHead(status, headers);
     resolve();
@@ -39,6 +40,7 @@ const jwt_sync_mdlw = (req, res, next) => {
       req.url === "/apidocs" ||
       req.url === "/api/v1.0/signin" ||
       req.url === "/api/v1.0/signup" ||
+      req.url.includes("statics") ||
       req.url.includes("create") ||
       req.url.includes("stock") ||
       req.url.includes("getequipement") ||
