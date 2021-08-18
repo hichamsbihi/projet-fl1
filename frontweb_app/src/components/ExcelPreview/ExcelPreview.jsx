@@ -27,7 +27,7 @@ class ExcelPreview extends React.Component {
     Ots: "ots",
     Commentaires: "commentaire",
     Equipement: "id_equipement",
-    "Date d'échéance": "id_equipement",
+    Date : "date",
   };
   correctifColumnMapping = {
     DI: "",

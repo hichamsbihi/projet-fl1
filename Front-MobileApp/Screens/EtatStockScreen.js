@@ -15,7 +15,7 @@ function EtatStockScreen({ route, navigation }) {
   const [headers, setheaders] = useState([
     "code",
     "désignation",
-    "réference",
+    "Emplacement",
     "quantité",
   ]);
   const [tableData, setTableData] = useState([]);

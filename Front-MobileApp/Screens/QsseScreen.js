@@ -25,6 +25,8 @@ function QsseScreen({ route, navigation }) {
   console.log(route.params);
   const [headers, setHeaders] = useState(["Description", "Lien"]);
   const [qsse, setQsse] = useState([]);
+  const[isLoading,setIsLoading] = useState(true);
+  const [dataArray, setDataArray] = useState([]);
   let data = [];
 
   useEffect(() => {
@@ -36,13 +38,16 @@ function QsseScreen({ route, navigation }) {
             return [e.description, e.document_pdf];
           })
         );
-        console.log(res.data);
+        console.log(qsse);
+        setDataArray(qsse.concat([]));
       })
+      
       .catch((err) => console.log(err));
   }, []);
 
   useEffect(() => {
-    data = qsse.concat([]);
+    setIsLoading(false)
+    data =  qsse.concat([])
   }, [qsse]);
 
   const element = (data, index) => (
@@ -55,9 +60,10 @@ function QsseScreen({ route, navigation }) {
       </TouchableOpacity>
     )
   );
-
-  return (
+  if(isLoading) return null;
+  else return (
     <ScrollView alwaysBounceHorizontal={true}>
+      {console.log(dataArray)}
       <Screen>
         <Titre title="QSSE" />
         <View style={styles.container}>

@@ -61,7 +61,7 @@ function SchemaScreen({ navigation, route }) {
           title="Automatique"
           style={[styles.pdf]}
           onPress={() => {
-            handleDoc("Automatqiue");
+            handleDoc("Automatique");
           }}
         />
       </View>
