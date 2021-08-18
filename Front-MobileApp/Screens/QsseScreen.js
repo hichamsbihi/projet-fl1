@@ -22,48 +22,38 @@ import AppButton from "../components/Button";
 import Api from "../Apis/EquipementApi";
 
 function QsseScreen({ route, navigation }) {
-  console.log(route.params);
+  //console.log(route.params);
   const [headers, setHeaders] = useState(["Description", "Lien"]);
   const [qsse, setQsse] = useState([]);
-  const[isLoading,setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(true);
   const [dataArray, setDataArray] = useState([]);
-  let data = [];
 
   useEffect(() => {
-    console.log("test");
+    console.log("///////////////////////////////////////////");
     Api.QsseApi(route.params.id)
       .then((res) => {
+        //console.log(res.data);
         setQsse(
           res.data.map((e) => {
             return [e.description, e.document_pdf];
           })
         );
-        console.log(qsse);
         setDataArray(qsse.concat([]));
       })
-      
+
       .catch((err) => console.log(err));
   }, []);
 
-  useEffect(() => {
-    setIsLoading(false)
-    data =  qsse.concat([])
-  }, [qsse]);
-
   const element = (data, index) => (
-    console.log(data),
-    (
-      <TouchableOpacity onPress={async () => await Linking.openURL(data)}>
-        <View style={styles.btn}>
-          <Text style={styles.btnText}>PDF</Text>
-        </View>
-      </TouchableOpacity>
-    )
+    <TouchableOpacity onPress={async () => await Linking.openURL(data)}>
+      <View style={styles.btn}>
+        <Text style={styles.btnText}>PDF</Text>
+      </View>
+    </TouchableOpacity>
   );
-  if(isLoading) return null;
-  else return (
+
+  return (
     <ScrollView alwaysBounceHorizontal={true}>
-      {console.log(dataArray)}
       <Screen>
         <Titre title="QSSE" />
         <View style={styles.container}>
@@ -74,7 +64,7 @@ function QsseScreen({ route, navigation }) {
               style={styles.head}
               textStyle={styles.textHead}
             />
-            {data.map((rowData, index) => (
+            {qsse.map((rowData, index) => (
               <TableWrapper key={index} style={styles.row1}>
                 {rowData.map((cellData, cellIndex) => (
                   <Cell

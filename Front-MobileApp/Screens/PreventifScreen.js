@@ -15,7 +15,14 @@ function PreventifScreen({ route, navigation }) {
   const [headers, setheaders] = useState(["ots", "date", "commentaire"]);
 
   const data = route.params.data.map((e) => {
-    return [e.ots, e.date, e.commentaire];
+    let dynamic_date = e.date;
+    if (!isNaN(e.date)) {
+      let date = new Date(
+        Math.round((e.date.toString() - (25567 + 2)) * 86400 * 1000)
+      );
+      dynamic_date = date.toISOString().split("T")[0];
+    }
+    return [e.ots, dynamic_date, e.commentaire];
   });
 
   return (

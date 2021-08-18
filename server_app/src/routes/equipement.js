@@ -198,8 +198,8 @@ router.get("/api/v1.0/getequipement/:QRcode", async (req, res) => {
           );
         else {
           inc++;
-          replybody.correctif = results;
-
+          replybody.correctif = results || [];
+          console.log(replybody);
           inc === 3 &&
             setHeaders({ res, status: 200 }).then(() =>
               res.end(_JSON2STR(replybody))
@@ -466,8 +466,8 @@ router.get("/api/v1.0/equipement/comment", (req, res) => {
 });
 
 router.post("/api/v1.0/equipement/comment", (req, res) => {
-  try { 
-    console.log('test');
+  try {
+    console.log("test");
     const comment_insert = new COMMENT();
     comment_insert.id_equipement = req.body.id_equipement;
     comment_insert.commentaire = req.body.commentaire;

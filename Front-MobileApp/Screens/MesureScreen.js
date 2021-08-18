@@ -24,7 +24,7 @@ function MesureScreen({ navigation, route }) {
     Api.MesureApi(route.params.id)
       .then((res) => {
         let seuilWrapper = {};
-        console.log(res.data)
+        console.log(res.data);
         res.data.forEach((e) => {
           e.values.forEach((val) => {
             if (!seuilWrapper[e.param]) seuilWrapper[e.param] = [];
@@ -33,7 +33,7 @@ function MesureScreen({ navigation, route }) {
           chartArray.push({
             // labels: e.values.map((e) =>{let date = new Date(Math.round((e.date.toString() - (25567+2 )) * 86400 * 1000));
             //   return date.toISOString().split('T')[0];}),
-            labels:[
+            labels: [
               "2018",
               "2018",
               "2019",
@@ -90,11 +90,16 @@ function MesureScreen({ navigation, route }) {
                     height={220}
                     width={600}
                     chartConfig={{
+                      propsForLabels: {
+                        fontSize: 15,
+                        fontWeight: "bold",
+                      },
                       backgroundColor: "#efc7df",
                       backgroundGradientFrom: "#efc7df",
                       backgroundGradientTo: "#f0a5d2",
                       decimalPlaces: 0, // optional, defaults to 2dp
                       color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
+                      labelColor: (opacity = 1) => `rgba(0 , 0, 0, ${opacity})`,
                       style: {
                         borderRadius: 16,
                       },
@@ -110,11 +115,16 @@ function MesureScreen({ navigation, route }) {
                     height={220}
                     width={600}
                     chartConfig={{
+                      propsForLabels: {
+                        fontSize: 15,
+                        fontWeight: "bold",
+                      },
                       backgroundColor: "#efc7df",
                       backgroundGradientFrom: "#efc7df",
                       backgroundGradientTo: "#f0a5d2",
                       decimalPlaces: 0, // optional, defaults to 2dp
                       color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
+                      labelColor: (opacity = 1) => `rgba(0 , 0, 0, ${opacity})`,
                       style: {
                         borderRadius: 16,
                       },
@@ -129,11 +139,16 @@ function MesureScreen({ navigation, route }) {
                     height={220}
                     width={600}
                     chartConfig={{
+                      propsForLabels: {
+                        fontSize: 15,
+                        fontWeight: "bold",
+                      },
                       backgroundColor: "#efc7df",
                       backgroundGradientFrom: "#efc7df",
                       backgroundGradientTo: "#f0a5d2",
                       decimalPlaces: 0, // optional, defaults to 2dp
                       color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
+                      labelColor: (opacity = 1) => `rgba(0 , 0, 0, ${opacity})`,
                       style: {
                         borderRadius: 16,
                       },
@@ -148,11 +163,16 @@ function MesureScreen({ navigation, route }) {
                     height={220}
                     width={600}
                     chartConfig={{
+                      propsForLabels: {
+                        fontSize: 15,
+                        fontWeight: "bold",
+                      },
                       backgroundColor: "#efc7df",
                       backgroundGradientFrom: "#efc7df",
                       backgroundGradientTo: "#f0a5d2",
                       decimalPlaces: 0, // optional, defaults to 2dp
                       color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
+                      labelColor: (opacity = 1) => `rgba(0 , 0, 0, ${opacity})`,
                       style: {
                         borderRadius: 16,
                       },

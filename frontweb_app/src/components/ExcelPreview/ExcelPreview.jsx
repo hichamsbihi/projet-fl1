@@ -27,7 +27,7 @@ class ExcelPreview extends React.Component {
     Ots: "ots",
     Commentaires: "commentaire",
     Equipement: "id_equipement",
-    Date : "date",
+    Date: "date",
   };
   correctifColumnMapping = {
     DI: "",
@@ -180,9 +180,9 @@ class ExcelPreview extends React.Component {
                           console.log(e);
                           res[this.getStaticName(e.trim(), pageName)] =
                             elem[idx];
-                          listToApi.push(res);
                         }
                       });
+                      listToApi.push(res);
                     }
                   });
                   reqPutItems &&
