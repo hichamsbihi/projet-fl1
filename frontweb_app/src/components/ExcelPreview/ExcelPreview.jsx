@@ -42,12 +42,12 @@ class ExcelPreview extends React.Component {
     "quantité magasin": "quantite",
   };
   equipementColumnMapping = {
-    Equipement: "QRcode",
+    "Equipement": "QRcode",
     "Nom de l'équipement": "nom",
     "Niveau stratégique": "niveau_strategique",
     "Emplacement équipement": "emplacement",
     "nom de constructeur": "nom_constructeur",
-    Référence: "ref",
+    "Référence": "ref",
     "Document constructeur format PDF": "constructeur_pdf",
     "QSSE format PDF": "Qsse_pdf",
     "Image équipement": "image_equipement",

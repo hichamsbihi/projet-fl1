@@ -121,8 +121,10 @@ const CommentShema = new mongoose.Schema({
     type: Date,
     default: Date.now(),
   },
+  image: {
+    type: String,
+  },
 });
-
 
 const DocumentationSchema = new mongoose.Schema({
   id_equipement: {
@@ -136,7 +138,7 @@ const DocumentationSchema = new mongoose.Schema({
   },
   document_pdf: {
     type: String,
-  }
+  },
 });
 
 const QsseSchema = new mongoose.Schema({
@@ -148,9 +150,8 @@ const QsseSchema = new mongoose.Schema({
   },
   document_pdf: {
     type: String,
-  }
+  },
 });
-
 
 const SchemaSchema = new mongoose.Schema({
   id_equipement: {
@@ -164,7 +165,7 @@ const SchemaSchema = new mongoose.Schema({
   },
   document_pdf: {
     type: String,
-  }
+  },
 });
 
 const MesureSchema = new mongoose.Schema({
@@ -174,9 +175,8 @@ const MesureSchema = new mongoose.Schema({
   param: {
     type: String,
   },
-  seuil: { type: String},
-  values: [
-  ]
+  seuil: { type: String },
+  values: [],
 });
 
 const FiabilisationShema = new mongoose.Schema({
@@ -197,7 +197,7 @@ const FiabilisationShema = new mongoose.Schema({
   },
   image: {
     type: String,
-  }
+  },
 });
 
 const getequipement = ({ id, code, id_equipement, _this_ref }, callback) => {
@@ -224,7 +224,6 @@ FiabilisationShema.statics.getequipement = getequipement;
 DocumentationSchema.statics.getequipement = getequipement;
 QsseSchema.statics.getequipement = getequipement;
 SchemaSchema.statics.getequipement = getequipement;
-
 
 const Correctif = new mongoose.model("Correctif", CorrectifSchema);
 const Preventif = new mongoose.model("Preventif", PreventifSchema);

@@ -431,6 +431,7 @@ router.post("/api/v1.0/comment", (req, res) => {
     newComment.id_equipement = req.body.QRcode;
     newComment.commentaire = req.body.commentaire;
     newComment.nom_technicien = req.body.nom_technicien;
+    newComment.image = req.body.image;
     newComment.save((err, reply) => {
       err &&
         setHeaders({ res, status: 404 }).then(() =>

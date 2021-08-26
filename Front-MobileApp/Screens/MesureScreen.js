@@ -20,6 +20,7 @@ function MesureScreen({ navigation, route }) {
   const colors = ["red", "blue", "orange", "black", "#b2ab14", "green"];
   let seuilWrapper = {};
   const [mesure, setMesure] = useState();
+
   useEffect(() => {
     Api.MesureApi(route.params.id)
       .then((res) => {
@@ -31,19 +32,13 @@ function MesureScreen({ navigation, route }) {
             seuilWrapper[e.param].push(e.seuil);
           });
           chartArray.push({
-            // labels: e.values.map((e) =>{let date = new Date(Math.round((e.date.toString() - (25567+2 )) * 86400 * 1000));
-            //   return date.toISOString().split('T')[0];}),
-            labels: [
-              "2018",
-              "2018",
-              "2019",
-              "2019",
-              "2020",
-              "2020",
-              "2020",
-              "2021",
-              "2021",
-            ],
+            labels: e.values.map((e) => {
+              let date = new Date(
+                Math.round((e.date.toString() - (25567 + 2)) * 86400 * 1000)
+              );
+              return date.toISOString().split("T")[0];
+            }),
+
             datasets: [
               {
                 data: e.values.map((elt) => elt.value),
@@ -87,8 +82,9 @@ function MesureScreen({ navigation, route }) {
                 <View style={{ marginBottom: 30 }}>
                   <LineChart
                     data={chartArrays[0]}
-                    height={220}
-                    width={600}
+                    height={300}
+                    width={750}
+                    verticalLabelRotation={20}
                     chartConfig={{
                       propsForLabels: {
                         fontSize: 15,
@@ -100,6 +96,7 @@ function MesureScreen({ navigation, route }) {
                       decimalPlaces: 0, // optional, defaults to 2dp
                       color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
                       labelColor: (opacity = 1) => `rgba(0 , 0, 0, ${opacity})`,
+
                       style: {
                         borderRadius: 16,
                       },
@@ -112,8 +109,9 @@ function MesureScreen({ navigation, route }) {
                 <View style={{ marginBottom: 30 }}>
                   <LineChart
                     data={chartArrays[1]}
-                    height={220}
-                    width={600}
+                    height={300}
+                    width={750}
+                    verticalLabelRotation={20}
                     chartConfig={{
                       propsForLabels: {
                         fontSize: 15,
@@ -136,8 +134,9 @@ function MesureScreen({ navigation, route }) {
                 <View style={{ marginBottom: 30 }}>
                   <LineChart
                     data={chartArrays[2]}
-                    height={220}
-                    width={600}
+                    height={300}
+                    width={750}
+                    verticalLabelRotation={20}
                     chartConfig={{
                       propsForLabels: {
                         fontSize: 15,
@@ -160,8 +159,9 @@ function MesureScreen({ navigation, route }) {
                 <View style={{ marginBottom: 30 }}>
                   <LineChart
                     data={chartArrays[3]}
-                    height={220}
-                    width={600}
+                    height={300}
+                    width={750}
+                    verticalLabelRotation={20}
                     chartConfig={{
                       propsForLabels: {
                         fontSize: 15,
