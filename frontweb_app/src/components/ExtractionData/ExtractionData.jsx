@@ -22,6 +22,10 @@ export default class ExtractionData extends Component {
         dataIndex: "num_operation",
       },
       {
+        title: "Nom technicien",
+        dataIndex: "nom_technicien",
+      },
+      {
         title: "Gamme",
         dataIndex: "gamme",
       },
