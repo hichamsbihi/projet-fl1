@@ -13,20 +13,29 @@ import Info from "../components/Info";
 
 function EquipementScreen({ route, navigation }) {
   const [state, setstate] = useState(route.params);
-  // console.log(date_visite);
-
-  const date_visite = state.data.equipement.map((e) => {
-    return e.date_visite ? e.date_visite.split("T") : "";
+  let date_visite = "";
+  state.data.equipement.forEach((e) => {
+    if (e.data_visite) {
+      if (isNan(e.data_visite)) date_visite = e.date_visite.split("T")[0];
+      else {
+        let date = new Date(
+          Math.round((e.date.toString() - (25567 + 2)) * 86400 * 1000)
+        );
+        date_visite = date.toISOString().split("T")[0];
+      }
+    }
   });
-  console.log(route.params.data.correctif);
 
   return (
     <ScrollView>
       {state.data.equipement.map((e) => (
         <View style={styles.container} key={e._id}>
           <Titre title={e.nom} />
-          {/* <Image source={{uri:e.image_equipement}} style={{width:150,height:150}}/> */}
-          <Image source={require("../assets/20210401_114306.jpg")} />
+          <Image
+            source={{ uri: e.image_equipement }}
+            style={{ width: 150, height: 150 }}
+          />
+          {/* <Image source={require("../assets/20210401_114306.jpg")} /> */}
           <View style={{ flexDirection: "row" }}>
             <View style={{ flexDirection: "column", marginRight: 70 }}>
               <Text
@@ -66,7 +75,7 @@ function EquipementScreen({ route, navigation }) {
               >
                 dernière date VR :
               </Text>
-              <Info title={date_visite[0][0]} style={styles.champ} />
+              <Info title={date_visite} style={styles.champ} />
             </View>
           </View>
 

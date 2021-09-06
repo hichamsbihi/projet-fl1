@@ -32,14 +32,14 @@ function SchemaScreen({ navigation, route }) {
           title="Meca"
           style={[styles.pdf]}
           onPress={() => {
-            handleDoc("meca");
+            handleDoc("Meca");
           }}
         />
         <AppButton
           title="Elec"
           style={[styles.pdf]}
           onPress={() => {
-            handleDoc("elec");
+            handleDoc("Elec");
           }}
         />
       </View>
@@ -54,14 +54,14 @@ function SchemaScreen({ navigation, route }) {
           title="Pneumatique"
           style={[styles.pdf]}
           onPress={() => {
-            handleDoc("pneumatique");
+            handleDoc("Pneumatique");
           }}
         />
         <AppButton
           title="Automatique"
           style={[styles.pdf]}
           onPress={() => {
-            handleDoc("automatqiue");
+            handleDoc("Automatique");
           }}
         />
       </View>
@@ -76,14 +76,14 @@ function SchemaScreen({ navigation, route }) {
           title="Hydraulique"
           style={[styles.pdf]}
           onPress={() => {
-            handleDoc("hydraulique");
+            handleDoc("Hydraulique");
           }}
         />
         <AppButton
           title="Divers"
           style={[styles.pdf]}
           onPress={() => {
-            handleDoc("divers");
+            handleDoc("Divers");
           }}
         />
       </View>

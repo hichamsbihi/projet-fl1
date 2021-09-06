@@ -12,6 +12,7 @@ function FiabilisationsScreen({ navigation, route }) {
   const [image, setImage] = useState(null);
   const [imageBase64, setImageBase64] = useState(null);
   const handleSubmit = async ({ nom, fiabilisation }) => {
+    console.log(route.params);
     axios
       .post(Client.URL + "api/v1.0/equipement/fiabilisation", {
         id_equipement: route.params.id,
@@ -44,7 +45,7 @@ function FiabilisationsScreen({ navigation, route }) {
       mediaTypes: ImagePicker.MediaTypeOptions.All,
       allowsEditing: true,
       aspect: [4, 3],
-      quality: 0.1,
+      quality: 0.3,
       base64: true,
     });
 

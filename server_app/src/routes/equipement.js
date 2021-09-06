@@ -12,7 +12,7 @@ import {
   DOCUMENTATION,
   QSSE,
   SCHEMA,
-  MESURE
+  MESURE,
 } from "../models/equipement.js";
 // import {equipementSerializer} from "../serializers/equipement_serializer.js";
 
@@ -198,8 +198,8 @@ router.get("/api/v1.0/getequipement/:QRcode", async (req, res) => {
           );
         else {
           inc++;
-          replybody.correctif = results;
-
+          replybody.correctif = results || [];
+          console.log(replybody);
           inc === 3 &&
             setHeaders({ res, status: 200 }).then(() =>
               res.end(_JSON2STR(replybody))
@@ -338,7 +338,7 @@ router.post("/api/v1.0/equipement/documentation", (req, res) => {
 });
 
 router.post("/api/v1.0/equipement/schema", (req, res) => {
-  
+  console.log("test");
   SCHEMA.deleteMany({}, (err, reply) => {
     if (!err) {
       SCHEMA.create(req.body.arrayData);
@@ -369,13 +369,11 @@ router.post("/api/v1.0/equipement/qssedata", (req, res) => {
 });
 
 router.post("/api/v1.0/equipement/mesures", (req, res) => {
-      MESURE.create(req.body.arrayData);
-      setHeaders({ res, status: 200 }).then(() =>
-        res.end("Mesures data have been added")
-      );
-    
-  });
-
+  MESURE.create(req.body.arrayData);
+  setHeaders({ res, status: 200 }).then(() =>
+    res.end("Mesures data have been added")
+  );
+});
 
 router.post("/api/v1.0/stock", (req, res) => {
   STOCK.deleteMany({}, (err, reply) => {
@@ -433,6 +431,7 @@ router.post("/api/v1.0/comment", (req, res) => {
     newComment.id_equipement = req.body.QRcode;
     newComment.commentaire = req.body.commentaire;
     newComment.nom_technicien = req.body.nom_technicien;
+    newComment.image = req.body.image;
     newComment.save((err, reply) => {
       err &&
         setHeaders({ res, status: 404 }).then(() =>
@@ -469,6 +468,7 @@ router.get("/api/v1.0/equipement/comment", (req, res) => {
 
 router.post("/api/v1.0/equipement/comment", (req, res) => {
   try {
+    console.log("test");
     const comment_insert = new COMMENT();
     comment_insert.id_equipement = req.body.id_equipement;
     comment_insert.commentaire = req.body.commentaire;
@@ -510,7 +510,7 @@ router.post("/api/v1.0/equipement/fiabilisation", (req, res) => {
 
 router.get("/api/v1.0/equipement/fiabilisation", (req, res) => {
   try {
-    FIABILISATION.find({},{image:false}, (err, reply) => {
+    FIABILISATION.find({}, { image: false }, (err, reply) => {
       if (err || !reply) {
         setHeaders({ res, status: 404 }).then(() =>
           res.end(
@@ -531,20 +531,25 @@ router.get("/api/v1.0/equipement/fiabilisation", (req, res) => {
 
 router.get("/api/v1.0/equipement/documentation", (req, res) => {
   try {
-    DOCUMENTATION.find({
-      id_equipement: req.query.id_equipement,
-      type: req.query.type
-    }, (err, reply) => {
-      if (err || !reply) {
-        setHeaders({ res, status: 404 }).then(() =>
-          res.end(
-            _JSON2STR({ err_number: 9, demande_state: ERROR_MESSAGES_EN[9] })
-          )
-        );
-      } else {
-        setHeaders({ res, status: 200 }).then(() => res.end(_JSON2STR(reply)));
+    DOCUMENTATION.find(
+      {
+        id_equipement: req.query.id_equipement,
+        type: req.query.type,
+      },
+      (err, reply) => {
+        if (err || !reply) {
+          setHeaders({ res, status: 404 }).then(() =>
+            res.end(
+              _JSON2STR({ err_number: 9, demande_state: ERROR_MESSAGES_EN[9] })
+            )
+          );
+        } else {
+          setHeaders({ res, status: 200 }).then(() =>
+            res.end(_JSON2STR(reply))
+          );
+        }
       }
-    });
+    );
   } catch (e) {
     console.log(e);
     setHeaders({ res, status: 450 }).then(() =>
@@ -555,19 +560,24 @@ router.get("/api/v1.0/equipement/documentation", (req, res) => {
 
 router.get("/api/v1.0/equipement/mesures/:id", (req, res) => {
   try {
-    MESURE.find({
-      id_equipement: req.params.id,
-    }, (err, reply) => {
-      if (err || !reply) {
-        setHeaders({ res, status: 404 }).then(() =>
-          res.end(
-            _JSON2STR({ err_number: 9, demande_state: ERROR_MESSAGES_EN[9] })
-          )
-        );
-      } else {
-        setHeaders({ res, status: 200 }).then(() => res.end(_JSON2STR(reply)));
+    MESURE.find(
+      {
+        id_equipement: req.params.id,
+      },
+      (err, reply) => {
+        if (err || !reply) {
+          setHeaders({ res, status: 404 }).then(() =>
+            res.end(
+              _JSON2STR({ err_number: 9, demande_state: ERROR_MESSAGES_EN[9] })
+            )
+          );
+        } else {
+          setHeaders({ res, status: 200 }).then(() =>
+            res.end(_JSON2STR(reply))
+          );
+        }
       }
-    });
+    );
   } catch (e) {
     console.log(e);
     setHeaders({ res, status: 450 }).then(() =>
@@ -578,19 +588,24 @@ router.get("/api/v1.0/equipement/mesures/:id", (req, res) => {
 
 router.get("/api/v1.0/equipement/qssedata", (req, res) => {
   try {
-    QSSE.find({
-      id_equipement: req.query.id_equipement,
-    }, (err, reply) => {
-      if (err || !reply) {
-        setHeaders({ res, status: 404 }).then(() =>
-          res.end(
-            _JSON2STR({ err_number: 9, demande_state: ERROR_MESSAGES_EN[9] })
-          )
-        );
-      } else {
-        setHeaders({ res, status: 200 }).then(() => res.end(_JSON2STR(reply)));
+    QSSE.find(
+      {
+        id_equipement: req.query.id_equipement,
+      },
+      (err, reply) => {
+        if (err || !reply) {
+          setHeaders({ res, status: 404 }).then(() =>
+            res.end(
+              _JSON2STR({ err_number: 9, demande_state: ERROR_MESSAGES_EN[9] })
+            )
+          );
+        } else {
+          setHeaders({ res, status: 200 }).then(() =>
+            res.end(_JSON2STR(reply))
+          );
+        }
       }
-    });
+    );
   } catch (e) {
     console.log(e);
     setHeaders({ res, status: 450 }).then(() =>
@@ -598,24 +613,28 @@ router.get("/api/v1.0/equipement/qssedata", (req, res) => {
     );
   }
 });
-
 
 router.get("/api/v1.0/equipement/schema", (req, res) => {
   try {
-    SCHEMA.find({
-      id_equipement: req.query.id_equipement,
-      type: req.query.type
-    }, (err, reply) => {
-      if (err || !reply) {
-        setHeaders({ res, status: 404 }).then(() =>
-          res.end(
-            _JSON2STR({ err_number: 9, demande_state: ERROR_MESSAGES_EN[9] })
-          )
-        );
-      } else {
-        setHeaders({ res, status: 200 }).then(() => res.end(_JSON2STR(reply)));
+    SCHEMA.find(
+      {
+        id_equipement: req.query.id_equipement,
+        type: req.query.type,
+      },
+      (err, reply) => {
+        if (err || !reply) {
+          setHeaders({ res, status: 404 }).then(() =>
+            res.end(
+              _JSON2STR({ err_number: 9, demande_state: ERROR_MESSAGES_EN[9] })
+            )
+          );
+        } else {
+          setHeaders({ res, status: 200 }).then(() =>
+            res.end(_JSON2STR(reply))
+          );
+        }
       }
-    });
+    );
   } catch (e) {
     console.log(e);
     setHeaders({ res, status: 450 }).then(() =>
@@ -623,7 +642,6 @@ router.get("/api/v1.0/equipement/schema", (req, res) => {
     );
   }
 });
-
 
 router.get("/api/v1.0/create", (req, res) => {
   const stock_insert = new STOCK();

@@ -12,7 +12,7 @@ const EquipementSearchScreen = ({ navigation }) => {
   const handleSubmit = async ({ id }) => {
     Api.EquipementApi(id)
       .then((res) => {
-        //console.log(res.data);
+        console.log(res.data);
         navigation.navigate("EquipementScreen", { data: res.data });
       })
       .catch((err) => {
