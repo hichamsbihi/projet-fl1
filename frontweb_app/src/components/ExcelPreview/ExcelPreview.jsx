@@ -19,7 +19,7 @@ class ExcelPreview extends React.Component {
         "Ots": "ots",
         "Commentaires": "commentaire",
         "Equipement": "id_equipement",
-        "Date d'échéance": "id_equipement",
+        "Date d'échéance": "date",
     };
     correctifColumnMapping = {
         "DI": "",
@@ -134,12 +134,10 @@ getStaticName = (e,pageName)=>{
                                     let res ={};
                                 columnsNames.map((e,idx)=>{
                                     if(skippedCol.indexOf(e)===-1)
-                                        {res[this.getStaticName(e,pageName)] = elem[idx];
-                                        listToApi.push(res);
-                                    }
+                                        res[this.getStaticName(e.trim(),pageName)] = elem[idx];
                                     });
-                                   
-                                    }
+                                    listToApi.push(res);
+                                }
                                   
                             });
                             reqPutItems && reqPutItems(listToApi).then((res)=>{
@@ -148,10 +146,15 @@ getStaticName = (e,pageName)=>{
 
 
                             }).catch(e=>{
-                                message.error('please select the page');
+                                message.error('connection error !! ');
                                 this.setState({isProcessingData:false});
 
-                            })
+                            });
+                            if(!reqPutItems) 
+                            {
+                                message.error('please select the page');
+                                this.setState({isProcessingData:false});
+                            }
                         }
                         else {
                             let res ={

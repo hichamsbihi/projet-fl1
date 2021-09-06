@@ -337,7 +337,8 @@ router.post("/api/v1.0/equipement/documentation", (req, res) => {
   });
 });
 
-router.post("api/v1.0/equipement/schema", (req, res) => {
+router.post("/api/v1.0/equipement/schema", (req, res) => {
+  
   SCHEMA.deleteMany({}, (err, reply) => {
     if (!err) {
       SCHEMA.create(req.body.arrayData);

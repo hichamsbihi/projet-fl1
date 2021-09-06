@@ -97,7 +97,6 @@ export const ReactExcel = (props) => {
                 {
                     let date = new Date(Math.round((cell.toString() - (25567+2 )) * 86400 * 1000));
                     tmp[idx] = date.toISOString().split('T')[0];
-                    // tmp[idx] = date.toISOString();
                     
                 }
                 else tmp[idx] = cell.toString();
