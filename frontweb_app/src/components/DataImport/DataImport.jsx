@@ -75,7 +75,7 @@ class DataImport extends React.Component {
 
                             <Row align="middle" justify="center" className="second_row_wrapper" key='b'>
                                 <Col >
-                                    <h2>{GRAPHICS_PAGE_FR.IMPORT_DATA_TITLE}</h2>
+                                    <h2>{this.props.dataType ==="_equip_data" ? GRAPHICS_PAGE_FR.IMPORT_DATA_TITLE : GRAPHICS_PAGE_FR.IMPORT_DATA_TITLE1}</h2>
                                 </Col>
                             </Row>
                             <Row align="middle" justify="center" className="third_row_wrapper" key='c'>
